@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 
 const Schema = mongoose.Schema;
 
@@ -50,7 +51,31 @@ userSchema.methods.isPasswordValid = function (password) {
 };
 
 //sets users unique cool pastel background color
-userSchema.methods.generateBackgroundColor = async function () {
+// userSchema.methods.generateBackgroundColor = async function () {
+//   let uniqueColor = false; //set unique color false
+
+//   //loop til user has unique color
+//   while (!uniqueColor) {
+//     try {
+//       const randomColor = getRandomCoolColor();
+
+//       //check if color is already being used
+//       const colorUsed = await User.findOne({ background_color: randomColor });
+
+//       // check is color exist in users
+//       if (!colorUsed) {
+//         this.background_color = randomColor; //set background color to random color
+//         uniqueColor = true; //set unique color to true, escape loop
+//       }
+//     } catch (err) {
+//       console.log(err);
+//       break; //break loop
+//     }
+//   }
+// };
+
+// User Pre Middleware
+userSchema.pre("save", async function (next) {
   let uniqueColor = false; //set unique color false
 
   //loop til user has unique color
@@ -65,13 +90,15 @@ userSchema.methods.generateBackgroundColor = async function () {
       if (!colorUsed) {
         this.background_color = randomColor; //set background color to random color
         uniqueColor = true; //set unique color to true, escape loop
+        return next(); // exit loop and middleware
       }
     } catch (err) {
       console.log(err);
+      next(err);
       break; //break loop
     }
   }
-};
+});
 
 // Creates random cool pastel color
 const getRandomCoolColor = () => {

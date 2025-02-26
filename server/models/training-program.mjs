@@ -52,7 +52,33 @@ let trainingProgramSchema = new Schema({
 //Traing Program Methods
 
 //sets training program unique cool pastel background color
-trainingProgramSchema.methods.generateBackgroundColor = async function () {
+// trainingProgramSchema.methods.generateBackgroundColor = async function () {
+//   let uniqueColor = false; //set unique color false
+
+//   //loop til user has unique color
+//   while (!uniqueColor) {
+//     try {
+//       const randomColor = getRandomCoolColor();
+
+//       //check if color is already being used
+//       const colorUsed = await TrainingProgram.findOne({
+//         background_color: randomColor,
+//       });
+
+//       // check is color exist in users
+//       if (!colorUsed) {
+//         this.background_color = randomColor; //set background color to random color
+//         uniqueColor = true; //set unique color to true, escape loop
+//       }
+//     } catch (err) {
+//       console.log(err);
+//       break; //break loop
+//     }
+//   }
+// };
+
+// Training Program Pre Middleware
+trainingProgramSchema.pre("save", async function (next) {
   let uniqueColor = false; //set unique color false
 
   //loop til user has unique color
@@ -69,13 +95,15 @@ trainingProgramSchema.methods.generateBackgroundColor = async function () {
       if (!colorUsed) {
         this.background_color = randomColor; //set background color to random color
         uniqueColor = true; //set unique color to true, escape loop
+        return next(); // exit loop and middleware
       }
     } catch (err) {
       console.log(err);
+      next(err);
       break; //break loop
     }
   }
-};
+});
 
 // Creates random cool pastel color
 const getRandomCoolColor = () => {
