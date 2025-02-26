@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import http from "http";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/usertest"); // local db
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 // Routing
 import { configureRoutes } from "./config/routes.mjs";
