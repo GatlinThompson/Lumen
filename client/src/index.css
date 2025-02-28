@@ -66,3 +66,61 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* landing page admin desktop */
+.landingQuote span {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.landingQuote {
+  font-weight: bold;
+}
+
+/* button landing page admin deskop... layout.jsx */
+.btn {
+  display: inline-block;
+  padding: 15px 90px;
+  background-color: black;
+  color: white;
+  border-radius: 50px;
+  border: 2px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+h1 {
+  font-family: sans-serif;
+}
+
+/* login css  login.jsx*/
+.input-group input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 300px;
+}
+label {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.btn-login {
+  background-color: black;
+  color: white;
+  padding: 15px 50px;
+  border-radius: 50px;
+  margin-top: 20px;
+}
