@@ -1,8 +1,11 @@
 import express from "express";
+import { User } from "../models/user.mjs";
+import { Role } from "../models/role.mjs";
+import { createUser } from "../controllers/users.mjs";
 
 // Define Router
 let router = express.Router();
 
-export function configureRoutes(app) {
-  app.use("/", router);
-}
+export const configureRoutes = (app) => {
+  app.get("/api/createUser", createUser);
+};
