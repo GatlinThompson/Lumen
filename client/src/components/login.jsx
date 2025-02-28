@@ -1,28 +1,37 @@
 /* login page */
 import "../index.css";
+import logo from "../assets/images/lumenlogo_full_light.svg";
+import Button from "./Button";
+import Input from "../components/Input";
 
 function LoginUser() {
   return (
-    <form>
-      <h1>lumen</h1>
-      <h2>login</h2>
-      <div class="input-group flex-nowrap">
-        <label htmlFor="Email">Email</label>
-        <input type="text" />
-      </div>
-      <div class="input-group flex-nowrap">
-        <label htmlFor="Password">Password</label>
-        <input type="text" />
-      </div>
-      <button
-        type="button"
-        onClick={() => navigate("/login")}
-        class="btn-login btn-outline-primary"
-      >
-        Login
-      </button>
-      <a href="">Dont Have an account? Sign up</a>
-    </form>
+    <>
+      <img src={logo} alt="Lumen logo" />
+      <form>
+        <h2>Login</h2>
+
+        <Input
+          type="email"
+          label="Email"
+          name="email"
+          placeholder="Enter your email"
+          required
+        />
+        <Input
+          type="password"
+          label="Password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+
+        <Button variant="black" type="button" onClick={() => navigate("#")}>
+          Login
+        </Button>
+        <a href="/registration">Don't have an account? Sign up</a>
+      </form>
+    </>
   );
 }
 

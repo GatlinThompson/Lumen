@@ -2,9 +2,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import LoginUser from "./components/login";
 
-//styling import
-import "./App.css";
-
 function App() {
   return (
     <>
