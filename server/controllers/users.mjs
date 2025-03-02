@@ -1,11 +1,14 @@
+import { Department } from "../models/department.mjs";
 import { Role } from "../models/role.mjs";
 import { User } from "../models/user.mjs";
+import jwt from "jsonwebtoken";
 
 // Create User api function
 export const registerUser = async (req, res) => {
   try {
     //get default employee role
     let role = await Role.findOne({ name: "employee" });
+    let department = await Department.findOne({ name: "new hire" });
 
     //set up new user
     let user = new User();
@@ -15,6 +18,7 @@ export const registerUser = async (req, res) => {
     user.last_name = req.body.last_name;
     user.createPassword(req.body.password);
     user.email = req.body.email;
+    user.department = department._id;
     user.role = role._id;
 
     await user.save(); // save user
@@ -64,6 +68,9 @@ export const signInUser = async (req, res) => {
       let token = user.generateJWT(); // create token for user
 
       res.cookie("token", token, { maxAge: 1000 * 60 * 60 });
+      res
+        .status(200)
+        .json({ success: true, message: "User sign in was successful" });
     } else {
       return res.status(403).json({
         success: false,
@@ -74,6 +81,39 @@ export const signInUser = async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Internal login error occured." });
+  }
+};
+
+//verify user
+export const verifiedLoggedInUser = async (req, res) => {
+  try {
+    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+
+    //get all base user infomation
+    let user = await User.findById(userDecoded._id);
+    let role = await Role.findById(userDecoded.role);
+    let department = await Department.findById(userDecoded.department);
+
+    //set up user data to send back
+    const userData = {
+      id: user._id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      department: department.name,
+      email: user.email,
+      role: role.name,
+      background_color: user.background_color,
+    };
+
+    res.status(200).json({
+      success: true,
+      message: "User infomation obtained",
+      user: user,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Internal error has occured." });
   }
 };
 

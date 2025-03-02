@@ -4,6 +4,7 @@ import { Role } from "../models/role.mjs";
 import {
   registerUser,
   signInUser,
+  verifiedLoggedInUser,
   createUser,
   editUser,
   deleteUser,
@@ -19,7 +20,11 @@ import {
   deleteDepartment,
 } from "../controllers/departments.mjs";
 import { createTrainingProgram } from "../controllers/training-programs.mjs";
-import { isSuperAdmin, isAdmin } from "../middleware/user-authorization.mjs";
+import {
+  isSuperAdmin,
+  isAdmin,
+  verifyUser,
+} from "../middleware/user-authorization.mjs";
 
 // Define Router
 let router = express.Router();
@@ -29,6 +34,7 @@ export const configureRoutes = (app) => {
 
   app.post("/api/user/register", registerUser);
   app.post("/api/user/signin", signInUser);
+  app.get("/api/user/verify", verifyUser, verifiedLoggedInUser);
 
   //Super Admin API Calls*************************************************************
 

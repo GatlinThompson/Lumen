@@ -4,8 +4,57 @@ import Button from "../components/Button";
 import Input from "../components/Input";
 import styles from "../styles/authentication-pages.module.scss";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import { apiFetch } from "../hooks/APIFetch";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../App.jsx";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+
+  let { loggedIn, user } = useContext(AppContext);
+
+  //go to dashboard if user is already logged in
+  useEffect(() => {
+    if (loggedIn && user) {
+      navigate("/dashboard");
+    }
+  }, [loggedIn]);
+
+  //Set Inital Values for form
+  let initialValues = {
+    email: "",
+    password: "",
+  };
+
+  // Form validation
+  const validationSchema = yup.object({
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+  });
+
+  const onSubmit = async (values) => {
+    //api fetch hook
+    const { result, error, loading } = await apiFetch(
+      "/api/user/signin",
+      "POST",
+      values
+    );
+
+    if (error) {
+      //make error notification
+      console.log(result.message);
+    } else {
+      //if user is authenticated with backend set User for App and navagate to dashboard
+      console.log(result);
+      navigate("/dashboard");
+    }
+  };
+
+  let formik = useFormik({ initialValues, validationSchema, onSubmit });
+
   return (
     <div className="content margin-side-1">
       <div className={`${styles.authenticate_container}`}>
@@ -17,20 +66,27 @@ export default function LoginPage() {
         <h2 className={styles.authentication_header}>Login</h2>
       </div>
 
-      <form className={`${styles.authentication_form}`}>
+      <form
+        className={`${styles.authentication_form}`}
+        onSubmit={formik.handleSubmit}
+      >
         <Input
+          id="email"
           type="email"
           label="Email"
           name="email"
           placeholder="Enter your email"
-          required
+          onChange={formik.handleChange}
+          value={formik.values.email}
         />
         <Input
+          id="password"
           type="password"
           label="Password"
           name="password"
           placeholder="Enter your password"
-          required
+          onChange={formik.handleChange}
+          value={formik.values.password}
         />
         <div className={`${styles.authentication_btn}`}>
           <Button variant="black" type="submit">
