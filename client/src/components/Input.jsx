@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/input.css";
+import styles from "../styles/input.module.scss";
 
 const Input = ({
   type = "text",
@@ -11,7 +11,7 @@ const Input = ({
   required,
 }) => {
   return (
-    <div className="input-container">
+    <div className={`${styles.input_container}`}>
       {label && <label htmlFor={name}>{label}</label>}
 
       <input
@@ -22,7 +22,7 @@ const Input = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className="input-field"
+        className={`${styles.input_field}`}
       />
     </div>
   );

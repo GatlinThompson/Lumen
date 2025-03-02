@@ -1,0 +1,17 @@
+@use "./custom-colors.scss" as *;
+
+div.landing_logo {
+  display: flex;
+  justify-content: center;
+}
+
+p.landing_quote {
+  margin-top: 1rem;
+  align-self: center;
+  width: 225px;
+}
+
+button.landing_button {
+  margin-top: 2.5rem;
+  align-self: center;
+}

@@ -1,0 +1,32 @@
+@use "./custom-colors.scss" as *;
+@use "sass:color";
+
+div.input_container {
+  margin-bottom: 1.5rem;
+  max-width: 500px;
+  flex: 1;
+  width: 100%;
+
+  //Label Styling
+  & > label {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  //Input Styling
+  & > input {
+    margin-top: 0.75rem;
+    background-color: $white;
+    width: 100%;
+    border-radius: 10px;
+    border: 0.5px solid $gray;
+    height: 40px;
+    padding: 0.75rem;
+
+    //Focus Styling
+    &:focus {
+      border-color: color.adjust($color: $gray, $lightness: -20%);
+      outline: none;
+    }
+  }
+}

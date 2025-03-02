@@ -1,0 +1,8 @@
+@use "./custom-colors.scss" as *;
+
+div.card-container {
+  border-radius: 10px;
+  border: 0.5px solid $gray;
+  background-color: $bright_white;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}

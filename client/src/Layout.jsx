@@ -1,22 +1,18 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import "./index.css";
-import Button from "./components/Button";
-import logo from "./assets/images/lumenlogo_full_light.svg";
 
-/* this is the landing page */
+import { useLocation } from "react-router-dom";
+import Footer from "./components/Footer";
+import LandingPage from "./pages/LandingPage";
+
 export default function Layout() {
-  const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <>
-      <img src={logo} alt="Lumen logo" />
-      <p className="landingQuote">
-        Your company's guiding light <span> to efficient team compliance</span>
-      </p>
-      <Button variant="black" type="button" onClick={() => navigate("/login")}>
-        Get Started
-      </Button>
-      <footer></footer>
-      <Outlet />
+      <main className="container">
+        {location.pathname === "/" ? <LandingPage /> : <Outlet />}
+      </main>
+      <Footer />
     </>
   );
 }

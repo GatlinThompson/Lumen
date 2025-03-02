@@ -1,0 +1,52 @@
+@use "./custom-colors.scss" as *;
+
+div.authentication_logo {
+  margin-top: 130px;
+  width: 162px;
+  & > img {
+    width: 100%;
+    height: auto;
+  }
+}
+div.authenticate_container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  margin: 0 auto;
+  justify-content: start;
+}
+
+h2.authentication_header {
+  margin-top: 1.25rem;
+  max-width: 500px;
+}
+
+form.authentication_form {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+div.authentication_btn {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+
+  & > button {
+    margin-bottom: 0;
+  }
+}
+
+a.link {
+  align-self: center;
+  margin-top: 1.5rem;
+  font-size: 0.75rem;
+  color: $neutral_black;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+}
