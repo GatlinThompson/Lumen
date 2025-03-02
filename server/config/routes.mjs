@@ -1,11 +1,64 @@
 import express from "express";
 import { User } from "../models/user.mjs";
 import { Role } from "../models/role.mjs";
-import { createUser } from "../controllers/users.mjs";
+import {
+  registerUser,
+  signInUser,
+  createUser,
+  editUser,
+  deleteUser,
+  getManagers,
+  getTrainers,
+  getEmployees,
+  getAllUsers,
+} from "../controllers/users.mjs";
+import { createRole, deleteRole, editRole } from "../controllers/roles.mjs";
+import {
+  createDepartment,
+  editDepartment,
+  deleteDepartment,
+} from "../controllers/departments.mjs";
+import { createTrainingProgram } from "../controllers/training-programs.mjs";
+import { isSuperAdmin, isAdmin } from "../middleware/user-authorization.mjs";
 
 // Define Router
 let router = express.Router();
 
 export const configureRoutes = (app) => {
-  app.get("/api/createUser", createUser);
+  //User Signup and Login API Calls***************************************************
+
+  app.post("/api/user/register", registerUser);
+  app.post("/api/user/signin", signInUser);
+
+  //Super Admin API Calls*************************************************************
+
+  //Role API Calls
+  app.post("/api/role/create", isSuperAdmin, createRole);
+  app.put("/api/role/:id/edit", isSuperAdmin, editRole);
+  app.delete("/api/role/:id/delete", isSuperAdmin, deleteRole);
+
+  //Department API Calls
+  app.get("/api/department/create", isSuperAdmin, createDepartment);
+  app.put("/api/department/:id/edit", isSuperAdmin, editDepartment);
+  app.delete("/api/department/:id/delete", isSuperAdmin, deleteDepartment);
+
+  //Admin API Calls*******************************************************************
+
+  //Admin User API Calls
+  app.post("/api/user/create", isAdmin, createUser);
+  app.put("/api/user/:id/edit", isAdmin, editUser);
+  app.delete("/api/user/:id/delete", isAdmin, deleteUser);
+
+  //Get Users by Role
+  app.get("/api/users/managers", isAdmin, getManagers);
+  app.get("/api/users/trainers", isAdmin, getTrainers);
+  app.get("/api/users/employees", isAdmin, getEmployees);
+
+  //Get All Users
+  app.get("/api/users/everyone", isAdmin, getAllUsers);
+
+  //Training Program API Calls
+  app.post("/api/training-programs/create", isAdmin, createTrainingProgram);
+
+  app.use("/", router);
 };

@@ -17,7 +17,7 @@ let userSchema = new Schema({
     default: null,
   },
   email: { type: String, unique: true, trim: true, required: true },
-  deparment: { type: Schema.Types.ObjectId, ref: "Department" },
+  deparment: { type: Schema.Types.ObjectId, ref: "Department", default: null },
   role: { type: Schema.Types.ObjectId, ref: "Role" },
   hash: String,
   salt: String,
@@ -50,32 +50,37 @@ userSchema.methods.isPasswordValid = function (password) {
   return this.hash === passwordAttempt; //return true/false
 };
 
-//sets users unique cool pastel background color
-// userSchema.methods.generateBackgroundColor = async function () {
-//   let uniqueColor = false; //set unique color false
+// generate jwt for user
+userSchema.methods.generateJWT = function () {
+  let expirationDate = new Date(); // get date
 
-//   //loop til user has unique color
-//   while (!uniqueColor) {
-//     try {
-//       const randomColor = getRandomCoolColor();
+  //give user 7 day access before cookie expires
+  expirationDate.setDate(expirationDate.getDate() + 7);
 
-//       //check if color is already being used
-//       const colorUsed = await User.findOne({ background_color: randomColor });
-
-//       // check is color exist in users
-//       if (!colorUsed) {
-//         this.background_color = randomColor; //set background color to random color
-//         uniqueColor = true; //set unique color to true, escape loop
-//       }
-//     } catch (err) {
-//       console.log(err);
-//       break; //break loop
-//     }
-//   }
-// };
+  //return jwt back
+  return jwt.sign(
+    {
+      _id: this.id,
+      first_name: this.first_name,
+      last_name: this.last_name,
+      email: this.email,
+      role: this.role,
+      deparment: this.deparment,
+      background_color: this.background_color,
+      expirationDate: parseInt(expirationDate.getTime() / 1000),
+    },
+    "TEST"
+  );
+};
 
 // User Pre Middleware
+
+//sets users unique cool pastel background color
 userSchema.pre("save", async function (next) {
+  //dont preform method is document isnt new
+  if (!this.isNew) {
+    return next();
+  }
   let uniqueColor = false; //set unique color false
 
   //loop til user has unique color

@@ -49,36 +49,13 @@ let trainingProgramSchema = new Schema({
   },
 });
 
-//Traing Program Methods
-
-//sets training program unique cool pastel background color
-// trainingProgramSchema.methods.generateBackgroundColor = async function () {
-//   let uniqueColor = false; //set unique color false
-
-//   //loop til user has unique color
-//   while (!uniqueColor) {
-//     try {
-//       const randomColor = getRandomCoolColor();
-
-//       //check if color is already being used
-//       const colorUsed = await TrainingProgram.findOne({
-//         background_color: randomColor,
-//       });
-
-//       // check is color exist in users
-//       if (!colorUsed) {
-//         this.background_color = randomColor; //set background color to random color
-//         uniqueColor = true; //set unique color to true, escape loop
-//       }
-//     } catch (err) {
-//       console.log(err);
-//       break; //break loop
-//     }
-//   }
-// };
-
 // Training Program Pre Middleware
 trainingProgramSchema.pre("save", async function (next) {
+  //dont preform method is document isnt new
+  if (!this.isNew) {
+    return next();
+  }
+
   let uniqueColor = false; //set unique color false
 
   //loop til user has unique color

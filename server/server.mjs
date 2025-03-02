@@ -10,11 +10,12 @@ dotenv.config();
 // Web Server
 const app = express();
 const PORT = process.env.PORT || "8080";
+const backendURI = `mongodb+srv://mongoDBConnector:tn1gRXgaJeyQmvVW@lumenbackend.ldzcf.mongodb.net/?retryWrites=true&w=majority&appName=lumenBackend`;
 
 // Mongoose and DB Connect
-mongoose.connect("mongodb://127.0.0.1:27017/usertest"); // local db
+await mongoose.connect(backendURI);
 
-//Middleware
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +29,14 @@ configureRoutes(app);
 let server = http.createServer(app);
 server.listen(PORT);
 
+app.use("/", function (req, res, next) {
+  console.log(req.url);
+  next();
+});
+
 server.on("listening", () => {
-  console.log("Listening on PORT: " + PORT);
+  console.log(
+    `\n\x1b[1mLocal Backend:\x1b\[0m\t\x1b[34mhttp://localhost:${PORT}\x1b[39m`
+  );
+  console.log(`\x1b[30mListening on Port: ${PORT}\x1b[39m\n`);
 });
