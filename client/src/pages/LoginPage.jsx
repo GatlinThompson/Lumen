@@ -14,7 +14,7 @@ import { AppContext } from "../App.jsx";
 export default function LoginPage() {
   const navigate = useNavigate();
 
-  let { loggedIn, user } = useContext(AppContext);
+  let { loggedIn, user, setLoggedIn, setUser } = useContext(AppContext);
 
   //go to dashboard if user is already logged in
   useEffect(() => {
@@ -43,13 +43,11 @@ export default function LoginPage() {
       values
     );
 
-    if (error) {
-      //make error notification
-      console.log(result.message);
-    } else {
-      //if user is authenticated with backend set User for App and navagate to dashboard
-      console.log(result);
-      navigate("/dashboard");
+    // if theres no error from fetch
+    if (!error) {
+      setLoggedIn(true); //set login to true
+      setUser(result.user); // set user
+      navigate("/dashboard"); // navigate to dashboard
     }
   };
 

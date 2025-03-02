@@ -66,11 +66,27 @@ export const signInUser = async (req, res) => {
     //if user exist validate password
     if (user.isPasswordValid(req.body.password)) {
       let token = user.generateJWT(); // create token for user
+      //get all base user infomation
 
+      let role = await Role.findById(user.role);
+      let department = await Department.findById(user.department);
+
+      //set up user data to send back
+      const userData = {
+        id: user._id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        department: department.name,
+        email: user.email,
+        role: role.name,
+        background_color: user.background_color,
+      };
       res.cookie("token", token, { maxAge: 1000 * 60 * 60 });
-      res
-        .status(200)
-        .json({ success: true, message: "User sign in was successful" });
+      res.status(200).json({
+        success: true,
+        message: "User sign in was successful",
+        user: userData,
+      });
     } else {
       return res.status(403).json({
         success: false,
