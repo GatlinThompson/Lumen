@@ -6,13 +6,6 @@ const BACKEND_URL = "http://127.0.0.1:8080";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  css: {
-    preprocessorOptions: {
-      sass: {
-        quietDeps: false,
-      },
-    },
-  },
   server: {
     proxy: {
       "/api": {
