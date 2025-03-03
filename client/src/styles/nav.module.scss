@@ -1,0 +1,109 @@
+@use "./custom-colors.scss" as *;
+
+//Nav Styling
+nav.navbar {
+  background-color: $neutral_black;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  transition: border-radius 250ms linear;
+  gap: 10px;
+  padding: 3.5rem 0 1rem 0;
+
+  //Profile Link Styling
+  & > a {
+    text-decoration: none;
+  }
+
+  //Nav Brand Styling
+  & > a.nav_brand {
+    color: $white;
+    font-family: "Outfit", sans-serif;
+    font-size: 2rem;
+    text-decoration: none;
+    flex: 1;
+    margin-left: 1.5rem;
+  }
+
+  //Hambuger Menu Icon
+  & > button.toggle {
+    background-color: transparent;
+    border: none;
+    height: 36px;
+    width: 36px;
+    padding: 0;
+    margin-right: 1.5rem;
+
+    &:focus {
+      outline: none;
+      border-color: transparent;
+    }
+
+    & > img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  //Link Stylings
+  div.nav_links {
+    & > ul {
+      list-style: none;
+    }
+
+    & > li {
+    }
+    //Anchor Tag Styling
+    & > a {
+      color: $white;
+      text-decoration: none;
+      margin-bottom: 10px;
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+
+      //icon styling
+      & > i {
+        width: 25px;
+        height: auto;
+        margin-right: 13px;
+      }
+    }
+  }
+
+  //Open Nav Border Radius
+  &.open {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+  & > ul {
+    display: flex;
+    list-style: none;
+    align-content: center;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+
+    & > li {
+      display: flex;
+      align-items: center;
+
+      //Nav Layout
+      &:first-of-type {
+        flex: 1;
+      }
+    }
+  }
+}
+
+//Bottom Horizontal Line Styling
+hr.nav_divider {
+  width: calc(100%);
+  height: 0.5px;
+  color: $gray;
+  background-color: $gray;
+}
+//Role Link Spacing for Navbar Account and Logout
+a.last_user_high {
+  margin-bottom: 146px !important;
+}
+a.last_user_med {
+  margin-bottom: 104px !important;
+}

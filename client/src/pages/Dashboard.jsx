@@ -14,10 +14,6 @@ export default function Dashboard() {
           Hello in Dashboard, {user.first_name} {user.last_name}
         </p>
       ) : null}
-
-      <Button variant="black" type="button" onClick={() => navigate("/logout")}>
-        Logout
-      </Button>
     </>
   );
 }

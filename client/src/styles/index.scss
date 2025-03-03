@@ -1,7 +1,8 @@
 @use "./custom-colors.scss" as *;
+@use "../../node_modules/bootstrap/scss/bootstrap";
 
-@import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
 :root {
   font-size: 16px;
   box-sizing: border-box;
@@ -35,10 +36,14 @@ body {
 //Main Styling
 main {
   //max-width: 1280px;
-  min-height: calc(100vh - 77px - 3rem);
+  min-height: calc(100vh - 77px - 3rem - 120px);
   margin: 0 2rem;
   display: flex;
   flex-flow: column nowrap;
+
+  &.no-nav {
+    min-height: calc(100vh - 77px - 3rem);
+  }
 
   //Content Layout
   & > div.content {
@@ -94,4 +99,9 @@ h2 {
   font-family: "Outfit", sans-serif;
   font-size: 2rem;
   font-weight: normal;
+}
+
+//Active Link Styling
+a.active {
+  color: $darker_yellow !important;
 }

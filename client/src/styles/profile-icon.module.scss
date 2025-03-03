@@ -1,0 +1,18 @@
+@use "./custom-colors.scss" as *;
+
+div.profile {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+  & > span {
+    font-size: 16px;
+    text-decoration: none;
+    color: $neutral_black;
+    line-height: 30px;
+    font-family: "Roboto", sans-serif;
+  }
+}

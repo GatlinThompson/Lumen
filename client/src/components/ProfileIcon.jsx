@@ -1,0 +1,21 @@
+import { useContext } from "react";
+import { AppContext } from "../App.jsx";
+import styles from "../styles/profile-icon.module.scss";
+
+export default function ProfileIcon() {
+  let { user } = useContext(AppContext);
+  //setup profile name
+  const profileLetters = user
+    ? user.first_name.charAt(0) + user.last_name.charAt(0)
+    : "";
+  //set up background color
+  const backgroundColor = user ? user.background_color : "#fff";
+  return (
+    <div
+      className={`${styles.profile}`}
+      style={{ backgroundColor: backgroundColor }}
+    >
+      <span>{profileLetters}</span>
+    </div>
+  );
+}
