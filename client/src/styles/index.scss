@@ -35,7 +35,7 @@ body {
   @include screen-breakpoint("lg") {
     display: grid;
     min-width: 100wh;
-    grid-template-columns: auto, auto;
+    grid-template-columns: auto, 1fr;
     grid-template-rows: auto, auto, auto;
   }
 }
@@ -63,7 +63,6 @@ nav {
 
 //Main Styling
 main {
-  //max-width: 1280px;
   min-height: calc(100vh - 77px - 3rem - 120px);
   margin: 0 2rem;
   display: flex;
@@ -84,7 +83,7 @@ main {
     min-height: calc(100vh - 77px - 4rem - 104px);
     grid-column: 2/3;
     grid-row: 2 /3;
-    width: calc(100vw - 296px);
+    width: calc(100vw - 296px - 4rem);
   }
 
   //Content Layout
