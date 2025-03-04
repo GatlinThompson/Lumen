@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Footer from "./components/Footer";
 import LandingPage from "./pages/LandingPage";
 import NavBar from "./components/Navbar";
+import DesktopHeader from "./components/DesktopHeader";
 
 export default function Layout() {
   const location = useLocation();
@@ -15,11 +16,12 @@ export default function Layout() {
   return (
     <>
       {noNavbar ? null : <NavBar />}
-      <main className={`container ${noNavbar ? "no-nav" : ""}`}>
+      {noNavbar ? null : <DesktopHeader />}
+      <main className={` ${noNavbar ? "no-nav" : ""}`}>
         {/*Swap Components based on url location*/}
         {location.pathname === "/" ? <LandingPage /> : <Outlet />}
       </main>
-      <Footer />
+      <Footer noNavbar={noNavbar} />
     </>
   );
 }

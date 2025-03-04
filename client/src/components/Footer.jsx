@@ -1,6 +1,6 @@
-export default function Footer() {
+export default function Footer(props) {
   return (
-    <footer>
+    <footer className={` ${props.noNavbar ? "no-nav" : ""}`}>
       <p className="footer-name">lumen</p>
       <span className="footer-copy">&copy; Copyright 2025</span>
     </footer>

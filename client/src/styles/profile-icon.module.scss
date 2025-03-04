@@ -1,4 +1,4 @@
-@use "./custom-colors.scss" as *;
+@use "./custom.scss" as *;
 
 div.profile {
   border-radius: 100%;
@@ -7,6 +7,12 @@ div.profile {
   display: flex;
   text-align: center;
   justify-content: center;
+  border: 0.5px solid $neutral_black;
+
+  @include screen-breakpoint("lg") {
+    width: 45px;
+    height: 45px;
+  }
 
   & > span {
     font-size: 16px;
@@ -14,5 +20,10 @@ div.profile {
     color: $neutral_black;
     line-height: 30px;
     font-family: "Roboto", sans-serif;
+
+    @include screen-breakpoint("lg") {
+      line-height: 45px;
+      font-size: 18px;
+    }
   }
 }

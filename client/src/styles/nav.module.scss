@@ -1,4 +1,4 @@
-@use "./custom-colors.scss" as *;
+@use "./custom.scss" as *;
 
 //Nav Styling
 nav.navbar {
@@ -8,6 +8,15 @@ nav.navbar {
   transition: border-radius 250ms linear;
   gap: 10px;
   padding: 3.5rem 0 1rem 0;
+
+  //Desktop Layout
+  @include screen-breakpoint("lg") {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 0;
+    z-index: 10;
+    box-shadow: -3px 0px 24px 0px rgba(0, 0, 0, 0.21);
+  }
 
   //Profile Link Styling
   & > a {
@@ -19,9 +28,35 @@ nav.navbar {
     color: $white;
     font-family: "Outfit", sans-serif;
     font-size: 2rem;
-    text-decoration: none;
     flex: 1;
+    text-decoration: none;
     margin-left: 1.5rem;
+
+    //Logo Image
+
+    & > div {
+      display: none;
+    }
+
+    @include screen-breakpoint("lg") {
+      margin-top: 1.5rem;
+      margin-left: -4.5rem;
+      font-size: 2.5rem;
+      display: flex;
+      flex: none;
+      align-self: center;
+      justify-self: center;
+
+      & > div {
+        display: block;
+        width: 65px;
+
+        & > img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
   }
 
   //Hambuger Menu Icon
@@ -46,12 +81,15 @@ nav.navbar {
 
   //Link Stylings
   div.nav_links {
-    & > ul {
-      list-style: none;
+    @include screen-breakpoint("lg") {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 0.825rem;
+      justify-content: flex-start;
+      flex: 1;
+      //align-items: stretch;
     }
 
-    & > li {
-    }
     //Anchor Tag Styling
     & > a {
       color: $white;
@@ -59,35 +97,17 @@ nav.navbar {
       margin-bottom: 10px;
       margin-left: 1.5rem;
       margin-right: 1.5rem;
+      @include screen-breakpoint("lg") {
+        font-size: 1.125rem;
+        margin-left: 0;
+        margin-right: 0;
+      }
 
       //icon styling
       & > i {
         width: 25px;
         height: auto;
         margin-right: 13px;
-      }
-    }
-  }
-
-  //Open Nav Border Radius
-  &.open {
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-  }
-  & > ul {
-    display: flex;
-    list-style: none;
-    align-content: center;
-    gap: 0.5rem;
-    padding-bottom: 1rem;
-
-    & > li {
-      display: flex;
-      align-items: center;
-
-      //Nav Layout
-      &:first-of-type {
-        flex: 1;
       }
     }
   }
@@ -99,11 +119,28 @@ hr.nav_divider {
   height: 0.5px;
   color: $gray;
   background-color: $gray;
+  @include screen-breakpoint("lg") {
+    display: none;
+  }
 }
+
 //Role Link Spacing for Navbar Account and Logout
 a.last_user_high {
   margin-bottom: 146px !important;
 }
 a.last_user_med {
   margin-bottom: 104px !important;
+}
+
+//Screen queries
+.lg_gone {
+  @include screen-breakpoint("lg") {
+    display: none;
+  }
+}
+//Last 2 link layout
+@include screen-breakpoint("lg") {
+  a.lg_divider {
+    margin-top: auto;
+  }
 }

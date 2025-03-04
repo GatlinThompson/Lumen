@@ -35,7 +35,7 @@ function App() {
       //verify user with token
       verifyUser();
     }
-  }, [cookies.token]);
+  }, []);
 
   return (
     <AppContext.Provider

@@ -1,4 +1,4 @@
-@use "./custom-colors.scss" as *;
+@use "./custom.scss" as *;
 @use "../../node_modules/bootstrap/scss/bootstrap";
 
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
@@ -15,6 +15,7 @@
   box-sizing: inherit;
   margin: 0;
   padding: 0;
+  font-family: "Albert Sans", sans-serif;
 }
 
 body {
@@ -31,6 +32,32 @@ body {
   flex-flow: column nowrap;
 
   //layout for side nav & desktop layout might have to do grid
+  @include screen-breakpoint("lg") {
+    display: grid;
+    min-width: 100wh;
+    grid-template-columns: auto, auto;
+    grid-template-rows: auto, auto, auto;
+  }
+}
+
+//Nav Layout
+nav {
+  @include screen-breakpoint("lg") {
+    position: sticky;
+    top: 0;
+    grid-column: 1 / 2;
+    grid-row: 1 / 4;
+
+    & .navbar-collapse {
+      padding-left: 43px;
+      width: 100%;
+      margin-top: 4.875rem;
+      display: flex;
+      flex: 1;
+      align-items: stretch;
+      padding-bottom: 77px;
+    }
+  }
 }
 
 //Main Styling
@@ -43,6 +70,20 @@ main {
 
   &.no-nav {
     min-height: calc(100vh - 77px - 3rem);
+    margin: auto;
+
+    @include screen-breakpoint("lg") {
+      min-height: calc(100vh - 77px - 4rem);
+      grid-column: 1/3;
+      grid-row: 1/3;
+    }
+  }
+
+  @include screen-breakpoint("lg") {
+    min-height: calc(100vh - 77px - 4rem - 104px);
+    grid-column: 2/3;
+    grid-row: 2 /3;
+    width: calc(100vw - 296px);
   }
 
   //Content Layout
@@ -81,10 +122,23 @@ footer {
   flex-flow: column;
   text-align: center;
 
+  @include screen-breakpoint("lg") {
+    margin-top: 4rem;
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    //width: calc(100% - 296px);
+
+    &.no-nav {
+      width: 100%;
+      grid-column: 1 / 3;
+    }
+  }
+
   & > p.footer-name {
     font-size: 2rem;
     line-height: normal;
     font-family: "Outfit", sans-serif;
+    margin-bottom: 0.25rem;
   }
 
   & > span.footer-copy {

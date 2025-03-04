@@ -1,0 +1,33 @@
+@use "./custom.scss" as *;
+
+//Desktop Header Styling
+div.desktop_header {
+  display: none;
+
+  @include screen-breakpoint("lg") {
+    grid-column: 2/3;
+    grid-row: 1 / 2;
+    height: 104px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.049);
+    border-bottom: 0.5px solid $gray;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 4rem;
+    align-items: center;
+    gap: 0.75rem;
+
+    //Name Styling
+    & > span {
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 32px;
+      filter: none;
+    }
+
+    //Get rid of text decoration from icon link
+    & > a {
+      text-decoration: none;
+    }
+  }
+}

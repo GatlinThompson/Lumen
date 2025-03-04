@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $darker_yellow: #fed428;
 $neutral_black: #1a1e29;
 $white: #f8f8f7;
@@ -12,3 +14,25 @@ $footer-gray: #e5e5e5;
 @import url("https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+//screen break points
+$breakpoints: (
+  "sm": 320px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1440px,
+);
+
+//Mixins
+
+// Screen media queries
+@mixin screen-breakpoint($size) {
+  $breakpoint: map-get(
+    $map: $breakpoints,
+    $key: $size,
+  );
+
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
