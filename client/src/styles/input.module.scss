@@ -11,6 +11,10 @@ div.input_container {
   & > label {
     font-size: 1rem;
     font-weight: 500;
+
+    @include screen-breakpoint("lg") {
+      font-size: 1.125rem;
+    }
   }
 
   //Input Styling

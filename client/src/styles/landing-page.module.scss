@@ -9,9 +9,23 @@ p.landing_quote {
   margin-top: 1rem;
   align-self: center;
   width: 225px;
+
+  @include screen-breakpoint("lg") {
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    width: 279px;
+    margin-bottom: 0;
+  }
 }
 
 button.landing_button {
   margin-top: 2.5rem;
   align-self: center;
+
+  @include screen-breakpoint("lg") {
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    height: 3rem;
+    width: 243px;
+  }
 }

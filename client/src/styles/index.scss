@@ -158,4 +158,8 @@ h2 {
 //Active Link Styling
 a.active {
   color: $darker_yellow !important;
+
+  @include screen-breakpoint("lg") {
+    border-bottom: 1px solid $darker_yellow;
+  }
 }

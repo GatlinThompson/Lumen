@@ -3,6 +3,12 @@
 div.authentication_logo {
   margin-top: 130px;
   width: 162px;
+
+  @include screen-breakpoint("lg") {
+    width: 210px;
+    margin-top: 170px;
+  }
+
   & > img {
     width: 100%;
     height: auto;
@@ -10,7 +16,7 @@ div.authentication_logo {
 }
 div.authenticate_container {
   width: 100%;
-  max-width: 500px;
+  max-width: 359px;
   display: flex;
   margin: 0 auto;
   justify-content: start;
@@ -19,6 +25,11 @@ div.authenticate_container {
 h2.authentication_header {
   margin-top: 1.25rem;
   max-width: 500px;
+
+  @include screen-breakpoint("lg") {
+    font-size: 2.5rem;
+    margin-top: 4.5rem;
+  }
 }
 
 form.authentication_form {
@@ -28,14 +39,32 @@ form.authentication_form {
   flex-flow: column;
   justify-content: center;
   align-items: center;
+
+  @include screen-breakpoint("lg") {
+    margin: 2.5rem auto 0;
+    margin-top: 2.5rem;
+    margin-bottom: 0;
+    max-width: 359px;
+  }
 }
 div.authentication_btn {
   margin-top: 3rem;
   display: flex;
   justify-content: center;
 
+  @include screen-breakpoint("lg") {
+    margin-top: 2.5rem;
+  }
+
   & > button {
     margin-bottom: 0;
+
+    @include screen-breakpoint("lg") {
+      margin-top: 0rem;
+      font-size: 1.25rem;
+      height: 3rem;
+      width: 243px;
+    }
   }
 }
 
@@ -49,4 +78,8 @@ a.link {
   text-decoration-skip-ink: auto;
   text-decoration-thickness: auto;
   text-underline-offset: auto;
+
+  @include screen-breakpoint("lg") {
+    font-size: 1rem;
+  }
 }
