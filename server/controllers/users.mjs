@@ -70,7 +70,6 @@ export const signInUser = async (req, res) => {
 
       let role = await Role.findById(user.role);
       let department = await Department.findById(user.department);
-      console.log(role.name);
 
       //set up user data to send back
       const userData = {
@@ -110,7 +109,6 @@ export const verifiedLoggedInUser = async (req, res) => {
     let user = await User.findById(userDecoded._id);
     let role = await Role.findById(userDecoded.role);
     let department = await Department.findById(userDecoded.department);
-    console.log(role.name);
 
     //set up user data to send back
     const userData = {

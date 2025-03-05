@@ -18,7 +18,9 @@ function App() {
   // set logged in status as false
   const [loggedIn, setLoggedIn] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const [toStart, setToStart] = useState(false);
 
+  //verify user
   const verifyUser = async () => {
     const { result, error, loading } = await apiFetch("api/user/verify", "GET");
 
@@ -26,6 +28,9 @@ function App() {
       //set logged in to true
       setLoggedIn(true);
       setUser(result.user);
+    } else {
+      // set to start if user isnt valid
+      setToStart(true);
     }
   };
 
@@ -34,6 +39,9 @@ function App() {
     if (cookies.token !== undefined) {
       //verify user with token
       verifyUser();
+    } else {
+      //cookie not found
+      setToStart(true);
     }
   }, []);
 
@@ -47,6 +55,8 @@ function App() {
         cookies,
         setCookie,
         removeCookie,
+        toStart,
+        setToStart,
       }}
     >
       <Router>
