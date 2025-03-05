@@ -17,7 +17,7 @@ export default function AdminNav() {
         <i className="bi bi-briefcase"></i>Managers
       </NavLink>
       <NavLink to="">
-        <i className="bi bi-person-video3"></i>Traners
+        <i className="bi bi-person-video3"></i>Trainers
       </NavLink>
       <NavLink to="">
         <i className="bi bi-person"></i>Employees
