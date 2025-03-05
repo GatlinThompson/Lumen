@@ -64,6 +64,7 @@ export default function LoginPage() {
         <h2 className={styles.authentication_header}>Login</h2>
       </div>
 
+
       <form
         className={`${styles.authentication_form}`}
         onSubmit={formik.handleSubmit}
