@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import { useEffect, useState, createContext } from "react";
 import { apiFetch } from "./hooks/APIFetch";
 import Logout from "./components/role-navagation/Logout";
+import TrainingForm from "./pages/TrainingForm";
+import TrainingPage from "./pages/TrainingPage";
 
 export const AppContext = createContext();
 
@@ -73,6 +75,10 @@ function App() {
               <Route path="logout" element={<Logout />} />
               <Route path="/registration" element={<RegistrationPage />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              {/*Training Routes*/}
+              <Route path="/trainings" element={<TrainingPage />} />
+              <Route path="/training/new" element={<TrainingForm />} />
+              <Route path="/training/:id/edit" element={<TrainingForm />} />
             </Route>
           </Routes>
         </ScrollToTop>

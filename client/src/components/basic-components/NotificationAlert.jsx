@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../styles/notification-alert.module.scss";
+import styles from "../../styles/notification-alert.module.scss";
 
 export default function NotificationAlert({ error = true, message = null }) {
   const [notifyMsg, setNotifyMsg] = useState("");

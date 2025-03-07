@@ -6,7 +6,7 @@ import NavBar from "./components/layout/NavBar";
 import DesktopHeader from "./components/layout/DesktopHeader";
 import { useEffect, useContext } from "react";
 import { AppContext } from "./App";
-import NotificationAlert from "./components/NotificationAlert";
+import NotificationAlert from "./components/basic-components/NotificationAlert";
 
 export default function Layout() {
   const location = useLocation();

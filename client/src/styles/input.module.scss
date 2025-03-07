@@ -6,6 +6,7 @@ div.input_container {
   max-width: 500px;
   flex: 1;
   width: 100%;
+  position: relative;
 
   //Error Text
   & > p {
@@ -14,6 +15,8 @@ div.input_container {
     color: $error-background;
     font-weight: 500;
     font-size: 0.825rem;
+    position: absolute;
+    bottom: -20px;
   }
 
   //Label Styling
@@ -28,7 +31,7 @@ div.input_container {
 
   //Input Styling
   & > input {
-    margin-top: 0.75rem;
+    //margin-top: 0.75rem;
     background-color: $white;
     width: 100%;
     border-radius: 10px;

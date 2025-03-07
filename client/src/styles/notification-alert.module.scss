@@ -14,13 +14,14 @@ div.notification {
   color: $neutral_black;
   //position: absolute;
   width: 100%;
+  margin-top: calc(1.625rem);
   top: 0;
   height: 1.625rem;
   display: flex;
   justify-content: flex-start;
   border-radius: 10px;
   position: absolute;
-  top: 0;
+  top: calc(1.625rem / 2);
   left: 0;
   margin: auto;
 

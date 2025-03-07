@@ -1,6 +1,6 @@
 /* login page */
 import logo from "../assets/images/lumenlogo_full_light.svg";
-import Button from "../components/Button";
+import Button from "../components/basic-components/Button.jsx";
 import Input from "../components/Input";
 import styles from "../styles/authentication-pages.module.scss";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import * as yup from "yup";
 import { apiFetch } from "../hooks/APIFetch";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App.jsx";
-import NotificationAlert from "../components/NotificationAlert.jsx";
+import NotificationAlert from "../components/basic-components/NotificationAlert.jsx";
 
 export default function LoginPage() {
   const navigate = useNavigate();

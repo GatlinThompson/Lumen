@@ -1,6 +1,6 @@
 /* login page */
 import logo from "../assets/images/lumenlogo_full_light.svg";
-import Button from "../components/Button";
+import Button from "../components/basic-components/Button.jsx";
 import Input from "../components/Input";
 import styles from "../styles/authentication-pages.module.scss";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import { apiFetch } from "../hooks/APIFetch";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App.jsx";
-import NotificationAlert from "../components/NotificationAlert.jsx";
+import NotificationAlert from "../components/basic-components/NotificationAlert.jsx";
 
 export default function RegistrationPage() {
   const navigate = useNavigate();
@@ -101,7 +101,6 @@ export default function RegistrationPage() {
           error={formik.errors.first_name}
           touched={formik.touched.first_name}
         />
-        <p>{formik.touched.first_name}</p>
         <Input
           type="text"
           label="Last Name"

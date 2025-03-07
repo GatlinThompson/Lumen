@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { AppContext } from "../App.jsx";
-import styles from "../styles/profile-icon.module.scss";
+import { AppContext } from "../../App.jsx";
+import styles from "../../styles/profile-icon.module.scss";
 
 export default function ProfileIcon({ user }) {
   //setup profile name
