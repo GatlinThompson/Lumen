@@ -11,7 +11,7 @@ const checkUserRole = (userRole) => async (req, res, next) => {
       let userDecoded = jwt.verify(req.cookies.token, "TEST");
 
       //get role of user
-      let role = await Role.find({ name: userRole });
+      let role = await Role.findOne({ name: userRole });
       //find user who has admin role based on jwt
       let user = await User.findById(userDecoded._id).populate({
         path: "role",
@@ -19,7 +19,7 @@ const checkUserRole = (userRole) => async (req, res, next) => {
       });
 
       //check is role and user combo exist
-      if (user && role.id == userDecoded.role) {
+      if (user && role._id == userDecoded.role) {
         next(); //middleware is good to go forward
       } else {
         //not valid role for api call

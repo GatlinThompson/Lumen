@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
 import styles from "../../styles/back-button.module.scss";
+import BackButtonImage from "../../assets/images/back-button.svg";
 
 export default function BackButton() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function BackButton() {
   };
   return (
     <button className={styles.back_button} onClick={goBack}>
-      &lt;
+      <img src={BackButtonImage} alt="Back Button Image" />
     </button>
   );
 }

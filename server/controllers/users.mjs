@@ -219,7 +219,7 @@ const getRoleSpecificUser = (usersRole) => async (req, res) => {
     let role = await Role.findOne({ name: usersRole });
 
     //get role specific users
-    let users = await User.find({ role: role._id });
+    let users = await User.find({ role: role._id }).select("-hash -salt");
 
     res.status(200).json({
       success: true,

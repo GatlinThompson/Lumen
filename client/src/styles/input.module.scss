@@ -30,8 +30,9 @@ div.input_container {
   }
 
   //Input Styling
-  & > input {
-    //margin-top: 0.75rem;
+  & > input,
+  & > textarea,
+  & > select {
     background-color: $white;
     width: 100%;
     border-radius: 10px;
@@ -43,6 +44,26 @@ div.input_container {
     &:focus {
       border-color: color.adjust($color: $gray, $lightness: -20%);
       outline: none;
+    }
+  }
+
+  //Text Area Styling
+  & > textarea {
+    min-height: 132px;
+  }
+
+  & > select.selection {
+    padding: 0px 30px 0px 10px;
+    position: relative;
+    appearance: none;
+    background-image: url("../assets/images/select-arrow.svg");
+    background-repeat: no-repeat;
+    background-position: right 1rem top 50%;
+    background-size: 32px auto;
+
+    & > option {
+      padding: 0rem;
+      border-radius: 0;
     }
   }
 }

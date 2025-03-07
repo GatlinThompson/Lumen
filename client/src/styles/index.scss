@@ -84,6 +84,7 @@ main {
     min-height: calc(100vh - 77px - 4rem - 104px);
     grid-column: 2/3;
     grid-row: 2 /3;
+    padding-left: calc(135px - 2rem);
     width: calc(100vw - 296px - 4rem);
   }
 

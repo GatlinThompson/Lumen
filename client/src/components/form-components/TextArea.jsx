@@ -1,14 +1,12 @@
 import React from "react";
-import styles from "../styles/input.module.scss";
+import styles from "../../styles/input.module.scss";
 
-const Input = ({
-  type = "text",
+const TextArea = ({
   label,
   name,
   value,
   onChange,
   onBlur,
-  placeholder,
   required,
   error,
   touched,
@@ -16,14 +14,12 @@ const Input = ({
   return (
     <div className={`${styles.input_container}`}>
       {label && <label htmlFor={name}>{label}</label>}
-      <input
-        type={type}
+      <textarea
         id={name}
         name={name}
-        value={value}
-        onChange={onChange}
+        defaultValue={value}
+        onChangeCapture={onChange}
         onBlur={onBlur}
-        placeholder={placeholder}
         required={required}
         className={`${styles.input_field}`}
       />
@@ -32,4 +28,4 @@ const Input = ({
   );
 };
 
-export default Input;
+export default TextArea;

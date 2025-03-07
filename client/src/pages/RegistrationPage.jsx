@@ -1,7 +1,7 @@
 /* login page */
 import logo from "../assets/images/lumenlogo_full_light.svg";
 import Button from "../components/basic-components/Button.jsx";
-import Input from "../components/Input";
+import Input from "../components/form-components/Input.jsx";
 import styles from "../styles/authentication-pages.module.scss";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
@@ -52,7 +52,6 @@ export default function RegistrationPage() {
 
   const onSubmit = async (values) => {
     //api fetch hook
-    console.log("hello");
     const { result, error, loading } = await apiFetch(
       "/api/user/register",
       "POST",
