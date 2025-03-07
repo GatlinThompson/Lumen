@@ -7,7 +7,7 @@ import { useCookies } from "react-cookie";
 import Dashboard from "./pages/Dashboard";
 import { useEffect, useState, createContext } from "react";
 import { apiFetch } from "./hooks/APIFetch";
-import Logout from "./components/Logout";
+import Logout from "./components/role-navagation/Logout";
 
 export const AppContext = createContext();
 
@@ -19,6 +19,8 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const [toStart, setToStart] = useState(false);
+  const [formError, setFormError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   //verify user
   const verifyUser = async () => {
@@ -57,6 +59,10 @@ function App() {
         removeCookie,
         toStart,
         setToStart,
+        formError,
+        setFormError,
+        errorMessage,
+        setErrorMessage,
       }}
     >
       <Router>

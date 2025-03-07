@@ -6,7 +6,7 @@ import NavBar from "./components/layout/NavBar";
 import DesktopHeader from "./components/layout/DesktopHeader";
 import { useEffect, useContext } from "react";
 import { AppContext } from "./App";
-import Notification from "./components/Notification";
+import NotificationAlert from "./components/NotificationAlert";
 
 export default function Layout() {
   const location = useLocation();
@@ -30,7 +30,6 @@ export default function Layout() {
       {noNavbar ? null : <NavBar />}
       {noNavbar ? null : <DesktopHeader />}
       <main className={` ${noNavbar ? "no-nav" : ""}`}>
-        <Notification />
         {location.pathname === "/" ? <LandingPage /> : <Outlet />}
       </main>
       <Footer noNavbar={noNavbar} />
