@@ -1,11 +1,12 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Footer from "./components/Footer";
+import Footer from "./components/layout/Footer";
 import LandingPage from "./pages/LandingPage";
-import NavBar from "./components/Navbar";
-import DesktopHeader from "./components/DesktopHeader";
+import NavBar from "./components/layout/NavBar";
+import DesktopHeader from "./components/layout/DesktopHeader";
 import { useEffect, useContext } from "react";
 import { AppContext } from "./App";
+import Notification from "./components/Notification";
 
 export default function Layout() {
   const location = useLocation();
@@ -29,7 +30,7 @@ export default function Layout() {
       {noNavbar ? null : <NavBar />}
       {noNavbar ? null : <DesktopHeader />}
       <main className={` ${noNavbar ? "no-nav" : ""}`}>
-        {/*Swap Components based on url location*/}
+        <Notification />
         {location.pathname === "/" ? <LandingPage /> : <Outlet />}
       </main>
       <Footer noNavbar={noNavbar} />

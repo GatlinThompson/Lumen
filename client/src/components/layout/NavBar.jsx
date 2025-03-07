@@ -1,16 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
-import menu_icon from "../assets/images/menu-icon.svg";
-import styles from "../styles/nav.module.scss";
-import ProfileIcon from "./ProfileIcon";
+import menu_icon from "../../assets/images/menu-icon.svg";
+import styles from "../../styles/nav.module.scss";
+import ProfileIcon from "../ProfileIcon";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import AdminNav from "./role-navagation/AdminNav";
+import AdminNav from "../role-navagation/AdminNav";
 import { useContext } from "react";
-import { AppContext } from "../App";
-import ManagerNav from "./role-navagation/ManagerNav";
-import TrainerNav from "./role-navagation/TrainerNav";
-import EmployeeNav from "./role-navagation/EmployeeNav";
-import logo from "../assets/images/lumenlogo.svg";
+import { AppContext } from "../../App";
+import ManagerNav from "../role-navagation/ManagerNav";
+import TrainerNav from "../role-navagation/TrainerNav";
+import EmployeeNav from "../role-navagation/EmployeeNav";
+import logo from "../../assets/images/lumenlogo.svg";
 
 export default function NavBar() {
   let { user } = useContext(AppContext);
@@ -24,7 +24,7 @@ export default function NavBar() {
         lumen
       </Link>
       <Link to="#" className={`${styles.lg_gone}`}>
-        <ProfileIcon />
+        <ProfileIcon user={user} />
       </Link>
       <Navbar.Toggle
         aria-controls="basic-navbar-nav"

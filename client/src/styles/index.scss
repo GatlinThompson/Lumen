@@ -67,6 +67,7 @@ main {
   margin: 0 2rem;
   display: flex;
   flex-flow: column nowrap;
+  position: relative;
 
   &.no-nav {
     min-height: calc(100vh - 77px - 3rem);

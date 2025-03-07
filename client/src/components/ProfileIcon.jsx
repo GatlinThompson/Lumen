@@ -2,8 +2,7 @@ import { useContext } from "react";
 import { AppContext } from "../App.jsx";
 import styles from "../styles/profile-icon.module.scss";
 
-export default function ProfileIcon() {
-  let { user } = useContext(AppContext);
+export default function ProfileIcon({ user }) {
   //setup profile name
   const profileLetters = user
     ? user.first_name.charAt(0) + user.last_name.charAt(0)
