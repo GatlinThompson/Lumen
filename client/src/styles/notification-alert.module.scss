@@ -1,17 +1,28 @@
 @use "./custom.scss" as *;
 
+//Alert Container
+div.notification_container {
+  position: relative;
+  min-width: 300px;
+  max-width: 359px;
+  height: 1.625rem;
+  align-self: center;
+}
+
 div.notification {
   background-color: $light_gray;
   color: $neutral_black;
   //position: absolute;
   width: 100%;
-  min-width: 300px;
   top: 0;
-  margin-top: 2rem;
   height: 1.625rem;
   display: flex;
   justify-content: flex-start;
   border-radius: 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
 
   padding: 2px;
   gap: 5px;

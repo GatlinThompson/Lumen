@@ -13,7 +13,6 @@ const Input = ({
   error,
   touched,
 }) => {
-  console.log(touched);
   return (
     <div className={`${styles.input_container}`}>
       {label && <label htmlFor={name}>{label}</label>}
