@@ -53,12 +53,12 @@ div.input_container {
   }
 
   & > select.selection {
-    padding: 0px 30px 0px 10px;
+    padding: 0px 46px 0px 10px;
     position: relative;
     appearance: none;
     background-image: url("../assets/images/select-arrow.svg");
     background-repeat: no-repeat;
-    background-position: right 1rem top 50%;
+    background-position: right 13px top 50%;
     background-size: 32px auto;
 
     & > option {
