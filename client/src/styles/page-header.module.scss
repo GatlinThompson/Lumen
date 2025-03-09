@@ -1,7 +1,7 @@
 @use "./custom.scss" as *;
 
 h1.header {
-  font-family: "Outfit", sans-serif;
+  font-family: $header_font;
   font-size: 2rem;
   font-weight: normal;
   margin-top: calc(2rem - 3px);

@@ -7,8 +7,8 @@ import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
   try {
     //get default employee role
-    let role = await Role.findOne({ name: "employee" });
-    let department = await Department.findOne({ name: "new hire" });
+    let role = await Role.findOne({ name: "admin" });
+    let department = await Department.findOne({ name: "human resources" });
 
     //set up new user
     let user = new User();

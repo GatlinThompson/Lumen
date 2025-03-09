@@ -12,9 +12,11 @@ const Input = ({
   required,
   error,
   touched,
+  extraClasses,
+  pattern,
 }) => {
   return (
-    <div className={`${styles.input_container}`}>
+    <div className={`${styles.input_container} ${extraClasses}`}>
       {label && <label htmlFor={name}>{label}</label>}
       <input
         type={type}
@@ -23,6 +25,7 @@ const Input = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        pattern={pattern}
         placeholder={placeholder}
         required={required}
         className={`${styles.input_field}`}

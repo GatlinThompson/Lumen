@@ -12,7 +12,7 @@ const checkUserRole = (userRole) => async (req, res, next) => {
 
       //get role of user
       let role = await Role.findOne({ name: userRole });
-      //find user who has admin role based on jwt
+      //find user who has user role based on jwt
       let user = await User.findById(userDecoded._id).populate({
         path: "role",
         match: { name: userRole },

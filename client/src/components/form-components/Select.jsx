@@ -13,9 +13,10 @@ const Select = ({
   error,
   touched,
   children,
+  extraClasses,
 }) => {
   return (
-    <div className={`${styles.input_container}`}>
+    <div className={`${styles.input_container} ${extraClasses}`}>
       {label && <label htmlFor={name}>{label}</label>}
       <select
         id={name}
@@ -27,7 +28,7 @@ const Select = ({
         required={required}
         className={`${styles.input_field}  ${styles.selection}`}
       >
-        <option value="" selected disabled hidden>
+        <option value="" hidden>
           {placeholder}
         </option>
         {children}

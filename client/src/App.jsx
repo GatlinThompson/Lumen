@@ -10,6 +10,8 @@ import { apiFetch } from "./hooks/APIFetch";
 import Logout from "./components/role-navagation/Logout";
 import TrainingForm from "./pages/TrainingForm";
 import TrainingPage from "./pages/TrainingPage";
+import TrainingSuccess from "./pages/TrainingSuccess";
+import TrainingFormEdit from "./pages/TrainingFormEdit";
 
 export const AppContext = createContext();
 
@@ -78,7 +80,14 @@ function App() {
               {/*Training Routes*/}
               <Route path="/trainings" element={<TrainingPage />} />
               <Route path="/training/new" element={<TrainingForm />} />
-              <Route path="/training/:id/edit" element={<TrainingForm />} />
+              <Route
+                path="/training/:method/:p_id/success"
+                element={<TrainingSuccess />}
+              />
+              <Route
+                path="/training/:p_id/edit"
+                element={<TrainingFormEdit />}
+              />
             </Route>
           </Routes>
         </ScrollToTop>

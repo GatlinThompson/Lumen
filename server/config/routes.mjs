@@ -19,7 +19,11 @@ import {
   editDepartment,
   deleteDepartment,
 } from "../controllers/departments.mjs";
-import { createTrainingProgram } from "../controllers/training-programs.mjs";
+import {
+  createTrainingProgram,
+  getSingleTrainingProgram,
+  editTrainingProgram,
+} from "../controllers/training-programs.mjs";
 import {
   isSuperAdmin,
   isAdmin,
@@ -35,6 +39,15 @@ export const configureRoutes = (app) => {
   app.post("/api/user/register", registerUser);
   app.post("/api/user/signin", signInUser);
   app.get("/api/user/verify", verifyUser, verifiedLoggedInUser);
+
+  //Generic GET API Calls*************************************************************
+
+  //Get Users by Role
+  app.get("/api/users/managers", getManagers);
+  app.get("/api/users/trainers", getTrainers);
+  app.get("/api/users/employees", getEmployees);
+  //Get All Users
+  app.get("/api/users/everyone", isAdmin, getAllUsers);
 
   //Super Admin API Calls*************************************************************
 
@@ -55,16 +68,10 @@ export const configureRoutes = (app) => {
   app.put("/api/user/:id/edit", isAdmin, editUser);
   app.delete("/api/user/:id/delete", isAdmin, deleteUser);
 
-  //Get Users by Role
-  app.get("/api/users/managers", isAdmin, getManagers);
-  app.get("/api/users/trainers", isAdmin, getTrainers);
-  app.get("/api/users/employees", isAdmin, getEmployees);
-
-  //Get All Users
-  app.get("/api/users/everyone", isAdmin, getAllUsers);
-
   //Training Program API Calls
   app.post("/api/training-programs/create", isAdmin, createTrainingProgram);
+  app.put("/api/training-programs/:id/edit", isAdmin, editTrainingProgram);
+  app.get("/api/training-programs/:id", getSingleTrainingProgram);
 
   app.use("/", router);
 };

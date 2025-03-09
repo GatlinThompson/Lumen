@@ -19,8 +19,7 @@ div.profile {
     text-decoration: none;
     color: $neutral_black;
     line-height: 30px;
-    font-family: "Roboto", sans-serif;
-
+    font-family: $profile_font;
     @include screen-breakpoint("lg") {
       line-height: 45px;
       font-size: 18px;

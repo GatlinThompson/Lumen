@@ -21,6 +21,11 @@ $footer-gray: #e5e5e5;
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+//Font variables
+$header_font: "Outfit", sans-serif;
+$profile_font: "Roboto", sans-serif;
+$body_font: "Albert Sans", sans-serif;
+
 //screen break points
 $breakpoints: (
   "sm": 320px,

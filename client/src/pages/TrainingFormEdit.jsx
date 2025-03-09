@@ -15,21 +15,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { AppContext } from "../App";
 
-export default function TrainingForm() {
-  //use states
+export default function TrainingFormEdit() {
+  //declare variables
+  const { p_id } = useParams();
   const [managers, setManagers] = useState([]);
   const [trainers, setTrainers] = useState([]);
   const [sessions, setSessions] = useState([]);
   const [formError, setFormError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  let initialValues = {
+  const [initialValues, setInitialValues] = useState({
     title: "",
     description: "",
     assigned_manager: "",
     deadline: "",
     duration: "",
     sessions: [],
-  };
+  });
 
   const durations = [
     { time: 30, duration: "30 minutes" },
@@ -43,6 +44,7 @@ export default function TrainingForm() {
     { time: 240, duration: "4 hours" },
     { time: 300, duration: "5 hours" },
   ];
+
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
 
@@ -59,6 +61,7 @@ export default function TrainingForm() {
 
       if (!error) {
         //set manager from the list of users
+
         setManagers(result.users);
       }
     };
@@ -77,8 +80,76 @@ export default function TrainingForm() {
     //call functions
     getManagers();
     getTrainers();
-    addSession();
-  }, [user, navigate]);
+
+    //check if p_id is not null
+    if (p_id) {
+      //Get Training Program function
+      const getTrainingProgram = async () => {
+        const { result, error } = await apiFetch(
+          `/api/training-programs/${p_id}`,
+          "GET"
+        );
+
+        //if
+        if (!error) {
+          //declare program
+          const program = result.program;
+
+          //program is archived
+          if (program.archived) navigate("/dashboard");
+
+          //formate dealine to fit date input
+          const formatedDeadline = new Date(program.deadline)
+            .toISOString()
+            .split("T")[0];
+
+          //map through sessions to fit the form's format
+          let s = program.training_sessions.map((session) => {
+            //get date
+            const sessionDate = new Date(session.start_time)
+              .toISOString()
+              .split("T")[0];
+            //get time
+            const sessionTime = session.start_time
+              .split("T")[1]
+              .split(":")
+              .slice(0, 2)
+              .join(":");
+
+            //set up session schema
+            const sessionObj = {
+              _id: session.id,
+              trainer: session.trainer._id,
+              date: sessionDate,
+              time: sessionTime,
+            };
+
+            return sessionObj; //return object
+          });
+
+          setSessions(s);
+
+          setInitialValues({
+            title: program.title,
+            description: program.description,
+            assigned_manager: program.assigned_manager._id,
+            deadline: formatedDeadline,
+            duration: program.duration,
+            sessions: s,
+          });
+        } else {
+          //if there is an error nagivate to dashboard
+          navigate("/dashboard");
+        }
+      };
+
+      //call function
+      getTrainingProgram();
+    } else {
+      //if no_pid
+      navigate("/dashboard");
+    }
+  }, [p_id, user]);
 
   //Adds Session
   const addSession = () => {
@@ -142,15 +213,16 @@ export default function TrainingForm() {
 
   const onSubmit = async (values) => {
     //api fetch hook
+    console.log(values);
     const { result, error, loading } = await apiFetch(
-      "/api/training-programs/create",
-      "POST",
+      `/api/training-programs/${p_id}/edit`,
+      "PUT",
       values
     );
 
     if (!error) {
       setFormError(false); // no form errors
-      navigate(`/training/new/${result.program}/success`);
+      navigate(`/training/edit/${result.program}/success`);
     } else {
       setFormError(true);
       setErrorMessage(result.message);
@@ -161,12 +233,13 @@ export default function TrainingForm() {
     initialValues,
     validationSchema,
     onSubmit,
+    enableReinitialize: true,
   });
 
   return (
     <>
       <BackButton />
-      <PageHeader title={"Create New Training"} />
+      <PageHeader title={"Edit Training"} />
 
       <h2 className={styles.form_title}>Training Infomation</h2>
       <div className={styles.error_msg}>
@@ -291,7 +364,7 @@ export default function TrainingForm() {
             type="submit"
             extraClasses={`${styles.submit}`}
           >
-            Create training
+            Edit training
           </Button>
           <Button
             variant="gray"
