@@ -13,7 +13,7 @@ export default function DesktopHeader() {
           {user.first_name} {user.last_name}
         </span>
       ) : null}
-      <Link to="#">
+      <Link to="/profile">
         <ProfileIcon user={user} />
       </Link>
     </div>

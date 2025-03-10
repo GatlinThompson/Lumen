@@ -16,6 +16,7 @@ import UserCreationPage from "./pages/UserCreation.page";
 import UserSuccess from "./pages/UserSuccess";
 import ErrorAPiPage from "./pages/ErrorAPiPage";
 import ErrorPage from "./pages/ErrorPage";
+import UserProfile from "./pages/UserProfile";
 
 export const AppContext = createContext();
 
@@ -77,9 +78,12 @@ function App() {
         <ScrollToTop>
           <Routes>
             <Route path="/" element={<Layout />}>
+              {/*Authentication Routes */}
               <Route path="/login" element={<LoginPage />} />
               <Route path="logout" element={<Logout />} />
               <Route path="/registration" element={<RegistrationPage />} />
+              {/*Commonplace Route */}
+              <Route path="/errorapi" element={<ErrorAPiPage />} />
               <Route path="/dashboard" element={<Dashboard />} />
               {/*Training Routes*/}
               <Route path="/trainings" element={<TrainingPage />} />
@@ -95,8 +99,10 @@ function App() {
               {/*User Routes*/}
               <Route path="/users/create" element={<UserCreationPage />} />
               <Route path="/users/create/success" element={<UserSuccess />} />
-              <Route path="/errorapi" element={<ErrorAPiPage />} />
+              {/*Profile Route */}
+              <Route path="/profile" element={<UserProfile />} />
             </Route>
+
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </ScrollToTop>
