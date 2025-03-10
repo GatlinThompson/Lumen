@@ -75,6 +75,12 @@ div.btn_controls {
   flex-flow: column nowrap;
   gap: 1.5rem;
 
+  &.user_success_btns {
+    @include screen-breakpoint("lg") {
+      margin-top: 2.5rem;
+    }
+  }
+
   @include screen-breakpoint("lg") {
     margin-top: 4.5rem;
     gap: 1rem;

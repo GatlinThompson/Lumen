@@ -12,6 +12,8 @@ import TrainingForm from "./pages/TrainingForm";
 import TrainingPage from "./pages/TrainingPage";
 import TrainingSuccess from "./pages/TrainingSuccess";
 import TrainingFormEdit from "./pages/TrainingFormEdit";
+import UserCreationPage from "./pages/UserCreation.page";
+import UserSuccess from "./pages/UserSuccess";
 
 export const AppContext = createContext();
 
@@ -88,6 +90,9 @@ function App() {
                 path="/training/:p_id/edit"
                 element={<TrainingFormEdit />}
               />
+              {/*User Routes*/}
+              <Route path="/users/create" element={<UserCreationPage />} />
+              <Route path="/users/create/success" element={<UserSuccess />} />
             </Route>
           </Routes>
         </ScrollToTop>

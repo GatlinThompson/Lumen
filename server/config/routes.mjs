@@ -29,6 +29,7 @@ import {
   isAdmin,
   verifyUser,
 } from "../middleware/user-authorization.mjs";
+import { getRoleAndDepartments } from "../controllers/admin.mjs";
 
 // Define Router
 let router = express.Router();
@@ -57,11 +58,14 @@ export const configureRoutes = (app) => {
   app.delete("/api/role/:id/delete", isSuperAdmin, deleteRole);
 
   //Department API Calls
-  app.get("/api/department/create", isSuperAdmin, createDepartment);
+  app.post("/api/department/create", isSuperAdmin, createDepartment);
   app.put("/api/department/:id/edit", isSuperAdmin, editDepartment);
   app.delete("/api/department/:id/delete", isSuperAdmin, deleteDepartment);
 
   //Admin API Calls*******************************************************************
+
+  //Call Role & Department
+  app.get("/api/admin/roles-and-departments", isAdmin, getRoleAndDepartments);
 
   //Admin User API Calls
   app.post("/api/user/create", isAdmin, createUser);
