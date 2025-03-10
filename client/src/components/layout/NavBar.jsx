@@ -30,7 +30,7 @@ export default function NavBar() {
           </div>
           lumen
         </Link>
-        <Link to="#" className={`${styles.lg_gone}`}>
+        <Link to="/profile" className={`${styles.lg_gone}`}>
           <ProfileIcon user={user} />
         </Link>
         <Navbar.Toggle
