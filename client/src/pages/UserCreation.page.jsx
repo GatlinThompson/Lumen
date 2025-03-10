@@ -47,6 +47,7 @@ export default function UserCreationPage() {
       } else {
         setFormError(true);
         setErrorMessage(result.message);
+        navigate("/errorapi");
       }
     };
 

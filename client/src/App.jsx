@@ -14,6 +14,8 @@ import TrainingSuccess from "./pages/TrainingSuccess";
 import TrainingFormEdit from "./pages/TrainingFormEdit";
 import UserCreationPage from "./pages/UserCreation.page";
 import UserSuccess from "./pages/UserSuccess";
+import ErrorAPiPage from "./pages/ErrorAPiPage";
+import ErrorPage from "./pages/ErrorPage";
 
 export const AppContext = createContext();
 
@@ -93,7 +95,9 @@ function App() {
               {/*User Routes*/}
               <Route path="/users/create" element={<UserCreationPage />} />
               <Route path="/users/create/success" element={<UserSuccess />} />
+              <Route path="/errorapi" element={<ErrorAPiPage />} />
             </Route>
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
         </ScrollToTop>
       </Router>

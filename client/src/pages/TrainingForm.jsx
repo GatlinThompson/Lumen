@@ -60,6 +60,8 @@ export default function TrainingForm() {
       if (!error) {
         //set manager from the list of users
         setManagers(result.users);
+      } else {
+        navigate("/errorapi");
       }
     };
 
@@ -72,6 +74,8 @@ export default function TrainingForm() {
       if (!error) {
         //set trainers from the list of users
         setTrainers(result.users);
+      } else {
+        navigate("/errorapi");
       }
     };
     //call functions

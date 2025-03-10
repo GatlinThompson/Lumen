@@ -61,8 +61,9 @@ export default function TrainingFormEdit() {
 
       if (!error) {
         //set manager from the list of users
-
         setManagers(result.users);
+      } else {
+        navigate("/errorapi");
       }
     };
 
@@ -75,6 +76,8 @@ export default function TrainingFormEdit() {
       if (!error) {
         //set trainers from the list of users
         setTrainers(result.users);
+      } else {
+        navigate("/errorapi");
       }
     };
     //call functions
@@ -138,8 +141,8 @@ export default function TrainingFormEdit() {
             sessions: s,
           });
         } else {
-          //if there is an error nagivate to dashboard
-          navigate("/dashboard");
+          //if there is an error nagivate to errorapi
+          navigate("/errorapi");
         }
       };
 
@@ -213,7 +216,6 @@ export default function TrainingFormEdit() {
 
   const onSubmit = async (values) => {
     //api fetch hook
-    console.log(values);
     const { result, error, loading } = await apiFetch(
       `/api/training-programs/${p_id}/edit`,
       "PUT",

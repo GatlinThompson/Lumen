@@ -32,7 +32,7 @@ export default function TrainingSuccess() {
         setTitle(result.program.title);
         setSessions(result.program.training_sessions);
       } else {
-        navigate("/dashboard");
+        navigate("/errorapi");
       }
     };
 
