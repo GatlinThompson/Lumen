@@ -38,7 +38,7 @@ $breakpoints: (
 
 // Screen media queries
 @mixin screen-breakpoint($size) {
-  $breakpoint: map-get(
+  $breakpoint: map.get(
     $map: $breakpoints,
     $key: $size,
   );
