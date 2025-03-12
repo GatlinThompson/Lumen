@@ -23,6 +23,7 @@ import {
   createTrainingProgram,
   getSingleTrainingProgram,
   editTrainingProgram,
+  getAdminTrainingProgram,
 } from "../controllers/training-programs.mjs";
 import {
   isSuperAdmin,
@@ -47,8 +48,6 @@ export const configureRoutes = (app) => {
   app.get("/api/users/managers", getManagers);
   app.get("/api/users/trainers", getTrainers);
   app.get("/api/users/employees", getEmployees);
-  //Get All Users
-  app.get("/api/users/everyone", isAdmin, getAllUsers);
 
   //Super Admin API Calls*************************************************************
 
@@ -67,14 +66,22 @@ export const configureRoutes = (app) => {
   //Call Role & Department
   app.get("/api/admin/roles-and-departments", isAdmin, getRoleAndDepartments);
 
+  //Get All Users
+  app.get("/api/users/everyone", isAdmin, getAllUsers);
+
   //Admin User API Calls
   app.post("/api/user/create", isAdmin, createUser);
   app.put("/api/user/:id/edit", isAdmin, editUser);
   app.delete("/api/user/:id/delete", isAdmin, deleteUser);
 
-  //Training Program API Calls
+  //Training Program CRUD API Calls
   app.post("/api/training-programs/create", isAdmin, createTrainingProgram);
   app.put("/api/training-programs/:id/edit", isAdmin, editTrainingProgram);
+
+  //Admin Get All Active Training Programs
+  app.get("/api/training-programs", isAdmin, getAdminTrainingProgram);
+
+  //Generic Get Single Training Program
   app.get("/api/training-programs/:id", getSingleTrainingProgram);
 
   app.use("/", router);
