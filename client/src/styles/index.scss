@@ -84,6 +84,10 @@ main {
     min-height: calc(100vh - 77px - 3rem);
     margin: auto;
 
+    @include screen-breakpoint("lg") {
+      padding-left: 0;
+    }
+
     &.error {
       margin: 0 2rem;
     }

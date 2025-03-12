@@ -261,3 +261,21 @@ export const editTrainingProgram = async (req, res) => {
     });
   }
 };
+
+//Get all non-archived trainings
+export const getAdminTrainingProgram = async (req, res) => {
+  try {
+    let programs = await TrainingProgram.find({ archived: { $ne: true } });
+
+    res.status(200).json({
+      success: true,
+      message: "All programs obtained",
+      programs: programs,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Programs were not obtained",
+    });
+  }
+};
