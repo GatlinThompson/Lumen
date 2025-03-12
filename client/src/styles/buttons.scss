@@ -32,6 +32,7 @@
     &:hover {
       //background-color: #4b4b4b;
       background-color: color.adjust($color: $neutral_black, $lightness: 10%);
+      color: $white;
     }
   }
 
