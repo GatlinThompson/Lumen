@@ -15,7 +15,6 @@ nav.navbar {
     flex-flow: column nowrap;
     padding: 0;
     z-index: 10;
-    box-shadow: -3px 0px 24px 0px rgba(0, 0, 0, 0.21);
   }
 
   //Profile Link Styling
@@ -26,7 +25,7 @@ nav.navbar {
   //Nav Brand Styling
   & > a.nav_brand {
     color: $white;
-    font-family: "Outfit", sans-serif;
+    font-family: $header_font;
     font-size: 2rem;
     flex: 1;
     text-decoration: none;
@@ -97,6 +96,8 @@ nav.navbar {
       margin-bottom: 10px;
       margin-left: 1.5rem;
       margin-right: 1.5rem;
+      transition: all 200ms ease-in-out;
+      border-bottom: 1px solid transparent;
 
       @include screen-breakpoint("lg") {
         font-size: 1.125rem;

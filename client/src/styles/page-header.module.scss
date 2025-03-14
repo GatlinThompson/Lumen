@@ -1,0 +1,15 @@
+@use "./custom.scss" as *;
+
+h1.header {
+  font-family: $header_font;
+  font-size: 2rem;
+  font-weight: normal;
+  margin-top: calc(2rem - 3px);
+  margin-bottom: 0;
+
+  @include screen-breakpoint("lg") {
+    font-size: 2.125rem;
+    margin-top: calc(3rem + 3px);
+    font-size: 2.25rem;
+  }
+}

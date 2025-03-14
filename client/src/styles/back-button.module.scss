@@ -1,0 +1,16 @@
+@use "./custom.scss" as *;
+
+button.back_button {
+  background-color: transparent;
+  border: none;
+  margin-top: 2rem;
+  margin-right: auto;
+
+  & > img {
+    width: 0.5rem;
+  }
+
+  @include screen-breakpoint("lg") {
+    margin-top: 90px;
+  }
+}

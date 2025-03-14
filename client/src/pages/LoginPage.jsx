@@ -1,15 +1,16 @@
 /* login page */
 import logo from "../assets/images/lumenlogo_full_light.svg";
-import Button from "../components/Button";
-import Input from "../components/Input";
+import Button from "../components/basic-components/Button.jsx";
+import Input from "../components/form-components/Input.jsx";
 import styles from "../styles/authentication-pages.module.scss";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { apiFetch } from "../hooks/APIFetch";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App.jsx";
+import NotificationAlert from "../components/basic-components/NotificationAlert.jsx";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -22,6 +23,9 @@ export default function LoginPage() {
       navigate("/dashboard");
     }
   }, [loggedIn]);
+
+  const [formError, setFormError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   //Set Inital Values for form
   let initialValues = {
@@ -47,7 +51,11 @@ export default function LoginPage() {
     if (!error) {
       setLoggedIn(true); //set login to true
       setUser(result.user); // set user
+      setFormError(false); // no form errors
       navigate("/dashboard"); // navigate to dashboard
+    } else {
+      setFormError(true);
+      setErrorMessage(result.message);
     }
   };
 
@@ -63,8 +71,9 @@ export default function LoginPage() {
       <div className={`${styles.authenticate_container}`}>
         <h2 className={styles.authentication_header}>Login</h2>
       </div>
-
-
+      {formError ? (
+        <NotificationAlert successful={formError} message={errorMessage} />
+      ) : null}
       <form
         className={`${styles.authentication_form}`}
         onSubmit={formik.handleSubmit}

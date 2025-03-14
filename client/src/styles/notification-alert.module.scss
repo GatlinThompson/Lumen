@@ -1,0 +1,54 @@
+@use "./custom.scss" as *;
+
+//Alert Container
+div.notification_container {
+  position: relative;
+  min-width: 300px;
+  max-width: 359px;
+  height: 1.625rem;
+  align-self: center;
+}
+
+div.notification {
+  background-color: $light_gray;
+  color: $neutral_black;
+  //position: absolute;
+  width: 100%;
+  margin-top: calc(1.625rem);
+  top: 0;
+  height: 1.625rem;
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 10px;
+  position: absolute;
+  top: calc(1.625rem / 2);
+  left: 0;
+  margin: auto;
+
+  padding: 2px;
+  gap: 5px;
+  align-items: center;
+
+  //notification icon
+  & > i {
+    font-size: 1.125rem;
+    line-height: 0;
+  }
+
+  //notification text
+  & > span {
+    flex: 1;
+    font-size: 1rem;
+  }
+
+  //Successful Notification
+  &.success {
+    background-color: $success-background;
+    color: $success-text;
+  }
+  //Error Notification
+  &.error {
+    background-color: $error-background;
+    color: $error-text;
+  }
+}

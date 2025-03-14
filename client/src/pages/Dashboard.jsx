@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../App.jsx";
-import Button from "../components/Button.jsx";
+import Button from "../components/basic-components/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import DesktopEmployeeCard from "../components/DesktopEmployeeCard.jsx";
 

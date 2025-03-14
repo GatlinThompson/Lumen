@@ -19,12 +19,18 @@ import {
   editDepartment,
   deleteDepartment,
 } from "../controllers/departments.mjs";
-import { createTrainingProgram } from "../controllers/training-programs.mjs";
+import {
+  createTrainingProgram,
+  getSingleTrainingProgram,
+  editTrainingProgram,
+  getAdminTrainingProgram,
+} from "../controllers/training-programs.mjs";
 import {
   isSuperAdmin,
   isAdmin,
   verifyUser,
 } from "../middleware/user-authorization.mjs";
+import { getRoleAndDepartments } from "../controllers/admin.mjs";
 
 // Define Router
 let router = express.Router();
@@ -36,6 +42,13 @@ export const configureRoutes = (app) => {
   app.post("/api/user/signin", signInUser);
   app.get("/api/user/verify", verifyUser, verifiedLoggedInUser);
 
+  //Generic GET API Calls*************************************************************
+
+  //Get Users by Role
+  app.get("/api/users/managers", getManagers);
+  app.get("/api/users/trainers", getTrainers);
+  app.get("/api/users/employees", getEmployees);
+
   //Super Admin API Calls*************************************************************
 
   //Role API Calls
@@ -44,27 +57,32 @@ export const configureRoutes = (app) => {
   app.delete("/api/role/:id/delete", isSuperAdmin, deleteRole);
 
   //Department API Calls
-  app.get("/api/department/create", isSuperAdmin, createDepartment);
+  app.post("/api/department/create", isSuperAdmin, createDepartment);
   app.put("/api/department/:id/edit", isSuperAdmin, editDepartment);
   app.delete("/api/department/:id/delete", isSuperAdmin, deleteDepartment);
 
   //Admin API Calls*******************************************************************
+
+  //Call Role & Department
+  app.get("/api/admin/roles-and-departments", isAdmin, getRoleAndDepartments);
+
+  //Get All Users
+  app.get("/api/users/everyone", isAdmin, getAllUsers);
 
   //Admin User API Calls
   app.post("/api/user/create", isAdmin, createUser);
   app.put("/api/user/:id/edit", isAdmin, editUser);
   app.delete("/api/user/:id/delete", isAdmin, deleteUser);
 
-  //Get Users by Role
-  app.get("/api/users/managers", isAdmin, getManagers);
-  app.get("/api/users/trainers", isAdmin, getTrainers);
-  app.get("/api/users/employees", isAdmin, getEmployees);
-
-  //Get All Users
-  app.get("/api/users/everyone", isAdmin, getAllUsers);
-
-  //Training Program API Calls
+  //Training Program CRUD API Calls
   app.post("/api/training-programs/create", isAdmin, createTrainingProgram);
+  app.put("/api/training-programs/:id/edit", isAdmin, editTrainingProgram);
+
+  //Admin Get All Active Training Programs
+  app.get("/api/training-programs", isAdmin, getAdminTrainingProgram);
+
+  //Generic Get Single Training Program
+  app.get("/api/training-programs/:id", getSingleTrainingProgram);
 
   app.use("/", router);
 };

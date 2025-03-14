@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/buttons.scss";
+import "../../styles/buttons.scss";
 
 const Button = ({
   type = "button",

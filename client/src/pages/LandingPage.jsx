@@ -1,4 +1,4 @@
-import Button from "../components/Button";
+import Button from "../components/basic-components/Button.jsx";
 import logo from "../assets/images/lumenlogo_full_light.svg";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/landing-page.module.scss";

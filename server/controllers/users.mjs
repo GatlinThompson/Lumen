@@ -7,8 +7,8 @@ import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
   try {
     //get default employee role
-    let role = await Role.findOne({ name: "employee" });
-    let department = await Department.findOne({ name: "new hire" });
+    let role = await Role.findOne({ name: "admin" });
+    let department = await Department.findOne({ name: "human resources" });
 
     //set up new user
     let user = new User();
@@ -219,7 +219,7 @@ const getRoleSpecificUser = (usersRole) => async (req, res) => {
     let role = await Role.findOne({ name: usersRole });
 
     //get role specific users
-    let users = await User.find({ role: role._id });
+    let users = await User.find({ role: role._id }).select("-hash -salt");
 
     res.status(200).json({
       success: true,
