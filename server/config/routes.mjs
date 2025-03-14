@@ -31,6 +31,7 @@ import {
   verifyUser,
 } from "../middleware/user-authorization.mjs";
 import { getRoleAndDepartments } from "../controllers/admin.mjs";
+import { changeName, changePassword } from "../controllers/profile.mjs";
 
 // Define Router
 let router = express.Router();
@@ -42,7 +43,12 @@ export const configureRoutes = (app) => {
   app.post("/api/user/signin", signInUser);
   app.get("/api/user/verify", verifyUser, verifiedLoggedInUser);
 
-  //Generic GET API Calls*************************************************************
+  //User Name and Password API Calls***************************************************
+
+  app.put("/api/user/change-name", verifyUser, changeName);
+  app.put("/api/user/:id/change-password", verifyUser, changePassword);
+
+  //Generic GET API Calls**************************************************************
 
   //Get Users by Role
   app.get("/api/users/managers", getManagers);
@@ -83,6 +89,8 @@ export const configureRoutes = (app) => {
 
   //Generic Get Single Training Program
   app.get("/api/training-programs/:id", getSingleTrainingProgram);
+
+  //Dashboard API Calls***************************************************************
 
   app.use("/", router);
 };

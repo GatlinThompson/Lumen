@@ -50,9 +50,6 @@ function App() {
     if (cookies.token !== undefined) {
       //verify user with token
       verifyUser();
-    } else {
-      //cookie not found
-      //setToStart(true);
     }
   }, []);
 
