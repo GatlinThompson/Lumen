@@ -2,17 +2,19 @@ import React from "react";
 import styles from "../styles/desktop-employee-card.module.scss";
 import CardContainer from "./CardContainer";
 import Button from "./Button";
+import ProfileIcon from "./ProfileIcon";
 
 export default function DesktopEmployeeCard() {
+  return (
     <CardContainer>
-      <div className="d-flex justify-content-between">
-        <div>
-          <div className="me-3 align-self-center">
-            <div className="profile-icon">EP</div>
+      <div className="d-flex justify-content-between align-items-center m-3">
+        <div className="d-flex">
+          <div className="profile-icon me-2">
+            <ProfileIcon></ProfileIcon>
           </div>
           <div>
-            <div className="fw-bold">"Employee Name"</div>
-            <div>"Employee Department"</div>
+            <div className="fw-bold">Employee Name</div>
+            <div>Employee Department</div>
           </div>
         </div>
 
@@ -27,5 +29,7 @@ export default function DesktopEmployeeCard() {
           </Button>
         </div>
       </div>
-    </CardContainer>;
-}
+    </CardContainer>
+  );
+};
+

@@ -41,7 +41,7 @@ function App() {
       verifyUser();
     } else {
       //cookie not found
-      setToStart(true);
+      //setToStart(true);
     }
   }, []);
 
