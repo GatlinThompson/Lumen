@@ -10,7 +10,7 @@ import { AppContext } from "../../App";
 import ManagerNav from "../role-navagation/ManagerNav";
 import TrainerNav from "../role-navagation/TrainerNav";
 import EmployeeNav from "../role-navagation/EmployeeNav";
-import logo from "../../assets/images/lumenlogo.svg";
+import logo from "../../assets/images/lumenlogo_full_dark.svg";
 
 export default function NavBar() {
   let { user } = useContext(AppContext);
@@ -28,7 +28,7 @@ export default function NavBar() {
           <div>
             <img src={logo} alt="Lumen Logo" />
           </div>
-          lumen
+          <span>lumen</span>
         </Link>
         <Link to="/profile" className={`${styles.lg_gone}`}>
           <ProfileIcon user={user} />

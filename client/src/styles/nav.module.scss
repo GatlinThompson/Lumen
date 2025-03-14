@@ -24,13 +24,19 @@ nav.navbar {
 
   //Nav Brand Styling
   & > a.nav_brand {
-    color: $white;
-    font-family: $header_font;
-    font-size: 2rem;
     flex: 1;
     text-decoration: none;
     margin-left: 1.5rem;
 
+    & > span {
+      color: $white;
+      font-family: $header_font;
+      font-size: 2rem;
+      flex: 1;
+      @include screen-breakpoint("lg") {
+        display: none;
+      }
+    }
     //Logo Image
 
     & > div {
@@ -48,7 +54,7 @@ nav.navbar {
 
       & > div {
         display: block;
-        width: 65px;
+        width: 155px;
 
         & > img {
           width: 100%;

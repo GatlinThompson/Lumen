@@ -90,6 +90,10 @@ main {
 
     &.error {
       margin: 0 2rem;
+
+      @include screen-breakpoint("lg") {
+        padding-left: 296px;
+      }
     }
 
     @include screen-breakpoint("lg") {
@@ -208,6 +212,7 @@ div.error-container {
   flex: 1;
   justify-content: center;
   align-items: center;
+  width: 100%;
   flex-flow: column nowrap;
 
   & > button {

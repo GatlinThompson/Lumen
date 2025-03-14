@@ -23,6 +23,7 @@ export default function TrainingFormEdit() {
   const [sessions, setSessions] = useState([]);
   const [formError, setFormError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loaded, setLoading] = useState(false);
   const [initialValues, setInitialValues] = useState({
     title: "",
     description: "",
@@ -54,10 +55,7 @@ export default function TrainingFormEdit() {
     }
     //Get managers for assigned managers
     const getManagers = async () => {
-      const { result, error, loading } = await apiFetch(
-        "/api/users/managers",
-        "GET"
-      );
+      const { result, error } = await apiFetch("/api/users/managers", "GET");
 
       if (!error) {
         //set manager from the list of users
@@ -68,10 +66,7 @@ export default function TrainingFormEdit() {
     };
 
     const getTrainers = async () => {
-      const { result, error, loading } = await apiFetch(
-        "/api/users/trainers",
-        "GET"
-      );
+      const { result, error } = await apiFetch("/api/users/trainers", "GET");
 
       if (!error) {
         //set trainers from the list of users
@@ -83,12 +78,13 @@ export default function TrainingFormEdit() {
     //call functions
     getManagers();
     getTrainers();
+    addSession();
 
     //check if p_id is not null
     if (p_id) {
       //Get Training Program function
       const getTrainingProgram = async () => {
-        const { result, error } = await apiFetch(
+        const { result, error, loading } = await apiFetch(
           `/api/training-programs/${p_id}`,
           "GET"
         );
@@ -129,6 +125,7 @@ export default function TrainingFormEdit() {
 
             return sessionObj; //return object
           });
+          setLoading(loading);
 
           setSessions(s);
 
