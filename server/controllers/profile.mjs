@@ -69,8 +69,16 @@ export const changePassword = async (req, res) => {
     let oldPassword = req.body.password;
     let confrimPassword = req.body.confirm_password;
 
-    //check old and confirm password
+    //check if password is valid
+    if (!user.isPasswordValid(req.body.password)) {
+      return res.status(403).json({
+        success: false,
+        message: "Password is incorrect",
+      });
+    }
+
     if (oldPassword != confrimPassword) {
+      //check old and confirm password
       return res
         .status(409)
         .json({ success: false, message: "Passwords do not match" });
