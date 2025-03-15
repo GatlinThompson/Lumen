@@ -29,9 +29,18 @@ import {
   isSuperAdmin,
   isAdmin,
   verifyUser,
+  isManager,
+  isTrainer,
 } from "../middleware/user-authorization.mjs";
 import { getRoleAndDepartments } from "../controllers/admin.mjs";
 import { changeName, changePassword } from "../controllers/profile.mjs";
+import {
+  getDashboardManagerTrainings,
+  getDashboardPrograms,
+  getDashboardTrainerTrainings,
+  getDashBoardUsers,
+  getDepartmentEmployees,
+} from "../controllers/dashboard.mjs";
 
 // Define Router
 let router = express.Router();
@@ -91,6 +100,34 @@ export const configureRoutes = (app) => {
   app.get("/api/training-programs/:id", getSingleTrainingProgram);
 
   //Dashboard API Calls***************************************************************
+
+  //Admin Dashboard
+
+  //User Count
+  app.get("/api/dashboard/users", isAdmin, getDashBoardUsers);
+
+  //Training Program Count
+  app.get("/api/dashboard/programs", isAdmin, getDashboardPrograms);
+
+  //Manager Dashboard
+
+  //get assigned training
+  app.get(
+    "/api/dashboard/manager-trainings",
+    isManager,
+    getDashboardManagerTrainings
+  );
+
+  //Get department employees
+  app.get("/api/dashboard/employees", isManager, getDepartmentEmployees);
+
+  //Trainer Dashboard
+
+  app.get(
+    "/api/dashboard/trainer-trainings",
+    isTrainer,
+    getDashboardTrainerTrainings
+  );
 
   app.use("/", router);
 };

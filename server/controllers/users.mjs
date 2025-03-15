@@ -219,7 +219,9 @@ const getRoleSpecificUser = (usersRole) => async (req, res) => {
     let role = await Role.findOne({ name: usersRole });
 
     //get role specific users
-    let users = await User.find({ role: role._id }).select("-hash -salt");
+    let users = await User.find({ role: role._id, is_active: true }).select(
+      "-hash -salt"
+    );
 
     res.status(200).json({
       success: true,
@@ -245,7 +247,10 @@ export const getAllUsers = async (req, res) => {
     let superAdmin = await Role.find("super_admin");
 
     //get all users besides super admin
-    let users = await User.find({ role: { $ne: superAdmin._id } });
+    let users = await User.find({
+      role: { $ne: superAdmin._id },
+      is_active: true,
+    }).select("-hash -salt");
 
     res.status(200).json({
       success: true,
