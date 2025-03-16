@@ -1,6 +1,7 @@
 import { TrainingProgram } from "../models/training-program.mjs";
 import { TrainingSession } from "../models/training-session.mjs";
 import { User } from "../models/user.mjs";
+import jwt from "jsonwebtoken";
 
 export const createTrainingProgram = async (req, res) => {
   try {
@@ -265,7 +266,74 @@ export const editTrainingProgram = async (req, res) => {
 //Get all non-archived trainings
 export const getAdminTrainingProgram = async (req, res) => {
   try {
-    let programs = await TrainingProgram.find({ archived: { $ne: true } });
+    let programs = await TrainingProgram.find({ archived: false }).select(
+      "id background_color title"
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "All programs obtained",
+      programs: programs,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Programs were not obtained",
+    });
+  }
+};
+
+//get training programs assigned to manager
+export const getManagerTrainingProgram = async (req, res) => {
+  try {
+    //get manager
+    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+
+    //get programs assigned to manager
+    let programs = await TrainingProgram.find({
+      archived: false,
+      assigned_manager: userDecoded._id,
+    }).select("id background_color title");
+
+    res.status(200).json({
+      success: true,
+      message: "All programs obtained",
+      programs: programs,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Programs were not obtained",
+    });
+  }
+};
+
+//get training programs assigned to trainer
+export const getTrainerTrainingProgram = async (req, res) => {
+  try {
+    //get manager
+    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+
+    let sessions = await TrainingSession.find({
+      trainer: userDecoded._id,
+    }).select("-_id training_program");
+
+    //create an array that has unique ids
+    let trainingProgramIDs = [
+      ...new Set(
+        sessions.map((session) => {
+          return session.training_program;
+        })
+      ),
+    ];
+
+    //get all programs that match the ids
+    let programs = await TrainingProgram.find({
+      _id: { $in: trainingProgramIDs },
+      archived: false,
+    }).select("id background_color title");
+
+    console.log(programs);
 
     res.status(200).json({
       success: true,

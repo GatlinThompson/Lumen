@@ -23,7 +23,7 @@ export default function TrainingFormEdit() {
   const [sessions, setSessions] = useState([]);
   const [formError, setFormError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [loaded, setLoading] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const [initialValues, setInitialValues] = useState({
     title: "",
     description: "",
@@ -125,9 +125,12 @@ export default function TrainingFormEdit() {
 
             return sessionObj; //return object
           });
-          setLoading(loading);
 
           setSessions(s);
+
+          setTimeout(() => {
+            setLoaded(true);
+          }, 100);
 
           setInitialValues({
             title: program.title,
@@ -237,144 +240,147 @@ export default function TrainingFormEdit() {
 
   return (
     <>
-      <BackButton />
-      <PageHeader title={"Edit Training"} />
-
-      <h2 className={styles.form_title}>Training Infomation</h2>
-      <div className={styles.error_msg}>
-        {formError ? (
-          <NotificationAlert successful={formError} message={errorMessage} />
-        ) : null}
-      </div>
-      <form onSubmit={formik.handleSubmit} className={styles.form}>
-        <Input
-          type="text"
-          label="Training Title"
-          name="title"
-          placeholder="Enter title of the program"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.title}
-          error={formik.errors.title}
-          touched={formik.touched.title}
-        />
-        <TextArea
-          label="Description"
-          name="description"
-          value={formik.values.description}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.errors.description}
-          touched={formik.touched.description}
-        />
-        <div className={styles.double_row}>
-          <Select
-            label="Duration"
-            name="duration"
-            placeholder={"00:00"}
-            value={formik.values.duration}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.errors.duration}
-            touched={formik.touched.duration}
-            extraClasses={`${styles.duration}`}
-          >
-            {durations.map((duration, index) => {
-              return (
-                <option key={index} value={duration.time}>
-                  {duration.duration}
-                </option>
-              );
-            })}
-          </Select>
-
+      <div className={`${loaded ? "loaded loading" : "loading"}`}>
+        <BackButton />
+        <PageHeader title={"Edit Training"} />
+        <h2 className={styles.form_title}>Training Infomation</h2>
+        <div className={styles.error_msg}>
+          {formError ? (
+            <NotificationAlert successful={formError} message={errorMessage} />
+          ) : null}
+        </div>
+        <form onSubmit={formik.handleSubmit} className={styles.form}>
           <Input
-            type="date"
-            label="Deadline"
-            name="deadline"
-            placeholder="MM/DD/YYYY"
+            type="text"
+            label="Training Title"
+            name="title"
+            placeholder="Enter title of the program"
             onChange={formik.handleChange}
-            extraClasses={`${styles.small_input} ${styles.deadline}`}
             onBlur={formik.handleBlur}
-            value={formik.values.deadline}
-            error={formik.errors.deadline}
-            touched={formik.touched.deadline}
+            value={formik.values.title}
+            error={formik.errors.title}
+            touched={formik.touched.title}
           />
-        </div>
-        <div className="col-11">
-          <Select
-            label="Manager"
-            name="assigned_manager"
-            placeholder={"Assign a manager"}
-            value={formik.values.assigned_manager}
+          <TextArea
+            label="Description"
+            name="description"
+            value={formik.values.description}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.errors.assigned_manager}
-            touched={formik.touched.assigned_manager}
-          >
-            {managers.map((manager) => {
+            error={formik.errors.description}
+            touched={formik.touched.description}
+          />
+          <div className={styles.double_row}>
+            <Select
+              label="Duration"
+              name="duration"
+              placeholder={"00:00"}
+              value={formik.values.duration}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.errors.duration}
+              touched={formik.touched.duration}
+              extraClasses={`${styles.duration}`}
+            >
+              {durations.map((duration, index) => {
+                return (
+                  <option key={index} value={duration.time}>
+                    {duration.duration}
+                  </option>
+                );
+              })}
+            </Select>
+
+            <Input
+              type="date"
+              label="Deadline"
+              name="deadline"
+              placeholder="MM/DD/YYYY"
+              onChange={formik.handleChange}
+              extraClasses={`${styles.small_input} ${styles.deadline}`}
+              onBlur={formik.handleBlur}
+              value={formik.values.deadline}
+              error={formik.errors.deadline}
+              touched={formik.touched.deadline}
+            />
+          </div>
+          <div className="col-11">
+            <Select
+              label="Manager"
+              name="assigned_manager"
+              placeholder={"Assign a manager"}
+              value={formik.values.assigned_manager}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.errors.assigned_manager}
+              touched={formik.touched.assigned_manager}
+            >
+              {managers.map((manager) => {
+                return (
+                  <option key={manager._id} value={manager._id}>
+                    {manager.first_name} {manager.last_name}
+                  </option>
+                );
+              })}
+            </Select>
+          </div>
+          {/*Sessions Dynamic Portion*/}
+          <h2 className={`${styles.form_title} ${styles.session_section}`}>
+            Create Sessions
+          </h2>
+          <div className={styles.sessions}>
+            {sessions.map((session, index) => {
               return (
-                <option key={manager._id} value={manager._id}>
-                  {manager.first_name} {manager.last_name}
-                </option>
+                <SessionsFormCard
+                  key={index}
+                  index={index}
+                  trainers={trainers}
+                  session={session}
+                  removeSession={removeSession}
+                  updateSession={updateSession}
+                  length={sessions.length}
+                  formik={formik}
+                  errors={
+                    formik.errors.sessions ? formik.errors.sessions[index] : {}
+                  }
+                  touches={
+                    formik.touched.sessions
+                      ? formik.touched.sessions[index]
+                      : {}
+                  }
+                />
               );
             })}
-          </Select>
-        </div>
-        {/*Sessions Dynamic Portion*/}
-        <h2 className={`${styles.form_title} ${styles.session_section}`}>
-          Create Sessions
-        </h2>
-        <div className={styles.sessions}>
-          {sessions.map((session, index) => {
-            return (
-              <SessionsFormCard
-                key={index}
-                index={index}
-                trainers={trainers}
-                session={session}
-                removeSession={removeSession}
-                updateSession={updateSession}
-                length={sessions.length}
-                formik={formik}
-                errors={
-                  formik.errors.sessions ? formik.errors.sessions[index] : {}
-                }
-                touches={
-                  formik.touched.sessions ? formik.touched.sessions[index] : {}
-                }
-              />
-            );
-          })}
-        </div>
-        <div>
-          <Button
-            variant="dark"
-            onClick={addSession}
-            type="button"
-            extraClasses={`${styles.add_btn}`}
-          >
-            Add session
-          </Button>
-        </div>
-        <div className={styles.btn_controls}>
-          <Button
-            variant="yellow"
-            type="submit"
-            extraClasses={`${styles.submit}`}
-          >
-            Edit training
-          </Button>
-          <Button
-            variant="gray"
-            type="button"
-            extraClasses={`${styles.cancel}`}
-            onClick={() => navigate(-1)}
-          >
-            Cancel
-          </Button>
-        </div>
-      </form>
+          </div>
+          <div>
+            <Button
+              variant="dark"
+              onClick={addSession}
+              type="button"
+              extraClasses={`${styles.add_btn}`}
+            >
+              Add session
+            </Button>
+          </div>
+          <div className={styles.btn_controls}>
+            <Button
+              variant="yellow"
+              type="submit"
+              extraClasses={`${styles.submit}`}
+            >
+              Edit training
+            </Button>
+            <Button
+              variant="gray"
+              type="button"
+              extraClasses={`${styles.cancel}`}
+              onClick={() => navigate(-1)}
+            >
+              Cancel
+            </Button>
+          </div>
+        </form>
+      </div>
     </>
   );
 }

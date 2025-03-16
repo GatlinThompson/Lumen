@@ -3,12 +3,20 @@ import { useNavigate } from "react-router-dom";
 import SuccessHeader from "../components/basic-components/SucessHeader";
 import styles from "../styles/success-page.module.scss";
 import Button from "../components/basic-components/Button";
+import { useEffect, useState } from "react";
 
 export default function UserSuccess() {
   const navigate = useNavigate();
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoaded(true);
+    }, 100);
+  }, []);
 
   return (
-    <>
+    <div className={`${loaded ? "loaded loading" : "loading"}`}>
       <BackButton />
       <SuccessHeader />
       <div className={styles.info_container}></div>
@@ -33,6 +41,6 @@ export default function UserSuccess() {
           Back to home
         </Button>
       </div>
-    </>
+    </div>
   );
 }

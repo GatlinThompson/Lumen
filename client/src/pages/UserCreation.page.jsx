@@ -19,6 +19,7 @@ export default function UserCreationPage() {
   const [errorMessage, setErrorMessage] = useState("");
   const [departments, setDepartments] = useState([]);
   const [roles, setRoles] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   let initialValues = {
     first_name: "",
@@ -50,6 +51,10 @@ export default function UserCreationPage() {
         navigate("/errorapi");
       }
     };
+    //add page tranisiton
+    setTimeout(() => {
+      setLoaded(true);
+    }, 100);
 
     getRolesandDepartments();
   }, []);
@@ -91,7 +96,7 @@ export default function UserCreationPage() {
   });
 
   return (
-    <>
+    <div className={`${loaded ? "loaded loading" : "loading"}`}>
       <BackButton />
       <PageHeader title={"Create new user"} />
       <div className={styles.error_msg}>
@@ -201,6 +206,6 @@ export default function UserCreationPage() {
           </Button>
         </div>
       </form>
-    </>
+    </div>
   );
 }

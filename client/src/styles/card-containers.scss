@@ -14,3 +14,13 @@ div.training-card-container {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   width: 25rem;
 }
+
+div.has_background_color {
+  overflow: hidden;
+}
+
+div.flex {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}

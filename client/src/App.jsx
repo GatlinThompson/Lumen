@@ -17,6 +17,7 @@ import UserSuccess from "./pages/UserSuccess";
 import ErrorAPiPage from "./pages/ErrorAPiPage";
 import ErrorPage from "./pages/ErrorPage";
 import UserProfile from "./pages/UserProfile";
+import TrainingDetails from "./pages/TrainingDetails";
 
 export const AppContext = createContext();
 
@@ -89,6 +90,7 @@ function App() {
                 path="/training/:method/:p_id/success"
                 element={<TrainingSuccess />}
               />
+              <Route path="/training/:p_id" element={<TrainingDetails />} />
               <Route
                 path="/training/:p_id/edit"
                 element={<TrainingFormEdit />}

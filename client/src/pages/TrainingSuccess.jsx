@@ -13,6 +13,7 @@ export default function TrainingSuccess() {
   const { p_id, method } = useParams();
   const [sessions, setSessions] = useState([]);
   const [title, setTitle] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   const { user } = useContext(AppContext);
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ export default function TrainingSuccess() {
       if (!error) {
         setTitle(result.program.title);
         setSessions(result.program.training_sessions);
+        setTimeout(() => {
+          setLoaded(true);
+        }, 100);
       } else {
         navigate("/errorapi");
       }
@@ -43,45 +47,49 @@ export default function TrainingSuccess() {
 
   return (
     <>
-      <BackButton />
-      <SuccessHeader />
-      <div className={styles.info_container}></div>
-      <p className={styles.info}>
-        Your training was successfully {methodType} with the following sessions:
-      </p>
-      <div className={styles.sessions_container}>
-        {sessions &&
-          sessions.map((session, index) => {
-            return (
-              <SuccessTrainingCard
-                key={index}
-                session={session}
-                trainer={session.trainer}
-                title={title}
-              />
-            );
-          })}
-      </div>
-      <div className={styles.btn_controls}>
-        {method === "new" && (
-          <Button
-            variant="yellow"
-            type="button"
-            extraClasses={`${styles.submit}`}
-            onClick={() => navigate("/training/new")}
-          >
-            Create another training
-          </Button>
-        )}
+      <div className={`${loaded ? "loaded loading" : "loading"}`}>
+        <BackButton />
 
-        <Button
-          variant="gray"
-          type="button"
-          extraClasses={`${styles.cancel}`}
-          onClick={() => navigate("/dashboard")}
-        >
-          Back to home
-        </Button>
+        <SuccessHeader />
+        <div className={styles.info_container}></div>
+        <p className={styles.info}>
+          Your training was successfully {methodType} with the following
+          sessions:
+        </p>
+        <div className={styles.sessions_container}>
+          {sessions &&
+            sessions.map((session, index) => {
+              return (
+                <SuccessTrainingCard
+                  key={index}
+                  session={session}
+                  trainer={session.trainer}
+                  title={title}
+                />
+              );
+            })}
+        </div>
+        <div className={styles.btn_controls}>
+          {method === "new" && (
+            <Button
+              variant="yellow"
+              type="button"
+              extraClasses={`${styles.submit}`}
+              onClick={() => navigate("/training/new")}
+            >
+              Create another training
+            </Button>
+          )}
+
+          <Button
+            variant="gray"
+            type="button"
+            extraClasses={`${styles.cancel}`}
+            onClick={() => navigate("/dashboard")}
+          >
+            Back to home
+          </Button>
+        </div>
       </div>
     </>
   );

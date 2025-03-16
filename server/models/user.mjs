@@ -107,8 +107,8 @@ userSchema.pre("save", async function (next) {
 
 // Creates random cool pastel color
 const getRandomCoolColor = () => {
-  // random hue number based between 180 and 270 for cooler colors
-  const hue = Math.floor(Math.random() * (270 - 180 + 1)) + 180;
+  // random hue number based between 100 and 270 for cooler colors
+  const hue = Math.floor(Math.random() * (270 - 100 + 1)) + 100;
 
   return `hsl(${hue}, 100%, 90%)`; //returns hsl color string
 };

@@ -45,6 +45,7 @@ export default function TrainingForm() {
   ];
   const navigate = useNavigate();
   const { user } = useContext(AppContext);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (!user || user.role !== "admin") {
@@ -82,6 +83,9 @@ export default function TrainingForm() {
     getManagers();
     getTrainers();
     addSession();
+    setTimeout(() => {
+      setLoaded(true);
+    }, 100);
   }, [user, navigate]);
 
   //Adds Session
@@ -168,7 +172,7 @@ export default function TrainingForm() {
   });
 
   return (
-    <>
+    <div className={`${loaded ? "loaded loading" : "loading"}`}>
       <BackButton />
       <PageHeader title={"Create New Training"} />
 
@@ -307,6 +311,6 @@ export default function TrainingForm() {
           </Button>
         </div>
       </form>
-    </>
+    </div>
   );
 }

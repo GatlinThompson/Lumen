@@ -12,7 +12,7 @@ const Input = ({
   required,
   error,
   touched,
-  extraClasses,
+  extraClasses = null,
   pattern,
 }) => {
   return (
@@ -28,7 +28,7 @@ const Input = ({
         pattern={pattern}
         placeholder={placeholder}
         required={required}
-        className={`${styles.input_field}`}
+        className={``}
       />
       {touched && error ? <p>{error}</p> : null}
     </div>
