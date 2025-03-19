@@ -32,6 +32,7 @@ function App() {
   const [toStart, setToStart] = useState(false);
   const [formError, setFormError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [newAssignedEmployees, setNewAssignedEmployees] = useState([]);
 
   //verify user
   const verifyUser = async () => {
@@ -71,6 +72,8 @@ function App() {
         setFormError,
         errorMessage,
         setErrorMessage,
+        newAssignedEmployees,
+        setNewAssignedEmployees,
       }}
     >
       <Router>
@@ -96,6 +99,10 @@ function App() {
               <Route
                 path="/trainings/:p_id/assign"
                 element={<ManagerEmployeeAssign />}
+              />
+              <Route
+                path="/trainings/:p_id/assign/success"
+                element={<ManagerEmployeeAssignSuccess />}
               />
               <Route
                 path="/training/:p_id/edit"

@@ -16,7 +16,7 @@ export default function ManagerEmployeeAssign() {
   const [employees, setEmployees] = useState([]);
   const [orginalEmployees, setOrginalEmployee] = useState([]);
   const { p_id } = useParams();
-  const { user } = useContext(AppContext);
+  const { user, setNewAssignedEmployees } = useContext(AppContext);
   let initialValues = {
     assigned_employees: [],
   };
@@ -85,8 +85,16 @@ export default function ManagerEmployeeAssign() {
       data
     );
 
-    if (!error) {
-      console.log(result);
+    if (true) {
+      //create newly assinged employees array
+      const assignedEmployees = orginalEmployees.filter((employee) => {
+        return finalValues.includes(employee._id);
+      });
+
+      //set app array
+      setNewAssignedEmployees(assignedEmployees);
+      //naviagate to success page
+      navigate(`/trainings/${p_id}/assign/success`);
     } else {
       console.log(result);
     }
