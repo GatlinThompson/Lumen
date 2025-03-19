@@ -186,7 +186,6 @@ export default function UserCreationPage() {
           })}
         </Select>
 
-        {/**Button Controls */}
         <div className={`${styles.btn_controls} ${styles.user_btns}`}>
           <Button
             variant="yellow"

@@ -25,4 +25,21 @@ div.profile {
       font-size: 18px;
     }
   }
+
+  &.large {
+    justify-self: center;
+    align-items: center;
+    width: 164px;
+    height: 164px;
+    margin: 1rem;
+
+    @include screen-breakpoint("lg") {
+      justify-self: start;
+    }
+
+    & > span {
+      font-size: 64px;
+      line-height: 60px;
+    }
+  }
 }

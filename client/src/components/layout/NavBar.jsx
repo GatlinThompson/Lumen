@@ -57,7 +57,7 @@ export default function NavBar() {
 
             <hr className={`${styles.nav_divider}`} />
             <NavLink
-              to="/training/67ce263f0b751242f5c050ec/edit"
+              to="/profile"
               className={`${styles.lg_divider}`}
               onClick={handleLinkClick}
             >

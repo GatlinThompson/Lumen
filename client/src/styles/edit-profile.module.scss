@@ -1,0 +1,57 @@
+@use "./custom.scss" as *;
+
+h2 {
+  margin-top: 2rem;
+}
+
+h3 {
+  margin: 2rem 0 1rem 0;
+}
+
+//Button Controls
+div.btn_controls {
+  margin-top: 73px;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.5rem;
+
+  &.user_btns {
+    margin-top: 38px;
+
+    @include screen-breakpoint("lg") {
+      margin-top: 50px;
+    }
+  }
+
+  @include screen-breakpoint("lg") {
+    margin-top: 2rem;
+    gap: 1rem;
+    flex-flow: row nowrap;
+  }
+
+  & > button {
+    width: 100%;
+    margin-bottom: 0;
+
+    @include screen-breakpoint("lg") {
+      max-width: 183px;
+      order: 1;
+    }
+
+    //Cancel Button
+    &.cancel {
+      @include screen-breakpoint("lg") {
+        max-width: 183px;
+        order: 1;
+      }
+    }
+
+    //Submit Button
+    &.submit {
+      @include screen-breakpoint("lg") {
+        max-width: 305px;
+        order: 2;
+      }
+    }
+  }
+}

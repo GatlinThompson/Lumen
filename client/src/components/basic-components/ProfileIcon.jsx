@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AppContext } from "../../App.jsx";
 import styles from "../../styles/profile-icon.module.scss";
 
-export default function ProfileIcon({ user }) {
+export default function ProfileIcon({ user, size }) {
   //setup profile name
   const profileLetters = user
     ? user.first_name.charAt(0).toUpperCase() +
@@ -12,7 +12,7 @@ export default function ProfileIcon({ user }) {
   const backgroundColor = user ? user.background_color : "#fff";
   return (
     <div
-      className={`${styles.profile}`}
+      className={`${styles.profile} ${size === "large" ? styles.large : ""}`}
       style={{ backgroundColor: backgroundColor }}
     >
       <span>{profileLetters}</span>
