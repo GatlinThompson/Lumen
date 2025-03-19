@@ -1,8 +1,11 @@
-import { useContext } from "react";
-import { AppContext } from "../../App.jsx";
 import styles from "../../styles/profile-icon.module.scss";
 
-export default function ProfileIcon({ user, size, extraClasses = "" }) {
+export default function ProfileIcon({
+  user,
+  size,
+  extraClasses = "",
+  handleLinkClick,
+}) {
   //setup profile name
   const profileLetters = user
     ? user.first_name.charAt(0).toUpperCase() +
@@ -16,6 +19,7 @@ export default function ProfileIcon({ user, size, extraClasses = "" }) {
         size === "large" ? styles.large : ""
       } ${extraClasses}`}
       style={{ backgroundColor: backgroundColor }}
+      onClick={() => handleLinkClick}
     >
       <span>{profileLetters}</span>
     </div>

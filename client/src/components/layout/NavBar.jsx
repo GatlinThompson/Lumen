@@ -24,13 +24,21 @@ export default function NavBar() {
   return (
     <header>
       <Navbar expand="lg" className={`${styles.navbar}`} expanded={expanded}>
-        <Link to="/dashboard" className={`${styles.nav_brand}`}>
+        <Link
+          to="/dashboard"
+          className={`${styles.nav_brand}`}
+          onClick={handleLinkClick}
+        >
           <div>
             <img src={logo} alt="Lumen Logo" />
           </div>
           <span>lumen</span>
         </Link>
-        <Link to="/profile" className={`${styles.lg_gone}`}>
+        <Link
+          to="/profile"
+          className={`${styles.lg_gone}`}
+          onClick={handleLinkClick}
+        >
           <ProfileIcon user={user} />
         </Link>
         <Navbar.Toggle

@@ -11,16 +11,11 @@ export default function AdminNav(props) {
         <i className="bi bi-book"></i>All Trainings
       </NavLink>
       <NavLink to="/training/new" onClick={props.handleLinkClick}>
-        <i
-          className="bi bi-file-plus"
-          onClick={() => {
-            props.handleLinkClick;
-          }}
-        ></i>
+        <i className="bi bi-file-plus"></i>
         Create Training
       </NavLink>
-      <NavLink to="">
-        <i className="bi bi-briefcase" onClick={props.handleLinkClick}></i>
+      <NavLink to="" onClick={props.handleLinkClick}>
+        <i className="bi bi-briefcase"></i>
         Managers
       </NavLink>
       <NavLink to="" onClick={props.handleLinkClick}>
