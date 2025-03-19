@@ -86,7 +86,7 @@ export default function TrainingPage() {
     if (user && user.role === "trainer") {
       getTrainerTrainings();
     }
-  }, []);
+  }, [user]);
 
   //search trainings
   const handleSearch = (e) => {
