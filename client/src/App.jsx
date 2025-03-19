@@ -19,6 +19,7 @@ import ErrorPage from "./pages/ErrorPage";
 import UserProfile from "./pages/UserProfile";
 import TrainingDetails from "./pages/TrainingDetails";
 import ManagerEmployeeAssign from "./pages/ManagerEmployeeAssign";
+import ManagerEmployeeAssignSuccess from "./pages/ManagerEmployeeAssignSuccess";
 
 export const AppContext = createContext();
 

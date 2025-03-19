@@ -85,7 +85,7 @@ export default function ManagerEmployeeAssign() {
       data
     );
 
-    if (true) {
+    if (!error) {
       //create newly assinged employees array
       const assignedEmployees = orginalEmployees.filter((employee) => {
         return finalValues.includes(employee._id);
