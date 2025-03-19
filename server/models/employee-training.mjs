@@ -22,7 +22,17 @@ let employeeTrainingSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
 });
+
+//composite primary key for training program and employee
+employeeTrainingSchema.index(
+  { training_program: 1, enrolled_employee: 1 },
+  { unique: true }
+);
 
 export let EmployeeTraining = mongoose.model(
   "EmployeeTraining",

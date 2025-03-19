@@ -97,9 +97,12 @@ div.session_container {
   display: flex;
   flex-flow: column nowrap;
   gap: 1.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 3rem;
 
   @include screen-breakpoint("lg") {
     flex-flow: row wrap;
+    margin-bottom: 3.25rem;
   }
 
   //Session Cards
@@ -141,4 +144,44 @@ div.session_container {
       }
     }
   }
+}
+
+//Manager Details Styling
+
+div.manager_btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  gap: 2rem;
+
+  &.mobile {
+    display: flex;
+
+    @include screen-breakpoint("lg") {
+      display: none;
+    }
+  }
+
+  & > button {
+    min-width: 301px;
+    margin-bottom: 0;
+  }
+}
+
+//Training Insights Header
+h2.insights_header {
+  margin-top: 4.5rem;
+  font-size: 1.5rem;
+  font-family: $header_font;
+  margin-bottom: 1.5rem;
+
+  @include screen-breakpoint("lg") {
+    margin-top: 4rem;
+    font-size: 2rem;
+  }
+}
+
+//Training Insights Container
+div.training_insights_container {
 }

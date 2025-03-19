@@ -6,6 +6,7 @@ import { apiFetch } from "../hooks/APIFetch";
 import { AppContext } from "../App";
 import Button from "../components/basic-components/Button";
 import TrainingSessionCard from "../components/trainings/TrainingSessionCard";
+import ManagerTrainingDetails from "../components/training-details/ManagerTrainingDetails";
 
 export default function TrainingDetails() {
   const { p_id } = useParams();
@@ -130,6 +131,9 @@ export default function TrainingDetails() {
               })}
           </div>
           {/*Role Specific Components*/}
+          {user && user.role === "manager" && (
+            <ManagerTrainingDetails programID={program._id} />
+          )}
         </div>
       )}
     </>

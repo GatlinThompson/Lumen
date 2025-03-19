@@ -1,0 +1,43 @@
+@use "./custom.scss" as *;
+
+div.employee_info {
+  display: flex;
+  padding: 0.825rem 1.25rem;
+  align-items: center;
+  gap: 0.75rem;
+
+  //Icon Styling {
+  div.icon {
+    width: 45px;
+    height: 45px;
+
+    & > span {
+      line-height: 45px;
+      font-size: 18px;
+    }
+  }
+
+  //Employee Name + Department
+  & div.info {
+    & > p {
+      margin: 0;
+
+      &.name {
+        font-style: normal;
+        font-weight: 700;
+        line-height: 16px;
+        margin-bottom: 0.25rem;
+      }
+      &.department {
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px;
+      }
+    }
+  }
+}
+
+//Extra Options Styling
+div.extra {
+  margin-left: auto;
+}

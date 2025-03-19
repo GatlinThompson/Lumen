@@ -63,10 +63,19 @@ p.no_trainings {
 
 //Admin Btn Controls
 div.admin_top_controls {
-  display: none;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1.5rem;
+
+  & > button {
+    margin: auto;
+    min-width: 300px;
+  }
 
   @include screen-breakpoint("lg") {
     display: block;
+    gap: 0px;
+    margin-bottom: 3rem;
 
     & > button {
       margin-top: 3.25rem;

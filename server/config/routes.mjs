@@ -43,6 +43,10 @@ import {
   getDashBoardUsers,
   getDepartmentEmployees,
 } from "../controllers/dashboard.mjs";
+import {
+  assignEmployeeTraining,
+  getUnassignedEmployees,
+} from "../controllers/manager.mjs";
 
 // Define Router
 let router = express.Router();
@@ -57,7 +61,7 @@ export const configureRoutes = (app) => {
   //User Name and Password API Calls***************************************************
 
   app.put("/api/user/change-name", verifyUser, changeName);
-  app.put("/api/user/:id/change-password", verifyUser, changePassword);
+  app.put("/api/user/change-password", verifyUser, changePassword);
 
   //Generic GET API Calls**************************************************************
 
@@ -115,6 +119,21 @@ export const configureRoutes = (app) => {
 
   //Generic Get Single Training Program
   app.get("/api/training-programs/:id", getSingleTrainingProgram);
+
+  //Manager Training API
+
+  //Get unassigned department employees
+  app.get(
+    "/api/training-program/:id/employees/unassigned",
+    isManager,
+    getUnassignedEmployees
+  );
+
+  app.post(
+    "/api/training-program/:id/employees/assign",
+    isManager,
+    assignEmployeeTraining
+  );
 
   //Dashboard API Calls***************************************************************
 
