@@ -139,7 +139,7 @@ export default function TrainingPage() {
                   <MiniTrainingCard training={training} key={training._id}>
                     <Button
                       variant="black"
-                      onClick={() => navigate(`/training/${training._id}`)}
+                      onClick={() => navigate(`/trainings/${training._id}`)}
                     >
                       Details
                     </Button>
@@ -156,7 +156,7 @@ export default function TrainingPage() {
             {trainings.length > 0 ? (
               trainings.map((training) => {
                 return (
-                  <Link to={`/training/${training._id}`} key={training._id}>
+                  <Link to={`/trainings/${training._id}`} key={training._id}>
                     <MiniTrainingCard training={training}></MiniTrainingCard>
                   </Link>
                 );

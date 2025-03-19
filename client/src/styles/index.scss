@@ -241,7 +241,7 @@ div.error-container {
   opacity: 0;
   top: -10px;
   position: relative;
-  transition: opacity 500ms ease, top 500ms ease;
+  transition: opacity 500ms ease-in-out, top 500ms ease-in-out;
 
   &.loaded {
     opacity: 1;
