@@ -3,7 +3,7 @@ import { AppContext } from "../App.jsx";
 import Button from "../components/basic-components/Button.jsx";
 import { useNavigate } from "react-router-dom";
 import ButtonGroup from "../components/basic-components/ButtonGroup.jsx";
-import EmployeesList from "../components/employees/EmployeesList.jsx";
+import IconButtons from "../components/admin-dashboard/IconButtons.jsx";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -22,6 +22,9 @@ export default function Dashboard() {
             ]}
             initialActiveIndex={1} // This sets the "About" button as initially active
           />
+
+          <IconButtons/>
+          
         </p>
       ) : null}
     </>
