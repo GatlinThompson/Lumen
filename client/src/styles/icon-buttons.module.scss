@@ -2,18 +2,13 @@
 @use "sass:color";
 
 .icon_btn_container{
-    max-width: 100%;
+    width: 344px;
     margin-top: 5rem;
 
     .icon_btn{
         text-decoration: none;
         color: $neutral_black;
-        padding-right: 10px;
-        padding-bottom: 10px;
-
-        &:hover{
-            color: $darker_yellow;
-        }
+        padding-bottom: 21px;
 
         .icon_card{
             width: 161px;
@@ -29,15 +24,22 @@
                 font-size: 48px;
             }
         }
+}
 
-    @include screen-breakpoint("lg") {
-      .icon_card{
-            width: 200px;
-            height: 200px;
+@include screen-breakpoint("lg") {
+        .icon_btn_container{
+            width: 420px;
+            margin-top: 5rem;
+            
+            .icon_btn{
+                .icon_card{
+                    width: 200px;
+                    height: 200px;
 
-            i{
-                font-size: 60px;
+                    i{
+                        font-size: 60px;
+                    }
+                }
             }
         }
     }
-}

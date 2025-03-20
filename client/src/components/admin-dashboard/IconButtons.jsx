@@ -4,10 +4,10 @@ import styles from "../../styles/icon-buttons.module.scss";
 export default function BackButton() {
   return (
     <div className={styles.icon_btn_container}>
-      <div className="d-flex">
+      <div className="d-flex justify-content-between">
         <a href="/users/create" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
-            <div className="">
+            <div>
               <div className="align-content-center">
                 <i class="bi bi-person-plus"></i>
               </div>
@@ -26,7 +26,7 @@ export default function BackButton() {
           </CardContainer>
         </a>
       </div>
-      <div className="d-flex">
+      <div className="d-flex justify-content-between">
         <a href="/users/trainers" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">
