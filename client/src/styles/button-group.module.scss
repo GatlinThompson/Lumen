@@ -1,0 +1,20 @@
+@use "./custom.scss" as *;
+@use "sass:color";
+
+.btn-group {
+  display: flex;
+}
+
+.btn {
+  padding: 10px 20px;
+  text-decoration: none;
+  color: $neutral_black;
+  border: 1px solid $neutral_black;
+  background-color: $white;
+  margin-right: 5px;
+    .active {
+        background-color: $darker_yellow;
+        color: $neutral_black;
+        border-color: $neutral_black;
+    }
+}
