@@ -1,20 +1,44 @@
 @use "./custom.scss" as *;
 @use "sass:color";
 
-.btn-group {
-  display: flex;
-}
+.btn_group_container{
+    
+    max-width: 60%;
 
-.btn {
-  padding: 10px 20px;
-  text-decoration: none;
-  color: $neutral_black;
-  border: 1px solid $neutral_black;
-  background-color: $white;
-  margin-right: 5px;
-    .active {
-        background-color: $darker_yellow;
-        color: $neutral_black;
-        border-color: $neutral_black;
+    .btn_group {
+        display: flex;
+        border-radius: 10rem;
+
+        :first-child {
+                        border-radius: 10rem 0 0 10rem;
+                        border-right: 0.5px solid  $gray;
+                    }
+        
+        :last-child {
+                        border-radius: 0 10rem 10rem 0;
+                        border-left: 0.5px solid  $gray;
+                    }
+        .btn {
+            padding: 10px 25px;
+            font-family: $body_font;
+            text-decoration: none;
+            text-align: center;
+            color: $neutral_black;
+            background-color: $white;
+            width: 33%;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+                .active-btn {
+                    background-color: $darker_yellow;
+                    color: $neutral_black;
+                    border-color: $neutral_black;
+                }
+
+                &:hover {
+                    background-color: $darker_yellow;
+                    color: $neutral_black;
+                    border-color: $neutral_black;
+                }
+            }
     }
 }

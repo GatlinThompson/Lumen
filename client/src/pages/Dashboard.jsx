@@ -16,10 +16,11 @@ export default function Dashboard() {
           Hello in Dashboard, {user.first_name} {user.last_name}
           <ButtonGroup
             buttons={[
-              { text: "Home", link: "/trainings" },
-              { text: "About", link: "/trainings" },
-              { text: "Contact", link: "/trainings" },
+              { text: "Home", link: "/trainings", extraClasses: "active-btn" },
+              { text: "About", link: "/about", extraClasses: "" },
+              { text: "Contact", link: "/contact", extraClasses: "",},
             ]}
+            initialActiveIndex={1} // This sets the "About" button as initially active
           />
         </p>
       ) : null}
