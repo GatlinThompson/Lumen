@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../../styles/training-details.module.scss";
 import Button from "../basic-components/Button";
 import { useEffect } from "react";
+import CircleContainer from "../basic-components/CircleContainer";
 
 export default function ManagerTrainingDetails({ programID }) {
   const navigate = useNavigate();
@@ -19,7 +20,10 @@ export default function ManagerTrainingDetails({ programID }) {
       </div>
       {/*Training Insights */}
       <h2 className={styles.insights_header}>Training Insights</h2>
-      <div className={styles.training_insights_container}></div>
+      <div className={styles.training_insights_container}>
+        <CircleContainer />
+        <CircleContainer />
+      </div>
     </>
   );
 }

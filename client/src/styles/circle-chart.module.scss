@@ -1,0 +1,65 @@
+@use "./custom.scss" as *;
+
+//base circle
+div.circle_chart {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  box-sizing: border-box;
+
+  // Default color is green
+
+  &.border {
+    border: 0.5px solid $gray;
+  }
+
+  &.large {
+    height: 100px;
+    width: 100px;
+  }
+}
+
+//Circle Color
+.green {
+  --circle-color: #4cc938;
+}
+
+.red {
+  --circle-color: #e62e0d;
+}
+
+.yellow {
+  --circle-color: #fed428;
+}
+
+.blue {
+  --circle-color: #a2c6ff;
+}
+
+//Container
+div.circle_container {
+  padding: 0.825rem 0;
+  max-width: 156px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  & > p.title {
+    font-size: 0.825rem;
+    font-style: normal;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-top: 0.75rem;
+  }
+
+  & > p.percent {
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 0;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem;
+  }
+}
