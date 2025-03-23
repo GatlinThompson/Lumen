@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const BACKEND_URL = process.env.VITE_BACKEND_URL || "http://127.0.0.1:8080";
+const BACKEND_URL = "http://localhost:8080";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,7 +14,7 @@ export default defineConfig({
       "/api": {
         target: BACKEND_URL,
         changeOrigin: true,
-        secure: true,
+        secure: false,
       },
     },
   },
