@@ -350,31 +350,38 @@ export const getTrainerTrainingProgram = async (req, res) => {
 };
 
 export const getEmployeeTrainingProgram = async (req, res) => {
-  //get trainer
-  let userDecoded = jwt.verify(req.cookies.token, "TEST");
+  try {
+    //get trainer
+    let userDecoded = jwt.verify(req.cookies.token, "TEST");
 
-  let trainings = await EmployeeTraining.find({
-    enrolled_employee: userDecoded._id,
-  }).select("training_program");
+    let trainings = await EmployeeTraining.find({
+      enrolled_employee: userDecoded._id,
+    }).select("training_program");
 
-  console.log(trainings);
+    console.log(trainings);
 
-  //create an array that has unique ids
-  let trainingProgramIDs = [
-    ...new Set(
-      trainings.map((trainings) => {
-        return trainings.training_program;
-      })
-    ),
-  ];
+    //create an array that has unique ids
+    let trainingProgramIDs = [
+      ...new Set(
+        trainings.map((trainings) => {
+          return trainings.training_program;
+        })
+      ),
+    ];
 
-  let programs = await TrainingProgram.find({
-    _id: { $in: trainingProgramIDs },
-  });
+    let programs = await TrainingProgram.find({
+      _id: { $in: trainingProgramIDs },
+    });
 
-  res.status(200).json({
-    success: true,
-    message: "Trainings obtained",
-    programs: programs,
-  });
+    res.status(200).json({
+      success: true,
+      message: "All programs obtained",
+      programs: programs,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Programs were not obtained",
+    });
+  }
 };
