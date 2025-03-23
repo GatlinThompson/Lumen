@@ -84,9 +84,7 @@ export const signInUser = async (req, res) => {
       res.cookie("token", token, {
         secure: true,
         sameSite: "None",
-        partitioned: true,
         maxAge: 1000 * 60 * 60 * 24 * 3,
-        path: "/",
       });
       res.status(200).json({
         success: true,

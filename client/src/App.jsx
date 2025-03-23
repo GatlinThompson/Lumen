@@ -37,11 +37,14 @@ function App() {
 
   //verify user
   const verifyUser = async () => {
-    const { result, error, loading } = await apiFetch("api/user/verify", "GET");
+    const { result, error } = await apiFetch("api/user/verify", "GET");
+
+    console.log(result);
 
     if (!error) {
       //set logged in to true
       setLoggedIn(true);
+      setToStart(false);
       setUser(result.user);
     } else {
       // set to start if user isnt valid
@@ -51,6 +54,10 @@ function App() {
 
   //get user from token cookie
   useEffect(() => {
+    setUser("");
+    setToStart(true);
+
+    console.log("sadas");
     if (cookies.token !== undefined) {
       //verify user with token
       verifyUser();

@@ -5,8 +5,6 @@ import { AppContext } from "../../App.jsx";
 export default function Logout() {
   let { removeCookie, setToStart, setLoggedIn } = useContext(AppContext);
   removeCookie("token");
-  setToStart(false);
-  setLoggedIn(false);
-  document.location = "/";
+  window.location.href = "/login";
   return <></>;
 }
