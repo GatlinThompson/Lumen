@@ -66,23 +66,23 @@ export const changePassword = async (req, res) => {
     }
 
     //initalize and declare passwords
-    let oldPassword = req.body.password;
+    let oldPassword = req.body.current_password;
     let confrimPassword = req.body.confirm_password;
 
     //check if password is valid
-    if (!user.isPasswordValid(req.body.password)) {
+    if (!user.isPasswordValid(oldPassword)) {
       return res.status(403).json({
         success: false,
         message: "Password is incorrect",
       });
     }
 
-    if (oldPassword != confrimPassword) {
-      //check old and confirm password
-      return res
-        .status(409)
-        .json({ success: false, message: "Passwords do not match" });
-    }
+    // if (oldPassword != confrimPassword) {
+    //   //check old and confirm password
+    //   return res
+    //     .status(409)
+    //     .json({ success: false, message: "Passwords do not match" });
+    // }
 
     //create new hash and salt
     user.createPassword(req.body.new_password);
