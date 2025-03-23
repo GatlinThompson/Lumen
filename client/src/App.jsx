@@ -51,11 +51,12 @@ function App() {
 
   //get user from token cookie
   useEffect(() => {
+    console.log("asd");
     if (cookies.token !== undefined) {
       //verify user with token
       verifyUser();
     }
-  }, []);
+  }, [cookies.token]);
 
   return (
     <AppContext.Provider
