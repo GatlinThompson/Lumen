@@ -14,7 +14,7 @@ export const apiFetch = async (url, method, data = null) => {
 
   let backendURL =
     import.meta.env.MODE === "production"
-      ? `https://lumen-vrk4.onrender.com${url}`
+      ? `${import.meta.env.VITE_BACKEND_URL}${url}`
       : url;
 
   //set up header
