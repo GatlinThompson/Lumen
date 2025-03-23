@@ -13,7 +13,7 @@ export const apiFetch = async (url, method, data = null) => {
   // console.log(backendURL);
 
   let backendURL =
-    import.meta.env.MODE === "development"
+    import.meta.env.MODE === "production"
       ? `${import.meta.env.VITE_BACKEND_URL}${url}`
       : url;
 
