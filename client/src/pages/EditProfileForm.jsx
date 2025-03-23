@@ -52,7 +52,7 @@ export default function EditProfileForm({ onClose }) {
 
     onSubmit: async (values) => {
       const { result, error } = await apiFetch(
-        "/api/user/:id/change-password",
+        "/api/user/change-password",
         "PUT",
         values
       );
