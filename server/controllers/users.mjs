@@ -82,7 +82,6 @@ export const signInUser = async (req, res) => {
         background_color: user.background_color,
       };
       res.cookie("token", token, {
-        httpOnly: true,
         secure: true,
         sameSite: "None",
         partitioned: true,
