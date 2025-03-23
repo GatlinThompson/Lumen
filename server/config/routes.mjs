@@ -26,6 +26,7 @@ import {
   getAdminTrainingProgram,
   getManagerTrainingProgram,
   getTrainerTrainingProgram,
+  getEmployeeTrainingProgram,
 } from "../controllers/training-programs.mjs";
 import {
   isSuperAdmin,
@@ -33,6 +34,7 @@ import {
   verifyUser,
   isManager,
   isTrainer,
+  isEmployee,
 } from "../middleware/user-authorization.mjs";
 import { getRoleAndDepartments } from "../controllers/admin.mjs";
 import { changeName, changePassword } from "../controllers/profile.mjs";
@@ -115,6 +117,13 @@ export const configureRoutes = (app) => {
     "/api/training-programs/trainer",
     isTrainer,
     getTrainerTrainingProgram
+  );
+
+  //Trainer Get All Active Assigned Programs
+  app.get(
+    "/api/training-programs/employee",
+    isEmployee,
+    getEmployeeTrainingProgram
   );
 
   //Generic Get Single Training Program

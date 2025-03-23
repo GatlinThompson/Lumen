@@ -7,7 +7,7 @@ export default function EmployeeNav(props) {
       <NavLink to="/dashboard">
         <i className="bi bi-speedometer2"></i>Dashboard
       </NavLink>
-      <NavLink to="" onClick={props.handleLinkClick}>
+      <NavLink to="/trainings" onClick={props.handleLinkClick}>
         <i className="bi bi-book"></i>Assigned Trainings
       </NavLink>
       <NavLink

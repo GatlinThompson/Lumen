@@ -1,3 +1,4 @@
+import { EmployeeTraining } from "../models/employee-training.mjs";
 import { TrainingProgram } from "../models/training-program.mjs";
 import { TrainingSession } from "../models/training-session.mjs";
 import { User } from "../models/user.mjs";
@@ -311,7 +312,7 @@ export const getManagerTrainingProgram = async (req, res) => {
 //get training programs assigned to trainer
 export const getTrainerTrainingProgram = async (req, res) => {
   try {
-    //get manager
+    //get trainer
     let userDecoded = jwt.verify(req.cookies.token, "TEST");
 
     let sessions = await TrainingSession.find({
@@ -346,4 +347,34 @@ export const getTrainerTrainingProgram = async (req, res) => {
       message: "Programs were not obtained",
     });
   }
+};
+
+export const getEmployeeTrainingProgram = async (req, res) => {
+  //get trainer
+  let userDecoded = jwt.verify(req.cookies.token, "TEST");
+
+  let trainings = await EmployeeTraining.find({
+    enrolled_employee: userDecoded._id,
+  }).select("training_program");
+
+  console.log(trainings);
+
+  //create an array that has unique ids
+  let trainingProgramIDs = [
+    ...new Set(
+      trainings.map((trainings) => {
+        return trainings.training_program;
+      })
+    ),
+  ];
+
+  let programs = await TrainingProgram.find({
+    _id: { $in: trainingProgramIDs },
+  });
+
+  res.status(200).json({
+    success: true,
+    message: "Trainings obtained",
+    programs: programs,
+  });
 };

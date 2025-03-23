@@ -72,6 +72,24 @@ export default function TrainingPage() {
       return;
     };
 
+    //get trainings for trainer
+    const getEmployeeTrainings = async () => {
+      const { result, error } = await apiFetch(
+        "/api/training-programs/employee",
+        "GET"
+      );
+      if (!error) {
+        setOrginalTrainings(result.programs);
+        setTrainings(result.programs);
+        setTimeout(() => {
+          setLoaded(true);
+        }, 100);
+      } else {
+        navigate("/errorapi");
+      }
+      return;
+    };
+
     //check if user is admin role
     if (user && user.role === "admin") {
       getAdminTrainings();
@@ -85,6 +103,11 @@ export default function TrainingPage() {
     //check if user is trainer role
     if (user && user.role === "trainer") {
       getTrainerTrainings();
+    }
+
+    //check if user is admin role
+    if (user && user.role === "employee") {
+      getEmployeeTrainings();
     }
   }, [user]);
 

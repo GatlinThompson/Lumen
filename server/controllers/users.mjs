@@ -151,6 +151,7 @@ export const createUser = async (req, res) => {
     user.email = req.body.email;
     user.role = req.body.role;
     user.department = req.body.department;
+    user.createPassword(req.body.temp_password);
 
     await user.save(); // save user
 

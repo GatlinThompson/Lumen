@@ -45,7 +45,9 @@ export const getUnassignedEmployees = async (req, res) => {
       _id: {
         $nin: assigned_employees.map((employee) => employee.enrolled_employee),
       },
-    }).populate("department");
+    })
+      .populate("department")
+      .select("-salt -hash");
 
     res.status(200).json({
       success: true,
