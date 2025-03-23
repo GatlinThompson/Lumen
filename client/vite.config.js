@@ -1,7 +1,10 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import dotenv from "dotenv";
 
-const BACKEND_URL = "http://127.0.0.1:8080";
+dotenv.config();
+
+const BACKEND_URL = process.env.VITE_BACKEND_URL || "http://127.0.0.1:8080";
 
 // https://vite.dev/config/
 export default defineConfig({

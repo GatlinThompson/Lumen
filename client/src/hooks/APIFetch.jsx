@@ -5,12 +5,16 @@ export const apiFetch = async (url, method, data = null) => {
     result = null;
 
   //set up url //add process.env later
-  let backendURL =
-    import.meta.env.MODE === "production" && process.env.VITE_BACKEND_URL
-      ? `${process.meta.env.VITE_BACKEND_URL}${url}`
-      : url;
+  // let backendURL =
+  //   import.meta.env.MODE === "production" && process.env.VITE_BACKEND_URL
+  //     ? `${process.meta.env.VITE_BACKEND_URL}${url}`
+  //     : url;
 
-  console.log(backendURL);
+  // console.log(backendURL);
+
+  let backendURL = import.meta.env.VITE_BACKEND_URL
+    ? `https://lumen-vrk4.onrender.com${url}`
+    : url;
 
   //set up header
   let apiConfig = {
