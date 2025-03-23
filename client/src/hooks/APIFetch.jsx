@@ -6,7 +6,7 @@ export const apiFetch = async (url, method, data = null) => {
 
   //set up url //add process.env later
   let backendURL =
-    import.meta.env.MODE === "production" && import.meta.env.VITE_BACKEND_URL
+    import.meta.env.MODE === "production" && process.env.VITE_BACKEND_URL
       ? `${process.meta.env.VITE_BACKEND_URL}${url}`
       : url;
 
