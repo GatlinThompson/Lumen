@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.mjs",
   "scripts": {
+    "production-server": "node server.mjs",
     "server": "nodemon server.mjs"
   },
   "author": "Gatlin Thompson",
