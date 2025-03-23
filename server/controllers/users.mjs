@@ -81,7 +81,14 @@ export const signInUser = async (req, res) => {
         role: role.name,
         background_color: user.background_color,
       };
-      res.cookie("token", token, { maxAge: 1000 * 60 * 60 * 24 * 3 });
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "None",
+        partitioned: true,
+        maxAge: 1000 * 60 * 60 * 24 * 3,
+        path: "/",
+      });
       res.status(200).json({
         success: true,
         message: "User sign in was successful",

@@ -8,6 +8,8 @@ const checkUserRole = (userRole) => async (req, res, next) => {
     //check if jwt is valid
     if (jwt.verify(req.cookies.token, "TEST")) {
       //get user info from jwt
+
+      console.log("Gello");
       let userDecoded = jwt.verify(req.cookies.token, "TEST");
 
       //get role of user

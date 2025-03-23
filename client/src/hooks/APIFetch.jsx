@@ -25,7 +25,9 @@ export const apiFetch = async (url, method, data = null) => {
 
   //add body when method isnt get method
   if (method.toUpperCase() != "GET" && data) {
-    apiConfig.headers = { "Content-Type": "application/json" };
+    apiConfig.headers = {
+      "Content-Type": "application/json",
+    };
     apiConfig.body = JSON.stringify(data);
   }
 
