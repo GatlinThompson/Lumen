@@ -5,7 +5,12 @@ export const apiFetch = async (url, method, data = null) => {
     result = null;
 
   //set up url //add process.env later
-  let backendURL = url;
+  let backendURL =
+    import.meta.env.MODE === "production" && import.meta.env.VITE_BACKEND_URL
+      ? `${process.meta.env.VITE_BACKEND_URL}${url}`
+      : url;
+
+  console.log(backendURL);
 
   //set up header
   let apiConfig = {
