@@ -15,8 +15,14 @@ const backendURI = `mongodb+srv://mongoDBConnector:tn1gRXgaJeyQmvVW@lumenbackend
 // Mongoose and DB Connect
 await mongoose.connect(backendURI);
 
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
 // Middleware
-app.use(cors({ origin: "*", credentials: true }));
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
