@@ -16,7 +16,10 @@ const backendURI = `mongodb+srv://mongoDBConnector:tn1gRXgaJeyQmvVW@lumenbackend
 await mongoose.connect(backendURI);
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin:
+    process.env.NODE_ENV === "production"
+      ? "https://lumen-ctt.netlify.app"
+      : "http://localhost:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 };
