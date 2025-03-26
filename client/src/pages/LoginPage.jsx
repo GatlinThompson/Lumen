@@ -41,7 +41,7 @@ export default function LoginPage() {
 
   const onSubmit = async (values) => {
     //api fetch hook
-    const { result, error, loading } = await apiFetch(
+    const { result, error } = await apiFetch(
       "/api/user/signin",
       "POST",
       values
@@ -51,6 +51,7 @@ export default function LoginPage() {
     if (!error) {
       setLoggedIn(true); //set login to true
       setUser(result.user); // set user
+      localStorage.setItem("user", JSON.stringify(result.user));
       setFormError(false); // no form errors
       navigate("/dashboard"); // navigate to dashboard
     } else {

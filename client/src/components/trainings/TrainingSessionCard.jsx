@@ -3,6 +3,7 @@ import styles from "../../styles/training-details.module.scss";
 import { useContext } from "react";
 import { AppContext } from "../../App";
 import Button from "../basic-components/Button";
+import { apiFetch } from "../../hooks/APIFetch";
 
 export default function TrainingSessionCard({ session, children }) {
   const { user } = useContext(AppContext);
@@ -20,6 +21,17 @@ export default function TrainingSessionCard({ session, children }) {
   });
 
   const trainer = `${session.trainer.first_name} ${session.trainer.last_name}`;
+
+  const enrollEmployee = async () => {
+    const employeeEnrollement = {
+      user_id: user.id,
+      session_id: session.id,
+    };
+
+    console.log(employeeEnrollement);
+
+    //const { result, error } = await apiFetch("", "POST", );
+  };
   return (
     <CardContainer>
       <div>
@@ -35,7 +47,9 @@ export default function TrainingSessionCard({ session, children }) {
       {user && user.role === "employee" && (
         <div className={styles.employee_enrollment}>
           {/*Add Employee Enrollment Function Here */}
-          <Button variant="yellow">Enroll in session</Button>
+          <Button variant="yellow" onClick={enrollEmployee}>
+            Enroll in session
+          </Button>
         </div>
       )}
     </CardContainer>

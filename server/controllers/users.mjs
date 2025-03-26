@@ -82,6 +82,7 @@ export const signInUser = async (req, res) => {
         background_color: user.background_color,
       };
       res.cookie("token", token, {
+        httpOnly: true,
         secure: true,
         sameSite: "None",
         maxAge: 1000 * 60 * 60 * 24 * 3,
@@ -97,6 +98,25 @@ export const signInUser = async (req, res) => {
         message: "Password is incorrect",
       });
     }
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Internal login error occured." });
+  }
+};
+
+//logout
+export const logoutUser = (req, res) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+
+    res
+      .status(200)
+      .json({ success: true, message: "Logged out successfully." });
   } catch (err) {
     res
       .status(500)

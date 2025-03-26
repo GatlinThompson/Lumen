@@ -11,7 +11,7 @@ import NotificationAlert from "./components/basic-components/NotificationAlert";
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
-  let { toStart } = useContext(AppContext);
+  let { toStart, user } = useContext(AppContext);
 
   // pages where a navbar isnt needed
   const noNavbar =
@@ -21,12 +21,12 @@ export default function Layout() {
 
   //Go to landing page if user has begun
   useEffect(() => {
-    if (toStart) {
+    if (toStart && !user) {
       if (!noNavbar) {
         navigate("/");
       }
     }
-  }, [toStart]);
+  }, [toStart, user]);
 
   return (
     <>

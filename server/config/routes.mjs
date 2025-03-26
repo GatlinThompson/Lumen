@@ -12,6 +12,7 @@ import {
   getTrainers,
   getEmployees,
   getAllUsers,
+  logoutUser,
 } from "../controllers/users.mjs";
 import { createRole, deleteRole, editRole } from "../controllers/roles.mjs";
 import {
@@ -59,6 +60,7 @@ export const configureRoutes = (app) => {
   app.post("/api/user/register", registerUser);
   app.post("/api/user/signin", signInUser);
   app.get("/api/user/verify", verifyUser, verifiedLoggedInUser);
+  app.post("/api/user/logout", logoutUser);
 
   //User Name and Password API Calls***************************************************
 

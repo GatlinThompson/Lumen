@@ -27,6 +27,12 @@ function App() {
   //set user as null
   const [user, setUser] = useState(null);
 
+  // let [user, setUser] = useState(
+  //   typeof localStorage.user === "undefined"
+  //     ? []
+  //     : JSON.parse(localStorage.getItem("user"))
+  // );
+
   // set logged in status as false
   const [loggedIn, setLoggedIn] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -38,8 +44,6 @@ function App() {
   //verify user
   const verifyUser = async () => {
     const { result, error } = await apiFetch("api/user/verify", "GET");
-
-    console.log(result);
 
     if (!error) {
       //set logged in to true
@@ -54,11 +58,11 @@ function App() {
 
   //get user from token cookie
   useEffect(() => {
-    setUser("");
-    setToStart(true);
+    //get user from locale storage
+    const localUser = localStorage.getItem("user");
 
-    console.log("sadas");
-    if (cookies.token !== undefined) {
+    // check if user exist
+    if (localUser) {
       //verify user with token
       verifyUser();
     }
