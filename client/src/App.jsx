@@ -43,7 +43,7 @@ function App() {
 
   //verify user
   const verifyUser = async () => {
-    const { result, error } = await apiFetch("api/user/verify", "GET");
+    const { result, error } = await apiFetch("/api/user/verify", "GET");
 
     if (!error) {
       //set logged in to true
