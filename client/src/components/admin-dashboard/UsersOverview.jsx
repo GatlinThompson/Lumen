@@ -1,13 +1,10 @@
 import CardContainer from "../basic-components/CardContainer";
 import styles from "../../styles/users-overview.module.scss";
-import Checkbox from "../form-components/Checkbox";
 
 export default function UsersOverview() {
   return (
     <CardContainer extraClasses={styles.users_overview_container}>
       <div className="fs-4 pb-3">Users</div>
-
-      <Checkbox />
 
       <div className={styles.users_data}>
         <div>
