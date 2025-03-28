@@ -75,7 +75,7 @@ export default function UsersPage() {
     if (user && user.role == "manager") {
       getManagerUsers();
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (users && usersRole) {
