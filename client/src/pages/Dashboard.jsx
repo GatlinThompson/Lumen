@@ -15,8 +15,10 @@ export default function Dashboard() {
   return (
     <>
       {user ? (
-        <p>
-          Hello in Dashboard, {user.first_name} {user.last_name}
+        <div>
+          <p>
+            Hello in Dashboard, {user.first_name} {user.last_name}
+          </p>
           <ButtonGroup
             buttons={[
               {
@@ -33,7 +35,7 @@ export default function Dashboard() {
           <IconButtons />
           <TrainingPrograms />
           <TrainingInsights />
-        </p>
+        </div>
       ) : null}
     </>
   );
