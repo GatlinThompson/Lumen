@@ -92,12 +92,16 @@ export const configureRoutes = (app) => {
   app.get("/api/admin/roles-and-departments", isAdmin, getRoleAndDepartments);
 
   //Get All Users
-  app.get("/api/users", getAllUsers);
+  app.get("/api/users", isAdmin, getAllUsers);
 
   //Admin User API Calls
   app.post("/api/user/create", isAdmin, createUser);
   app.put("/api/user/:id/edit", isAdmin, editUser);
   app.delete("/api/user/:id/delete", isAdmin, deleteUser);
+
+  //Manager API Calls*******************************************************************
+
+  app.get("/api/users/manager", isManager, getDepartmentEmployees);
 
   //Training Page API Call************************************************************
 

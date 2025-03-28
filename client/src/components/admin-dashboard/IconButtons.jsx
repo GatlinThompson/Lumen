@@ -9,7 +9,7 @@ export default function BackButton() {
           <CardContainer extraClasses={styles.icon_card}>
             <div>
               <div className="align-content-center">
-                <i class="bi bi-person-plus"></i>
+                <i className="bi bi-person-plus"></i>
               </div>
               <div>User Creation</div>
             </div>
@@ -19,7 +19,7 @@ export default function BackButton() {
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">
               <div>
-                <i class="bi bi-briefcase"></i>
+                <i className="bi bi-briefcase"></i>
               </div>
               <div>Managers</div>
             </div>
@@ -31,7 +31,7 @@ export default function BackButton() {
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">
               <div>
-                <i class="bi bi-person-video3"></i>
+                <i className="bi bi-person-video3"></i>
               </div>
               <div>Trainers</div>
             </div>
@@ -41,7 +41,7 @@ export default function BackButton() {
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">
               <div>
-                <i class="bi bi-person"></i>
+                <i className="bi bi-person"></i>
               </div>
               <div>Employees</div>
             </div>

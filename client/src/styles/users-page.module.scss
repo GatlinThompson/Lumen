@@ -1,0 +1,21 @@
+@use "./custom.scss" as *;
+
+div.search_nav {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+
+  @include screen-breakpoint("lg") {
+    flex-flow: row;
+
+    & > ul {
+      flex: 1;
+    }
+
+    & > div {
+      margin-left: auto;
+      max-width: 344px;
+    }
+  }
+}

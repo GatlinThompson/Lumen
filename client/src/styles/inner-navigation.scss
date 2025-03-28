@@ -1,0 +1,29 @@
+@use "./custom.scss" as *;
+
+ul.inner_nav {
+  display: inline-flex;
+  list-style: none;
+  padding: 0;
+
+  & > li.list_item {
+    & > a {
+      font-size: 1.25rem;
+      text-decoration: none;
+      padding: 0 0.425rem;
+      color: $gray;
+      padding-bottom: 0.325rem;
+      border-bottom: solid 1px $light_gray;
+      line-height: 140%;
+      font-style: normal;
+
+      @include screen-breakpoint("lg") {
+        padding: 0 rem;
+      }
+
+      &.active {
+        color: $neutral_black !important;
+        border-bottom: solid 2px $neutral_black !important;
+      }
+    }
+  }
+}
