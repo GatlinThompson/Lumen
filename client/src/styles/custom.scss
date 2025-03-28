@@ -29,6 +29,15 @@ $header_font: "Outfit", sans-serif;
 $profile_font: "Roboto", sans-serif;
 $body_font: "Albert Sans", sans-serif;
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1200px,
+  xxl: 1400px,
+);
+
 //screen break points
 $breakpoints: (
   "sm": 320px,
@@ -48,5 +57,12 @@ $breakpoints: (
 
   @media screen and (min-width: $breakpoint) {
     @content;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-expand-lg {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
   }
 }

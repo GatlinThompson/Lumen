@@ -4,7 +4,7 @@ import styles from "../../styles/nav.module.scss";
 export default function EmployeeNav(props) {
   return (
     <>
-      <NavLink to="/dashboard">
+      <NavLink to="/dashboard" onClick={props.handleLinkClick}>
         <i className="bi bi-speedometer2"></i>Dashboard
       </NavLink>
       <NavLink to="/trainings" onClick={props.handleLinkClick}>
