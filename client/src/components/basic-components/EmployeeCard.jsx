@@ -1,7 +1,7 @@
 import CardContainer from "./CardContainer";
 import styles from "../../styles/employee-card.module.scss";
 import ProfileIcon from "./ProfileIcon";
-export default function EmployerCard({ employee, children }) {
+export default function EmployeeCard({ employee, children }) {
   return (
     <CardContainer>
       <div className={styles.employee_info}>

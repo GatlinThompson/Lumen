@@ -92,7 +92,7 @@ export const configureRoutes = (app) => {
   app.get("/api/admin/roles-and-departments", isAdmin, getRoleAndDepartments);
 
   //Get All Users
-  app.get("/api/users/everyone", isAdmin, getAllUsers);
+  app.get("/api/users", getAllUsers);
 
   //Admin User API Calls
   app.post("/api/user/create", isAdmin, createUser);

@@ -1,5 +1,37 @@
+@use "./custom.scss" as *;
+
 .usersList {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+
+//users page felx box layout
+div.users_list_column > div {
+  gap: 1.25rem;
+  flex-flow: column nowrap;
+
+  & button.list_button {
+    margin: 0;
+    width: 150px;
+  }
+}
+
+div.mobile_list {
+  display: flex;
+
+  & a {
+    text-decoration: none;
+    color: $neutral_black;
+  }
+  @include screen-breakpoint("lg") {
+    display: none;
+  }
+}
+
+div.desktop_list {
+  display: none;
+  @include screen-breakpoint("lg") {
+    display: flex;
+  }
 }

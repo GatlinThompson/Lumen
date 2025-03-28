@@ -6,7 +6,7 @@ import styles from "../styles/success-page.module.scss";
 import { apiFetch } from "../hooks/APIFetch";
 import Button from "../components/basic-components/Button";
 import { AppContext } from "../App";
-import EmployerCard from "../components/basic-components/EmployeeCard";
+import EmployeeCard from "../components/basic-components/EmployeeCard";
 
 export default function ManagerEmployeeAssignSuccess() {
   const { p_id } = useParams();
@@ -67,7 +67,7 @@ export default function ManagerEmployeeAssignSuccess() {
           <div className={styles.sessions_container}>
             {assignEmployees &&
               assignEmployees.map((employee, index) => {
-                return <EmployerCard key={index} employee={employee} />;
+                return <EmployeeCard key={index} employee={employee} />;
               })}
           </div>
 

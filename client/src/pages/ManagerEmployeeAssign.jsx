@@ -5,10 +5,11 @@ import Input from "../components/form-components/Input";
 import styles from "../styles/assign-employee.module.scss";
 import { apiFetch } from "../hooks/APIFetch";
 import { useNavigate, useParams } from "react-router-dom";
-import EmployerCard from "../components/basic-components/EmployeeCard";
+import EmployeeCard from "../components/basic-components/EmployeeCard";
 import { useFormik } from "formik";
 import Button from "../components/basic-components/Button";
 import { AppContext } from "../App";
+import Checkbox from "../components/form-components/Checkbox";
 
 export default function ManagerEmployeeAssign() {
   const [loaded, setLoaded] = useState(false);
@@ -144,9 +145,8 @@ export default function ManagerEmployeeAssign() {
             {employees &&
               employees.map((employee, index) => {
                 return (
-                  <EmployerCard key={index} employee={employee}>
-                    <input
-                      type="checkbox"
+                  <EmployeeCard key={index} employee={employee}>
+                    <Checkbox
                       name="assigned_employees"
                       value={employee._id}
                       checked={formik.values.assigned_employees.includes(
@@ -154,7 +154,7 @@ export default function ManagerEmployeeAssign() {
                       )}
                       onChange={() => handleChange(employee._id)}
                     />
-                  </EmployerCard>
+                  </EmployeeCard>
                 );
               })}
           </div>

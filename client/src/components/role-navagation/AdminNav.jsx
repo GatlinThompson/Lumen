@@ -14,14 +14,14 @@ export default function AdminNav(props) {
         <i className="bi bi-file-plus"></i>
         Create Training
       </NavLink>
-      <NavLink to="" onClick={props.handleLinkClick}>
+      <NavLink to="/users/managers" onClick={props.handleLinkClick}>
         <i className="bi bi-briefcase"></i>
         Managers
       </NavLink>
-      <NavLink to="" onClick={props.handleLinkClick}>
+      <NavLink to="/users/trainers" onClick={props.handleLinkClick}>
         <i className="bi bi-person-video3"></i>Trainers
       </NavLink>
-      <NavLink to="" onClick={props.handleLinkClick}>
+      <NavLink to="/users/employees" onClick={props.handleLinkClick}>
         <i className="bi bi-person"></i>Employees
       </NavLink>
       <NavLink to="/users/create" onClick={props.handleLinkClick}>

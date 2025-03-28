@@ -173,6 +173,24 @@ export const createUser = async (req, res) => {
     user.department = req.body.department;
     user.createPassword(req.body.temp_password);
 
+    //check if trainer
+    let trainerRole = await Role.find({ name: "trainer" });
+    if (user.role === trainerRole._id) {
+      //get training department
+      let dept = await Department.find({ name: "Training" });
+
+      user.department = dept._id;
+    }
+
+    //check if admin
+    let adminRole = await Role.find({ name: "admin" });
+    if (user.role === adminRole._id) {
+      //get HR department
+      let dept = await Department.find({ name: "Human Resources" });
+
+      user.department = dept._id;
+    }
+
     await user.save(); // save user
 
     res
@@ -269,23 +287,63 @@ export const getEmployees = getRoleSpecificUser("employee");
 export const getAllUsers = async (req, res) => {
   try {
     //get super admin role
-    let superAdmin = await Role.find("super_admin");
+    let superAdmin = await Role.find({ name: "super_admin" });
 
-    //get all users besides super admin
+    //get users besides super admin
     let users = await User.find({
       role: { $ne: superAdmin._id },
       is_active: true,
-    }).select("-hash -salt");
+    })
+      .populate({ path: "role" })
+      .populate({ path: "department" })
+      .select("-hash -salt")
+      .sort({ "department.name": 1 });
+
+    //sort by department and then first name
+    users.sort((a, b) => {
+      //sort by department
+      if (a.department.name < b.department.name) {
+        return -1;
+      }
+      if (a.department.name > b.department.name) {
+        return 1;
+      }
+
+      //then sort by first name
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    const managers = users.filter((user) => user.role.name === "manager");
+    const trainers = users.filter((user) => user.role.name === "trainer");
+    const employees = users.filter((user) => user.role.name === "employee");
+
+    console.log("Managers:", managers.length);
+    console.log("Trainers:", trainers.length);
+    console.log("Employees:", employees.length);
+
+    const userData = {
+      employees: employees,
+      trainers: trainers,
+      managers: managers,
+    };
 
     res.status(200).json({
       success: true,
       message: "Server Success: Obtained all users",
-      users: users,
+      users: userData,
     });
   } catch (err) {
     res.status(500).json({
       success: false,
       message: "Server error, unable to get users",
+      err: err.message,
     });
   }
 };
