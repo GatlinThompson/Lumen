@@ -75,11 +75,32 @@ export default function TrainingDetails() {
 
   //change background color
   const backgroundColor = program ? program.background_color : "#fff";
+
+  //archive program
+  const archiveProgram = async () => {
+    const { result, error } = await apiFetch(
+      `/api/training-program/${p_id}/delete`,
+      "DELETE"
+    );
+
+    if (!error) {
+      navigate("/trainings");
+    }
+  };
   return (
     <>
       {program && (
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
-          <BackButton />
+          <div className={styles.program_top_btns}>
+            <BackButton />
+            {user && user.role === "admin" && (
+              <Button variant="red" onClick={archiveProgram}>
+                <i className="bi bi-trash" />
+                &nbsp;Archive Program
+              </Button>
+            )}
+          </div>
+
           <div
             className={`${styles.program_container} ${
               program ? "loaded loading" : "loading"

@@ -45,4 +45,18 @@
       background-color: $gray;
     }
   }
+
+  //Red Button Styling
+  &-red {
+    background-color: $error-red;
+    color: $white;
+    min-width: none;
+    width: auto;
+    padding: 2px 12px;
+
+    &:hover {
+      background-color: color.adjust($color: $error-red, $lightness: -15%);
+      color: $white;
+    }
+  }
 }

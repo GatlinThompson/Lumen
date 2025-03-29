@@ -28,6 +28,7 @@ import {
   getManagerTrainingProgram,
   getTrainerTrainingProgram,
   getEmployeeTrainingProgram,
+  archiveTrainingProgram,
 } from "../controllers/training-programs.mjs";
 import {
   isSuperAdmin,
@@ -108,6 +109,11 @@ export const configureRoutes = (app) => {
   //Training Program CRUD API Calls
   app.post("/api/training-programs/create", isAdmin, createTrainingProgram);
   app.put("/api/training-programs/:id/edit", isAdmin, editTrainingProgram);
+  app.delete(
+    "/api/training-program/:pid/delete",
+    isAdmin,
+    archiveTrainingProgram
+  );
 
   //Admin Get All Active Training Programs
   app.get("/api/training-programs/admin", isAdmin, getAdminTrainingProgram);

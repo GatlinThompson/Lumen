@@ -19,7 +19,7 @@ export const createTrainingProgram = async (req, res) => {
         .json({ success: false, message: "Sessions not found" });
     }
 
-    //check manager
+    //check managers
     let manager = await User.findById(req.body.assigned_manager).populate({
       path: "role",
       match: { name: "manager" },
@@ -260,6 +260,28 @@ export const editTrainingProgram = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Program update was unsuccessful",
+    });
+  }
+};
+
+//Archive Training Program
+export const archiveTrainingProgram = async (req, res) => {
+  try {
+    let program = await TrainingProgram.findById(req.params.pid);
+    console.log(program);
+    program.archived = true;
+
+    await program.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Program delete was successful",
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Program delete was unsuccessful",
+      err: err.message,
     });
   }
 };
