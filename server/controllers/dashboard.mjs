@@ -144,7 +144,9 @@ export const getDepartmentEmployees = async (req, res) => {
       department: userDecoded.department,
       is_active: true,
       role: employeeRole,
-    }).select("-hash -salt");
+    })
+      .populate({ path: "department" })
+      .select("-hash -salt");
 
     res.status(200).json({
       success: true,

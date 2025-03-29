@@ -1,11 +1,12 @@
 import CardContainer from "../basic-components/CardContainer";
 import styles from "../../styles/icon-buttons.module.scss";
+import { Link } from "react-router-dom";
 
 export default function BackButton() {
   return (
     <div className={styles.icon_btn_container}>
       <div className="d-flex justify-content-between">
-        <a href="/users/create" className={styles.icon_btn}>
+        <Link to="/users/create" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
             <div>
               <div className="align-content-center">
@@ -14,8 +15,8 @@ export default function BackButton() {
               <div>User Creation</div>
             </div>
           </CardContainer>
-        </a>
-        <a href="/users/managers" className={styles.icon_btn}>
+        </Link>
+        <Link to="/users/managers" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">
               <div>
@@ -24,10 +25,10 @@ export default function BackButton() {
               <div>Managers</div>
             </div>
           </CardContainer>
-        </a>
+        </Link>
       </div>
       <div className="d-flex justify-content-between">
-        <a href="/users/trainers" className={styles.icon_btn}>
+        <Link to="/users/trainers" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">
               <div>
@@ -36,8 +37,8 @@ export default function BackButton() {
               <div>Trainers</div>
             </div>
           </CardContainer>
-        </a>
-        <a href="/users/employees" className={styles.icon_btn}>
+        </Link>
+        <Link to="/users/employees" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">
               <div>
@@ -46,7 +47,7 @@ export default function BackButton() {
               <div>Employees</div>
             </div>
           </CardContainer>
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -167,24 +167,28 @@ export default function UserCreationPage() {
             );
           })}
         </Select>
-        <Select
-          label="Department"
-          name="department"
-          placeholder={"Select a department"}
-          value={formik.values.department}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          error={formik.errors.department}
-          touched={formik.touched.department}
-        >
-          {departments.map((department) => {
-            return (
-              <option key={department._id} value={department._id}>
-                {department.name}
-              </option>
-            );
-          })}
-        </Select>
+        {/*67c35a28cbe9a75c992624e2*/}
+        {formik.values.role != "67c35a28cbe9a75c992624e2" &&
+          formik.values.role != "67c355eb36db681b9d63d01f" && (
+            <Select
+              label="Department"
+              name="department"
+              placeholder={"Select a department"}
+              value={formik.values.department}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.errors.department}
+              touched={formik.touched.department}
+            >
+              {departments.map((department) => {
+                return (
+                  <option key={department._id} value={department._id}>
+                    {department.name}
+                  </option>
+                );
+              })}
+            </Select>
+          )}
 
         <div className={`${styles.btn_controls} ${styles.user_btns}`}>
           <Button

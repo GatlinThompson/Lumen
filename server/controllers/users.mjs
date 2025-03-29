@@ -7,8 +7,8 @@ import jwt from "jsonwebtoken";
 export const registerUser = async (req, res) => {
   try {
     //get default employee role
-    let role = await Role.findOne({ name: "admin" });
-    let department = await Department.findOne({ name: "human resources" });
+    let role = await Role.findOne({ name: "employee" });
+    let department = await Department.findOne({ name: "New Hire" });
 
     //set up new user
     let user = new User();
@@ -174,19 +174,18 @@ export const createUser = async (req, res) => {
     user.createPassword(req.body.temp_password);
 
     //check if trainer
-    let trainerRole = await Role.find({ name: "trainer" });
-    if (user.role === trainerRole._id) {
+    let trainerRole = await Role.findOne({ name: "trainer" });
+    if (req.body.role == trainerRole._id) {
       //get training department
-      let dept = await Department.find({ name: "Training" });
-
+      let dept = await Department.findOne({ name: "Training" });
       user.department = dept._id;
     }
 
     //check if admin
-    let adminRole = await Role.find({ name: "admin" });
-    if (user.role === adminRole._id) {
+    let adminRole = await Role.findOne({ name: "admin" });
+    if (req.body.role === adminRole._id) {
       //get HR department
-      let dept = await Department.find({ name: "Human Resources" });
+      let dept = await Department.findOne({ name: "Human Resources" });
 
       user.department = dept._id;
     }
@@ -310,10 +309,10 @@ export const getAllUsers = async (req, res) => {
       }
 
       //then sort by first name
-      if (a.name < b.name) {
+      if (a.first_name < b.first_name) {
         return -1;
       }
-      if (a.name > b.name) {
+      if (a.first_name > b.first_name) {
         return 1;
       }
 

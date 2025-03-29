@@ -23,6 +23,7 @@ export default function UsersPage() {
     const { result, error } = await apiFetch("/api/users", "GET");
 
     if (!error) {
+      console.log(result);
       setUsers(result.users);
       setTimeout(() => {
         setLoaded(true);
@@ -37,7 +38,6 @@ export default function UsersPage() {
     const { result, error } = await apiFetch("/api/users/manager", "GET");
 
     if (!error) {
-      console.log(result);
       setUsers(result.employees);
       setTimeout(() => {
         setLoaded(true);

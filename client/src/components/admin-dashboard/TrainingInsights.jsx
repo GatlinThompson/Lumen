@@ -11,7 +11,7 @@ export default function TrainingInsights() {
         <div className="d-flex flex-row mx-3 gap-3">
           <CardContainer extraClasses="col">
             <div className="text-end text-success fs-5 mx-2 mt-1">
-              <i class="bi bi-check-circle-fill"></i>
+              <i className="bi bi-check-circle-fill"></i>
             </div>
             <div className="d-flex flex-row">
               <p className="fs-1 fw-bold mx-3">12</p>
@@ -20,7 +20,7 @@ export default function TrainingInsights() {
           </CardContainer>
           <CardContainer extraClasses="col">
             <div className="text-end text-error-red fs-5 mx-2 mt-1">
-              <i class="bi bi-x-circle-fill"></i>
+              <i className="bi bi-x-circle-fill"></i>
             </div>
             <div className="d-flex flex-row">
               <p className="fs-1 fw-bold mx-3">5</p>
