@@ -22,6 +22,7 @@ import ManagerEmployeeAssign from "./pages/ManagerEmployeeAssign";
 import ManagerEmployeeAssignSuccess from "./pages/ManagerEmployeeAssignSuccess";
 import UsersPage from "./pages/users/UsersPage";
 import UsersTable from "./pages/users/UsersTable";
+import UserDetails from "./pages/UserDetails";
 
 export const AppContext = createContext();
 
@@ -130,6 +131,7 @@ function App() {
               </Route>
 
               {/*User Routes*/}
+              <Route path="user/:id" element={<UserDetails />} />
               <Route path="/users/create" element={<UserCreationPage />} />
               <Route path="/users/create/success" element={<UserSuccess />} />
               {/*Profile Route */}
