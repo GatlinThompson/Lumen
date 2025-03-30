@@ -30,9 +30,12 @@ const Select = ({
         required={required}
         className={`${styles.input_field}  ${styles.selection}`}
       >
-        <option value="" hidden>
-          {placeholder}
-        </option>
+        {placeholder && (
+          <option value="" hidden>
+            {placeholder}
+          </option>
+        )}
+
         {children}
       </select>
       {touched && error ? <p>{error}</p> : null}

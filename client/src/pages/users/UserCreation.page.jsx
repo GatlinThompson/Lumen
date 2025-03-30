@@ -69,7 +69,7 @@ export default function UserCreationPage() {
       .required("Email is required"),
     temp_password: yup.string().required("Password is required"),
     role: yup.string().required("Role is required"),
-    department: yup.string().required("Department is required"),
+    department: yup.string(),
   });
 
   const onSubmit = async (values) => {
@@ -152,7 +152,6 @@ export default function UserCreationPage() {
         <Select
           label="Role"
           name="role"
-          placeholder={"Select role"}
           value={formik.values.role}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -173,7 +172,6 @@ export default function UserCreationPage() {
             <Select
               label="Department"
               name="department"
-              placeholder={"Select a department"}
               value={formik.values.department}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
