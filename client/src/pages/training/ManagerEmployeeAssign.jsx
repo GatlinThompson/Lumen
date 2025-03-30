@@ -102,7 +102,6 @@ export default function ManagerEmployeeAssign() {
       //naviagate to success page
       navigate(`/trainings/${p_id}/assign/success`);
     } else {
-      console.log(result);
     }
   };
 

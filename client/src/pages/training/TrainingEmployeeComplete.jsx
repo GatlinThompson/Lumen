@@ -102,7 +102,6 @@ export default function TrainerEmployeeComplete() {
       //naviagate to success page
       navigate(`/trainings/${p_id}/complete/success`);
     } else {
-      console.log(result);
     }
   };
 

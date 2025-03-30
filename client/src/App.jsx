@@ -27,6 +27,8 @@ import ManagerEmployeesAssignPage from "./pages/training/ManagerEmployeesAssignP
 import NotificationPage from "./pages/NotificationsPage";
 import TrainerEmployeeComplete from "./pages/training/TrainingEmployeeComplete";
 import TrainerEmployeeCompleteSuccess from "./pages/training/TrainerEmployeeCompleteSuccess";
+import EmployeeTrainingConfirm from "./pages/training/EmployeeTrainingConfim";
+import EmployeeTrainingConfirmSuccess from "./pages/training/EmployeeTrainingConfimSuccess";
 
 export const AppContext = createContext();
 
@@ -41,6 +43,7 @@ function App() {
   const [formError, setFormError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [newAssignedEmployees, setNewAssignedEmployees] = useState([]);
+  const [newSession, setNewSession] = useState([]);
 
   //verify user
   const verifyUser = async () => {
@@ -87,6 +90,8 @@ function App() {
         setErrorMessage,
         newAssignedEmployees,
         setNewAssignedEmployees,
+        newSession,
+        setNewSession,
       }}
     >
       <Router>
@@ -132,6 +137,14 @@ function App() {
               <Route
                 path="/trainings/:p_id/complete/success"
                 element={<TrainerEmployeeCompleteSuccess />}
+              />
+              <Route
+                path="/trainings/:p_id/confirmation"
+                element={<EmployeeTrainingConfirm />}
+              />
+              <Route
+                path="/trainings/:p_id/confirmation/success"
+                element={<EmployeeTrainingConfirmSuccess />}
               />
               {/*Users Routes */}
               <Route path="/users" element={<UsersPage />}>

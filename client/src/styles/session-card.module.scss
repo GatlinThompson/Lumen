@@ -1,0 +1,51 @@
+@use "./custom.scss" as *;
+
+div.session_container {
+  display: flex;
+  max-width: 520px;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  padding: 0.75rem 0.5rem;
+  gap: 1.25rem;
+
+  @include screen-breakpoint("lg") {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+  }
+
+  //Background color
+  & > div.background_color {
+    background-color: $gray;
+    width: 1.25rem;
+    min-height: 100%;
+  }
+
+  //Info
+  & > div.info {
+    flex: 1;
+    & > p.title {
+      font-family: $header_font;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 32px;
+      margin-bottom: 0;
+    }
+
+    & > p.trainer {
+      margin-bottom: 0.5rem;
+    }
+    & > div {
+      display: flex;
+      gap: 0.75rem;
+
+      &.date {
+        margin-bottom: 1rem;
+      }
+
+      & > p {
+        margin-bottom: 0;
+      }
+    }
+  }
+}

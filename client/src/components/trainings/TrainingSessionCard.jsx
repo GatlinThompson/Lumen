@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import Button from "../basic-components/Button";
 import { apiFetch } from "../../hooks/APIFetch";
+import { useNavigate } from "react-router-dom";
 
 export default function TrainingSessionCard({
   session,
@@ -12,10 +13,11 @@ export default function TrainingSessionCard({
   enrolled,
   updateBtns,
 }) {
-  const { user } = useContext(AppContext);
+  const { user, setNewSession } = useContext(AppContext);
 
   const [btnText, setBtnText] = useState("Enroll in session");
   const [color, setColor] = useState("yellow");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (enrolled) {
@@ -42,6 +44,10 @@ export default function TrainingSessionCard({
 
   const trainer = `${session.trainer.first_name} ${session.trainer.last_name}`;
 
+  const confirmSession = () => {
+    setNewSession(session);
+    navigate(`/trainings/${program}/confirmation`);
+  };
   const enrollEmployee = async () => {
     if (enrolled) {
       return;
@@ -76,7 +82,7 @@ export default function TrainingSessionCard({
       {user && user.role === "employee" && (
         <div className={styles.employee_enrollment}>
           {/*Add Employee Enrollment Function Here */}
-          <Button variant={color} onClick={enrollEmployee}>
+          <Button variant={color} onClick={confirmSession}>
             {btnText}
           </Button>
         </div>
