@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import BackButton from "../components/basic-components/BackButton";
+import BackButton from "../../components/basic-components/BackButton";
 import { useNavigate, useParams } from "react-router-dom";
-import { apiFetch } from "../hooks/APIFetch";
-import SuccessHeader from "../components/basic-components/SucessHeader";
-import styles from "../styles/success-page.module.scss";
+import { apiFetch } from "../../hooks/APIFetch";
+import SuccessHeader from "../../components/basic-components/SucessHeader";
+import styles from "../../styles/success-page.module.scss";
 import { useContext } from "react";
-import { AppContext } from "../App";
-import SuccessTrainingCard from "../components/trainings/SuccessTrainingCard";
-import Button from "../components/basic-components/Button";
+import { AppContext } from "../../App";
+import SuccessTrainingCard from "../../components/trainings/SuccessTrainingCard";
+import Button from "../../components/basic-components/Button";
 
 export default function TrainingSuccess() {
   const { p_id, method } = useParams();

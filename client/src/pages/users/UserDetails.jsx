@@ -1,4 +1,4 @@
-import BackButton from "../components/basic-components/BackButton";
+import BackButton from "../../components/basic-components/BackButton";
 
 export default function UserDetails() {
   return (

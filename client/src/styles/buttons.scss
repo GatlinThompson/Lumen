@@ -46,16 +46,43 @@
     }
   }
 
+  //Green Button Styling
+  &-green {
+    background-color: $success;
+
+    &:hover {
+      background-color: color.adjust($color: $success, $lightness: 15%);
+    }
+  }
+
   //Red Button Styling
   &-red {
     background-color: $error-red;
     color: $white;
     min-width: none;
     width: auto;
-    padding: 2px 12px;
+    margin-bottom: 0;
+    padding: 4px 12px;
 
     &:hover {
-      background-color: color.adjust($color: $error-red, $lightness: -15%);
+      background-color: color.adjust($color: $error-red, $lightness: 15%);
+      color: $white;
+    }
+  }
+
+  //Remove Button
+  &-remove {
+    background-color: $error-red;
+    color: $white;
+    min-width: none;
+    width: auto;
+    margin-bottom: 0;
+    padding: 4px 12px;
+    box-shadow: none;
+    font-size: 1rem;
+
+    &:hover {
+      background-color: color.adjust($color: $error-red, $lightness: -10%);
       color: $white;
     }
   }

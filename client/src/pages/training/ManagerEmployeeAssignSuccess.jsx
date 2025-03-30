@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
-import BackButton from "../components/basic-components/BackButton";
-import SuccessHeader from "../components/basic-components/SucessHeader";
+import BackButton from "../../components/basic-components/BackButton";
+import SuccessHeader from "../../components/basic-components/SucessHeader";
 import { useContext, useEffect, useState } from "react";
-import styles from "../styles/success-page.module.scss";
-import { apiFetch } from "../hooks/APIFetch";
-import Button from "../components/basic-components/Button";
-import { AppContext } from "../App";
-import EmployeeCard from "../components/basic-components/EmployeeCard";
+import styles from "../../styles/success-page.module.scss";
+import { apiFetch } from "../../hooks/APIFetch";
+import Button from "../../components/basic-components/Button";
+import { AppContext } from "../../App";
+import EmployeeCard from "../../components/basic-components/EmployeeCard";
 
 export default function ManagerEmployeeAssignSuccess() {
   const { p_id } = useParams();
@@ -58,7 +58,7 @@ export default function ManagerEmployeeAssignSuccess() {
     <>
       {program && (
         <div className={`${loaded ? "loaded loading" : "loading"} max-1080`}>
-          <BackButton />
+          <BackButton to={`/trainings/${p_id}`} />
           <SuccessHeader />
           <div className={styles.info_container}></div>
           <p className={styles.info}>

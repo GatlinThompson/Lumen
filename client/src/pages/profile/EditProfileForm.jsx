@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { apiFetch } from "../hooks/APIFetch";
+import { apiFetch } from "../../hooks/APIFetch";
 import { useContext } from "react";
-import { AppContext } from "../App";
-import Input from "../components/form-components/Input.jsx";
-import Button from "../components/basic-components/Button.jsx";
-import styles from "../styles/edit-profile.module.scss";
+import { AppContext } from "../../App";
+import Input from "../../components/form-components/Input.jsx";
+import Button from "../../components/basic-components/Button.jsx";
+import styles from "../../styles/edit-profile.module.scss";
 
 export default function EditProfileForm({ onClose }) {
   const { user, setUser } = useContext(AppContext);

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import BackButton from "../components/basic-components/BackButton";
-import PageHeader from "../components/basic-components/PageHeader";
-import { apiFetch } from "../hooks/APIFetch";
+import BackButton from "../../components/basic-components/BackButton";
+import PageHeader from "../../components/basic-components/PageHeader";
+import { apiFetch } from "../../hooks/APIFetch";
 import { useNavigate, Link } from "react-router-dom";
-import { AppContext } from "../App";
-import MiniTrainingCard from "../components/trainings/MiniTrainingCard";
-import styles from "../styles/trainings-page.module.scss";
-import Input from "../components/form-components/Input";
-import Button from "../components/basic-components/Button";
+import { AppContext } from "../../App";
+import MiniTrainingCard from "../../components/trainings/MiniTrainingCard";
+import styles from "../../styles/trainings-page.module.scss";
+import Input from "../../components/form-components/Input";
+import Button from "../../components/basic-components/Button";
 
 export default function TrainingPage() {
   const navigate = useNavigate();
@@ -130,7 +130,7 @@ export default function TrainingPage() {
     <>
       <div className="max-1080">
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
-          <BackButton />
+          <BackButton to="/dashboard" />
 
           {user && user.role === "admin" && (
             <div className={styles.admin_top_controls}>

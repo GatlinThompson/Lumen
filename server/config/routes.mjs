@@ -29,6 +29,8 @@ import {
   getTrainerTrainingProgram,
   getEmployeeTrainingProgram,
   archiveTrainingProgram,
+  EnrollEmployee,
+  getEmployeeEnrollment,
 } from "../controllers/training-programs.mjs";
 import {
   isSuperAdmin,
@@ -49,7 +51,10 @@ import {
 } from "../controllers/dashboard.mjs";
 import {
   assignEmployeeTraining,
+  getAssignedEmployees,
+  getAssignedEmployeesCount,
   getUnassignedEmployees,
+  unassignEmployee,
 } from "../controllers/manager.mjs";
 
 // Define Router
@@ -149,11 +154,44 @@ export const configureRoutes = (app) => {
     isManager,
     getUnassignedEmployees
   );
+  //Get assigned employees
+  app.get(
+    "/api/training-program/:id/employees/assigned",
+    isManager,
+    getAssignedEmployees
+  );
 
+  //Assign Employeees
   app.post(
     "/api/training-program/:id/employees/assign",
     isManager,
     assignEmployeeTraining
+  );
+
+  //Unassign Employee
+  app.delete(
+    "/api/training-program/:pid/employees/unassign/:eid",
+    isManager,
+    unassignEmployee
+  );
+
+  //Training Details Widgets API Calls************************************************
+
+  //Employee
+
+  app.get(
+    "/api/training-programs/:pid/enroll/:uid",
+    isEmployee,
+    getEmployeeEnrollment
+  );
+  app.post("/api/training-programs/:pid/enroll", isEmployee, EnrollEmployee);
+
+  //Manager
+
+  app.get(
+    "/api/training-program/:pid/assign-count",
+    isManager,
+    getAssignedEmployeesCount
   );
 
   //Dashboard API Calls***************************************************************

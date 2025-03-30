@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import BackButton from "../components/basic-components/BackButton";
-import Button from "../components/basic-components/Button";
-import styles from "../styles/training-program.module.scss";
+import BackButton from "../../components/basic-components/BackButton";
+import Button from "../../components/basic-components/Button";
+import styles from "../../styles/training-program.module.scss";
 import { useContext, useEffect, useState } from "react";
-import PageHeader from "../components/basic-components/PageHeader";
-import NotificationAlert from "../components/basic-components/NotificationAlert";
-import { apiFetch } from "../hooks/APIFetch";
+import PageHeader from "../../components/basic-components/PageHeader";
+import NotificationAlert from "../../components/basic-components/NotificationAlert";
+import { apiFetch } from "../../hooks/APIFetch";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import Input from "../components/form-components/Input";
-import Select from "../components/form-components/Select";
-import { AppContext } from "../App";
+import Input from "../../components/form-components/Input";
+import Select from "../../components/form-components/Select";
+import { AppContext } from "../../App";
 
 export default function UserCreationPage() {
   const navigate = useNavigate();
@@ -97,7 +97,7 @@ export default function UserCreationPage() {
 
   return (
     <div className={`${loaded ? "loaded loading" : "loading"}`}>
-      <BackButton />
+      <BackButton to="/dashboard" />
       <PageHeader title={"Create new user"} />
       <div className={styles.error_msg}>
         {formError ? (

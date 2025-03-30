@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import BackButton from "../components/basic-components/BackButton";
-import PageHeader from "../components/basic-components/PageHeader";
-import { AppContext } from "../App";
-import ProfileIcon from "../components/basic-components/ProfileIcon";
-import Button from "../components/basic-components/Button.jsx";
-import styles from "../styles/profile.module.scss";
+import BackButton from "../../components/basic-components/BackButton.jsx";
+import PageHeader from "../../components/basic-components/PageHeader.jsx";
+import { AppContext } from "../../App.jsx";
+import ProfileIcon from "../../components/basic-components/ProfileIcon.jsx";
+import Button from "../../components/basic-components/Button.jsx";
+import styles from "../../styles/profile.module.scss";
 import EditProfileForm from "./EditProfileForm.jsx";
 
 export default function UserProfile({ roles, departments }) {

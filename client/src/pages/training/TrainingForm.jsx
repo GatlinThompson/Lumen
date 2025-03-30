@@ -1,19 +1,19 @@
-import BackButton from "../components/basic-components/BackButton";
-import PageHeader from "../components/basic-components/PageHeader";
-import Input from "../components/form-components/Input";
+import BackButton from "../../components/basic-components/BackButton";
+import PageHeader from "../../components/basic-components/PageHeader";
+import Input from "../../components/form-components/Input";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import styles from "../styles/training-program.module.scss";
-import TextArea from "../components/form-components/TextArea";
+import styles from "../../styles/training-program.module.scss";
+import TextArea from "../../components/form-components/TextArea";
 import { useEffect, useState } from "react";
-import { apiFetch } from "../hooks/APIFetch";
-import Select from "../components/form-components/Select";
-import SessionsFormCard from "../components/trainings/SessionsFormCard";
-import Button from "../components/basic-components/Button";
-import NotificationAlert from "../components/basic-components/NotificationAlert";
+import { apiFetch } from "../../hooks/APIFetch";
+import Select from "../../components/form-components/Select";
+import SessionsFormCard from "../../components/trainings/SessionsFormCard";
+import Button from "../../components/basic-components/Button";
+import NotificationAlert from "../../components/basic-components/NotificationAlert";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
 
 export default function TrainingForm() {
   //use states

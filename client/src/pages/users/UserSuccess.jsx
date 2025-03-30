@@ -1,8 +1,8 @@
-import BackButton from "../components/basic-components/BackButton";
+import BackButton from "../../components/basic-components/BackButton";
 import { useNavigate } from "react-router-dom";
-import SuccessHeader from "../components/basic-components/SucessHeader";
-import styles from "../styles/success-page.module.scss";
-import Button from "../components/basic-components/Button";
+import SuccessHeader from "../../components/basic-components/SucessHeader";
+import styles from "../../styles/success-page.module.scss";
+import Button from "../../components/basic-components/Button";
 import { useEffect, useState } from "react";
 
 export default function UserSuccess() {
@@ -17,7 +17,7 @@ export default function UserSuccess() {
 
   return (
     <div className={`${loaded ? "loaded loading" : "loading"}`}>
-      <BackButton />
+      <BackButton to="/users/create" />
       <SuccessHeader />
       <div className={styles.info_container}></div>
       <p className={styles.info}>User successfully created.</p>

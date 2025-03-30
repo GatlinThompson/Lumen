@@ -197,6 +197,77 @@ h2.insights_header {
   }
 }
 
+//Cancel Program Btn
+div.cancel_btn {
+  padding-top: 2rem;
+  display: flex;
+  max-width: 1024px;
+  justify-content: flex-start;
+
+  & > button {
+    width: 100%;
+    font-weight: 700;
+
+    @include screen-breakpoint("md") {
+      max-width: 300px;
+    }
+  }
+
+  @include screen-breakpoint("lg") {
+    justify-content: flex-start;
+    padding-top: 4rem;
+  }
+}
+
+//Manager Widgets Styling ****************************************
+
+//Widget Container {
+section.widget_container {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2rem;
+
+  @include screen-breakpoint("lg") {
+    flex-flow: row;
+  }
+
+  //Assign Employees
+  div.assign_employees {
+    display: none;
+
+    @include screen-breakpoint("lg") {
+      display: block;
+    }
+  }
+
+  //Widget Charts
+  & > div.widget_charts {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2rem;
+  }
+
+  //Widget Layout
+  & > div {
+    flex: 0 0 calc(50% - 1rem);
+  }
+}
+
 //Training Insights Container
-div.training_insights_container {
+div.manager_training_circles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+
+  @include screen-breakpoint("lg") {
+    gap: 2.5rem;
+  }
+
+  & > div {
+    flex: 0 0 calc(50% - (1.75rem / 2));
+
+    @include screen-breakpoint("lg") {
+      flex: 0 0 calc(50% - (2.5rem / 2));
+    }
+  }
 }

@@ -8,33 +8,28 @@ import Dashboard from "./pages/Dashboard";
 import { useEffect, useState, createContext } from "react";
 import { apiFetch } from "./hooks/APIFetch";
 import Logout from "./components/role-navagation/Logout";
-import TrainingForm from "./pages/TrainingForm";
-import TrainingPage from "./pages/TrainingPage";
-import TrainingSuccess from "./pages/TrainingSuccess";
-import TrainingFormEdit from "./pages/TrainingFormEdit";
-import UserCreationPage from "./pages/UserCreation.page";
-import UserSuccess from "./pages/UserSuccess";
+import TrainingForm from "./pages/training/TrainingForm";
+import TrainingPage from "./pages/training/TrainingPage";
+import TrainingSuccess from "./pages/training/TrainingSuccess";
+import TrainingFormEdit from "./pages/training/TrainingFormEdit";
+import UserCreationPage from "./pages/users/UserCreation.page";
+import UserSuccess from "./pages/users/UserSuccess";
 import ErrorAPiPage from "./pages/ErrorAPiPage";
 import ErrorPage from "./pages/ErrorPage";
-import UserProfile from "./pages/UserProfile";
-import TrainingDetails from "./pages/TrainingDetails";
-import ManagerEmployeeAssign from "./pages/ManagerEmployeeAssign";
-import ManagerEmployeeAssignSuccess from "./pages/ManagerEmployeeAssignSuccess";
+import UserProfile from "./pages/profile/UserProfile";
+import TrainingDetails from "./pages/training/TrainingDetails";
+import ManagerEmployeeAssign from "./pages/training/ManagerEmployeeAssign";
+import ManagerEmployeeAssignSuccess from "./pages/training/ManagerEmployeeAssignSuccess";
 import UsersPage from "./pages/users/UsersPage";
 import UsersTable from "./pages/users/UsersTable";
-import UserDetails from "./pages/UserDetails";
+import UserDetails from "./pages/users/UserDetails";
+import ManagerEmployeesAssignPage from "./pages/training/ManagerEmployeesAssignPage";
 
 export const AppContext = createContext();
 
 function App() {
   //set user as null
   const [user, setUser] = useState(null);
-
-  // let [user, setUser] = useState(
-  //   typeof localStorage.user === "undefined"
-  //     ? []
-  //     : JSON.parse(localStorage.getItem("user"))
-  // );
 
   // set logged in status as false
   const [loggedIn, setLoggedIn] = useState(false);
@@ -114,6 +109,10 @@ function App() {
               <Route
                 path="/trainings/:p_id/assign"
                 element={<ManagerEmployeeAssign />}
+              />
+              <Route
+                path="/trainings/:p_id/assigned"
+                element={<ManagerEmployeesAssignPage />}
               />
               <Route
                 path="/trainings/:p_id/assign/success"

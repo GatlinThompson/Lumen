@@ -7,6 +7,11 @@ div.circle_chart {
   border-radius: 50%;
   box-sizing: border-box;
 
+  @include screen-breakpoint("lg") {
+    height: 75px;
+    width: 75px;
+  }
+
   // Default color is green
 
   &.border {
@@ -39,7 +44,7 @@ div.circle_chart {
 //Container
 div.circle_container {
   padding: 0.825rem 0;
-  max-width: 156px;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

@@ -14,6 +14,7 @@ const Select = ({
   touched,
   children,
   extraClasses,
+  disabled = false,
 }) => {
   return (
     <div className={`${styles.input_container} ${extraClasses}`}>
@@ -22,6 +23,7 @@ const Select = ({
         id={name}
         name={name}
         value={value}
+        disabled={disabled}
         onChange={onChange}
         onBlur={onBlur}
         placeholder={placeholder}

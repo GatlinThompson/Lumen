@@ -1,12 +1,32 @@
 import CardContainer from "../basic-components/CardContainer";
 import styles from "../../styles/training-details.module.scss";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 import Button from "../basic-components/Button";
 import { apiFetch } from "../../hooks/APIFetch";
 
-export default function TrainingSessionCard({ session, children }) {
+export default function TrainingSessionCard({
+  session,
+  program,
+  children,
+  enrolled,
+  updateBtns,
+}) {
   const { user } = useContext(AppContext);
+
+  const [btnText, setBtnText] = useState("Enroll in session");
+  const [color, setColor] = useState("yellow");
+
+  useEffect(() => {
+    if (enrolled) {
+      setColor("black");
+      setBtnText("Join Meeting");
+    } else {
+      setColor("yellow");
+      setBtnText("Enroll in session");
+    }
+  }, [enrolled]);
+
   //Date
   const date = new Date(session.start_time).toLocaleDateString("en-US", {
     year: "numeric",
@@ -23,14 +43,23 @@ export default function TrainingSessionCard({ session, children }) {
   const trainer = `${session.trainer.first_name} ${session.trainer.last_name}`;
 
   const enrollEmployee = async () => {
+    if (enrolled) {
+      return;
+    }
     const employeeEnrollement = {
-      user_id: user.id,
-      session_id: session.id,
+      user: user.id,
+      session: session.id,
     };
 
-    console.log(employeeEnrollement);
+    const { result, error } = await apiFetch(
+      `/api/training-programs/${program}/enroll`,
+      "POST",
+      employeeEnrollement
+    );
 
-    //const { result, error } = await apiFetch("", "POST", );
+    if (!error) {
+      updateBtns();
+    }
   };
   return (
     <CardContainer>
@@ -47,8 +76,8 @@ export default function TrainingSessionCard({ session, children }) {
       {user && user.role === "employee" && (
         <div className={styles.employee_enrollment}>
           {/*Add Employee Enrollment Function Here */}
-          <Button variant="yellow" onClick={enrollEmployee}>
-            Enroll in session
+          <Button variant={color} onClick={enrollEmployee}>
+            {btnText}
           </Button>
         </div>
       )}

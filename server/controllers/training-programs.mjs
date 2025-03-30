@@ -172,24 +172,10 @@ export const editTrainingProgram = async (req, res) => {
         .json({ success: false, message: "Sessions not found" });
     }
 
-    //check manager
-    let manager = await User.findById(req.body.assigned_manager).populate({
-      path: "role",
-      match: { name: "manager" },
-    });
-
-    //if manager not found
-    if (!manager) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Manager not found" });
-    }
-
     program.title = req.body.title;
     program.duration = parseInt(req.body.duration);
     program.deadline = req.body.deadline;
     program.description = req.body.description;
-    program.assigned_manager = req.body.assigned_manager;
 
     //deal with deleted/unused sessions
     const formSessionsID = sessions.map((session) => session._id);
@@ -404,6 +390,103 @@ export const getEmployeeTrainingProgram = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Programs were not obtained",
+    });
+  }
+};
+
+//Enroll Employeee
+export const EnrollEmployee = async (req, res) => {
+  try {
+    //session
+    console.log(req);
+    let session = await TrainingSession.findById(req.body.session);
+
+    //check if session exists
+    if (!session) {
+      return res.status(404).json({
+        success: false,
+        message: "Training Session not found.",
+      });
+    }
+
+    //get user
+    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let employee = await User.findById(req.body.user);
+
+    //check if employee exists
+    if (!employee) {
+      return res.status(404).json({
+        success: false,
+        message: "Employee not found.",
+      });
+    }
+
+    console.log(session);
+
+    //get program
+    let program = await TrainingProgram.findById(req.params.pid);
+
+    //check program
+    if (!program) {
+      return res.status(404).json({
+        success: false,
+        message: "Training Program not found.",
+      });
+    }
+
+    //get employee training
+    let employeeTraining = await EmployeeTraining.findOne({
+      training_program: program._id,
+      enrolled_employee: employee._id,
+    });
+
+    //check employee training
+
+    if (!employeeTraining) {
+      return res.status(404).json({
+        success: false,
+        message: "Employee training assignment not found.",
+      });
+    }
+
+    //update date and session and reset other values to not complete state
+    employeeTraining.enrolled_date = new Date();
+    employeeTraining.enrolled_training_session = session._id;
+    employeeTraining.completion_date = null;
+    employeeTraining.training_completed = false;
+
+    await employeeTraining.save();
+
+    res.status(200).json({ success: true, message: "Enrollment Successful" });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Unabled to enroll in training session",
+      err: err.message,
+    });
+  }
+};
+
+//Get employee sessions enrollment
+export const getEmployeeEnrollment = async (req, res) => {
+  try {
+    let training = await EmployeeTraining.findOne({
+      enrolled_employee: req.params.uid,
+      training_program: req.params.pid,
+    }).select("enrolled_training_session");
+
+    console.log(training);
+
+    res.status(200).json({
+      success: true,
+      messag: "Enrolled training session obtained",
+      enrolledSession: training,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Unabled to get enrolled training session",
+      err: err.message,
     });
   }
 };

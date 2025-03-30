@@ -106,3 +106,162 @@ export const assignEmployeeTraining = async (req, res) => {
     console.log(err);
   }
 };
+
+export const getAssignedEmployees = async (req, res) => {
+  try {
+    //get program
+    let program = await TrainingProgram.findById(req.params.id);
+    //check if program exists
+    if (!program) {
+      return res
+        .status(200)
+        .json({ success: false, message: "Training Program not found" });
+    }
+
+    let assignedEmployees = await EmployeeTraining.find({
+      training_program: program._id,
+    }).select("enrolled_employee");
+
+    const employeesID = assignedEmployees.map((employee) => {
+      return employee.enrolled_employee;
+    });
+
+    let employees = await User.find({ _id: { $in: employeesID } })
+      .populate({
+        path: "department",
+      })
+      .select("-hash -salt");
+
+    res.status(200).json({
+      success: true,
+      message: "Assigned employees obtained",
+      employees: employees,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to get assigned employees" });
+    console.log(err);
+  }
+};
+
+export const getAssignedEmployeesCount = async (req, res) => {
+  try {
+    //get program
+    let program = await TrainingProgram.findOne({ _id: req.params.pid });
+
+    //check program
+    if (!program) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Program not found" });
+    }
+
+    //get all assigned employe count
+    let assigned = await EmployeeTraining.countDocuments({
+      training_program: program._id,
+    });
+
+    //get all employees who match the program in training sessions
+    let enrolled = await EmployeeTraining.countDocuments({
+      training_program: program._id,
+      enrolled_training_session: { $ne: null },
+      training_completed: false,
+    });
+
+    let not_enrolled = await EmployeeTraining.countDocuments({
+      training_program: program._id,
+      training_completed: false,
+      enrolled_training_session: null,
+    });
+
+    let completed = await EmployeeTraining.countDocuments({
+      training_program: program._id,
+      enrolled_training_session: { $ne: null },
+      training_completed: true,
+    });
+
+    //Get overdue
+    let overdue;
+    //set dates to play with
+    let deadline = program.deadline;
+    let today = new Date();
+
+    //check if today is earlier than the deadline
+    console.log("Is before deadline:", today < deadline);
+    if (today < deadline) {
+      overdue = 0;
+    } else {
+      overdue = await EmployeeTraining.countDocuments({
+        training_program: program._id,
+        training_completed: false,
+      });
+    }
+
+    const assignedSchema = {
+      total: assigned,
+      completed: completed,
+      enrolled: enrolled,
+      overdue: overdue,
+      not_enrolled: not_enrolled,
+    };
+
+    res.status(200).json({
+      success: true,
+      message: "Obtained Assigned Employee Counts",
+      assigned: assignedSchema,
+    });
+
+    console.log("Assigned", assigned);
+    console.log("Enrolled", enrolled);
+    console.log("Completed", completed);
+    //console.log("Overdue", overdue);
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to get employees assigned",
+      err: err.message,
+    });
+  }
+};
+
+//Unassign Employee
+export const unassignEmployee = async (req, res) => {
+  try {
+    //get program
+    let program = await TrainingProgram.findById(req.params.pid);
+
+    //check program
+    if (!program) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Training program not found" });
+    }
+
+    //get employee
+    let employee = await User.findById(req.params.eid);
+
+    //check employee
+    if (!employee) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Employee not found" });
+    }
+
+    //find and delete document
+    await EmployeeTraining.findOneAndDelete({
+      training_program: program._id,
+      enrolled_employee: employee._id,
+    });
+
+    res
+      .status(200)
+      .json({ success: true, message: "Employee unassigned successfu" });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to get employee unassigned",
+      err: err.message,
+    });
+  }
+};
