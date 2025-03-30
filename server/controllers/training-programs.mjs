@@ -330,6 +330,7 @@ export const getTrainerTrainingProgram = async (req, res) => {
 
     let sessions = await TrainingSession.find({
       trainer: userDecoded._id,
+      start_time: { $gt: new Date() },
     }).select("-_id training_program");
 
     //create an array that has unique ids
@@ -369,18 +370,15 @@ export const getEmployeeTrainingProgram = async (req, res) => {
 
     let trainings = await EmployeeTraining.find({
       enrolled_employee: userDecoded._id,
+      training_completed: false,
     }).select("training_program");
 
     console.log(trainings);
 
     //create an array that has unique ids
-    let trainingProgramIDs = [
-      ...new Set(
-        trainings.map((trainings) => {
-          return trainings.training_program;
-        })
-      ),
-    ];
+    let trainingProgramIDs = trainings.map((training) => {
+      return training.training_program;
+    });
 
     let programs = await TrainingProgram.find({
       _id: { $in: trainingProgramIDs },

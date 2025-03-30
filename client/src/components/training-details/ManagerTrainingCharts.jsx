@@ -13,7 +13,6 @@ export default function ManagerTrainingCharts({ programID }) {
       );
 
       if (!error) {
-        console.log(result.assigned);
         setAssigned(result.assigned);
       }
     };

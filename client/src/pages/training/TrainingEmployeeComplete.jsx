@@ -11,7 +11,7 @@ import Button from "../../components/basic-components/Button";
 import { AppContext } from "../../App";
 import Checkbox from "../../components/form-components/Checkbox";
 
-export default function ManagerEmployeeAssign() {
+export default function TrainerEmployeeComplete() {
   const [loaded, setLoaded] = useState(false);
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
@@ -19,18 +19,18 @@ export default function ManagerEmployeeAssign() {
   const { p_id } = useParams();
   const { user, setNewAssignedEmployees } = useContext(AppContext);
   let initialValues = {
-    assigned_employees: [],
+    completed_employees: [],
   };
 
   useEffect(() => {
     //redirect if
-    if (!user || user.role != "manager" || !p_id) {
+    if (!user || user.role != "trainer" || !p_id) {
       navigate("/dashboard");
     }
 
     const getEmployees = async () => {
       const { result, error } = await apiFetch(
-        `/api/training-program/${p_id}/employees/unassigned`,
+        `/api/training-program/${p_id}/employees/uncomplete`,
         "GET"
       );
 
@@ -71,36 +71,36 @@ export default function ManagerEmployeeAssign() {
     });
 
     //compare formik values to filtered to get final employee id to post
-    const finalValues = values.assigned_employees.filter((employee) => {
+    const finalValues = values.completed_employees.filter((employee) => {
       return filteredID.includes(employee);
     });
 
     const data = {
-      assigned_employees: finalValues,
+      completed_employees: finalValues,
     };
 
     //simple empty validation
-    if (data.assigned_employees.length <= 0) {
+    if (data.completed_employees.length <= 0) {
       return;
     }
 
     //api call
     const { result, error } = await apiFetch(
-      `/api/training-program/${p_id}/employees/assign`,
+      `/api/training-program/${p_id}/employees/complete`,
       "POST",
       data
     );
 
     if (!error) {
       //create newly assinged employees array
-      const assignedEmployees = orginalEmployees.filter((employee) => {
+      const completedEmployees = orginalEmployees.filter((employee) => {
         return finalValues.includes(employee._id);
       });
 
       //set app array
-      setNewAssignedEmployees(assignedEmployees);
+      setNewAssignedEmployees(completedEmployees);
       //naviagate to success page
-      navigate(`/trainings/${p_id}/assign/success`);
+      navigate(`/trainings/${p_id}/complete/success`);
     } else {
       console.log(result);
     }
@@ -109,15 +109,15 @@ export default function ManagerEmployeeAssign() {
   //handle checkbox change
   const handleChange = (employeeID) => {
     //check if id is in formik values
-    if (formik.values.assigned_employees.includes(employeeID)) {
+    if (formik.values.completed_employees.includes(employeeID)) {
       formik.setFieldValue(
-        "assigned_employees",
-        formik.values.assigned_employees.filter((id) => id !== employeeID)
+        "completed_employees",
+        formik.values.completed_employees.filter((id) => id !== employeeID)
       );
     } else {
       //add to array
-      formik.setFieldValue("assigned_employees", [
-        ...formik.values.assigned_employees,
+      formik.setFieldValue("completed_employees", [
+        ...formik.values.completed_employees,
         employeeID,
       ]);
     }
@@ -132,7 +132,7 @@ export default function ManagerEmployeeAssign() {
     <div className={`${loaded ? "loaded loading" : "loading"} max-1080`}>
       <BackButton />
       <div className={styles.search_container}>
-        <PageHeader title={"Assign employee training"} />
+        <PageHeader title={"Complete employee training"} />
         {employees.length > 0 && (
           <Input
             type="search"
@@ -152,9 +152,9 @@ export default function ManagerEmployeeAssign() {
                 return (
                   <EmployeeCard key={index} employee={employee}>
                     <Checkbox
-                      name="assigned_employees"
+                      name="completed_employees"
                       value={employee._id}
-                      checked={formik.values.assigned_employees.includes(
+                      checked={formik.values.completed_employees.includes(
                         employee._id
                       )}
                       onChange={() => handleChange(employee._id)}
@@ -165,14 +165,14 @@ export default function ManagerEmployeeAssign() {
           </div>
           <div className={styles.form_btn}>
             <Button type="submit" variant="yellow">
-              Assign Employees
+              Complete Employees
             </Button>
           </div>
         </form>
       ) : null}
       {employees.length <= 0 && (
         <div className={styles.no_employees}>
-          <p>No employees to assign training</p>
+          <p>No employees to complete training</p>
         </div>
       )}
     </div>

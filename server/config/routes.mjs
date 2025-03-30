@@ -56,6 +56,10 @@ import {
   getUnassignedEmployees,
   unassignEmployee,
 } from "../controllers/manager.mjs";
+import {
+  completeEmployees,
+  getUncompletedEmployees,
+} from "../controllers/trainer.mjs";
 
 // Define Router
 let router = express.Router();
@@ -174,6 +178,15 @@ export const configureRoutes = (app) => {
     isManager,
     unassignEmployee
   );
+
+  //Trainer Training API
+  app.get(
+    "/api/training-program/:pid/employees/uncomplete",
+    isTrainer,
+    getUncompletedEmployees
+  );
+
+  app.post("/api/training-program/:pid/employees/complete", completeEmployees);
 
   //Training Details Widgets API Calls************************************************
 

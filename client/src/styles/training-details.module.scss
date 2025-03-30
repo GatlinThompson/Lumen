@@ -219,6 +219,22 @@ div.cancel_btn {
   }
 }
 
+//Mark Employees Btn
+div.trainer_btn {
+  display: flex;
+  justify-content: center;
+
+  @include screen-breakpoint("lg") {
+    display: block;
+  }
+
+  & > button {
+    flex: 1;
+
+    min-width: 300px;
+  }
+}
+
 //Manager Widgets Styling ****************************************
 
 //Widget Container {

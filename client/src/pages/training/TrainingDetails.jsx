@@ -198,6 +198,16 @@ export default function TrainingDetails() {
               </Button>
             </div>
           )}
+          {user && user.role === "trainer" && (
+            <div className={styles.trainer_btn}>
+              <Button
+                variant="yellow"
+                onClick={() => navigate(`/trainings/${p_id}/complete`)}
+              >
+                Mark Employees Complete
+              </Button>
+            </div>
+          )}
           {user && user.role === "manager" && (
             <ManagerTrainingDetails programID={program._id} />
           )}

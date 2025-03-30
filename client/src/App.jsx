@@ -25,6 +25,8 @@ import UsersTable from "./pages/users/UsersTable";
 import UserDetails from "./pages/users/UserDetails";
 import ManagerEmployeesAssignPage from "./pages/training/ManagerEmployeesAssignPage";
 import NotificationPage from "./pages/NotificationsPage";
+import TrainerEmployeeComplete from "./pages/training/TrainingEmployeeComplete";
+import TrainerEmployeeCompleteSuccess from "./pages/training/TrainerEmployeeCompleteSuccess";
 
 export const AppContext = createContext();
 
@@ -122,6 +124,14 @@ function App() {
               <Route
                 path="/training/:p_id/edit"
                 element={<TrainingFormEdit />}
+              />
+              <Route
+                path="/trainings/:p_id/complete"
+                element={<TrainerEmployeeComplete />}
+              />
+              <Route
+                path="/trainings/:p_id/complete/success"
+                element={<TrainerEmployeeCompleteSuccess />}
               />
               {/*Users Routes */}
               <Route path="/users" element={<UsersPage />}>
