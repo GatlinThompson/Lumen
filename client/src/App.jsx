@@ -24,6 +24,7 @@ import UsersPage from "./pages/users/UsersPage";
 import UsersTable from "./pages/users/UsersTable";
 import UserDetails from "./pages/users/UserDetails";
 import ManagerEmployeesAssignPage from "./pages/training/ManagerEmployeesAssignPage";
+import NotificationPage from "./pages/NotificationsPage";
 
 export const AppContext = createContext();
 
@@ -135,6 +136,8 @@ function App() {
               <Route path="/users/create/success" element={<UserSuccess />} />
               {/*Profile Route */}
               <Route path="/profile" element={<UserProfile />} />
+              {/*Notification Route */}
+              <Route path="/notifications" element={<NotificationPage />} />
             </Route>
 
             <Route path="*" element={<ErrorPage />} />

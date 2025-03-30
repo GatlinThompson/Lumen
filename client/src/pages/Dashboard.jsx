@@ -8,6 +8,7 @@ import UsersOverview from "../components/admin-dashboard/UsersOverview.jsx";
 import TrainingPrograms from "../components/admin-dashboard/TrainingPrograms.jsx";
 import TrainingInsights from "../components/admin-dashboard/TrainingInsights.jsx";
 import AdminDashboard from "../components/admin-dashboard/AdminDashBoard.jsx";
+import PageHeader from "../components/basic-components/PageHeader.jsx";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -23,10 +24,11 @@ export default function Dashboard() {
   return (
     <div className={`${loaded ? "loaded loading" : "loading"}`}>
       {user ? (
-        <div>
-          <p>
-            Hello in Dashboard, {user.first_name} {user.last_name}
-          </p>
+        <div className="pt-4">
+          <PageHeader
+            title={`Welcome back, ${user.first_name} ${user.last_name}`}
+          />
+
           <ButtonGroup
             buttons={[
               {

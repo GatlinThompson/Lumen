@@ -14,7 +14,7 @@ export default function ManagerNav(props) {
         <i className="bi bi-person"></i>Employees
       </NavLink>
       <NavLink
-        to=""
+        to="/notifications"
         className={`${styles.last_user_med}`}
         onClick={props.handleLinkClick}
       >

@@ -127,7 +127,12 @@ export const getSingleTrainingProgram = async (req, res) => {
       department: manager.department,
     };
 
-    const programSessions = await Promise.all(sessions);
+    let programSessions = await Promise.all(sessions);
+
+    //sort by start time
+    programSessions.sort(
+      (a, b) => new Date(a.start_time) - new Date(b.start_time)
+    );
 
     program.training_sessions = programSessions;
 

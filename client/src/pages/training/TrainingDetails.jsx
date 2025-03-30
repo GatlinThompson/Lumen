@@ -151,29 +151,44 @@ export default function TrainingDetails() {
             </div>
           )}
           {/*Sessions */}
-          <h2 className={styles.session_header}>Sessions</h2>
-          <div className={styles.session_container}>
-            {program &&
-              program.training_sessions.map((session, index) => {
-                if (
-                  enrolledSession &&
-                  enrolledSession !== session.id &&
-                  user &&
-                  user.role === "employee"
-                ) {
-                  return;
-                }
-                return (
-                  <TrainingSessionCard
-                    key={index}
-                    enrolled={enrolledSession === session.id}
-                    session={session}
-                    program={program._id}
-                    updateBtns={getEmployeeEnrollment}
-                  ></TrainingSessionCard>
-                );
-              })}
-          </div>
+
+          <>
+            <h2 className={styles.session_header}>Sessions</h2>
+            <div className={styles.session_container}>
+              {program &&
+                program.training_sessions.map((session, index) => {
+                  //employee enrollement mapping
+                  if (
+                    enrolledSession &&
+                    enrolledSession !== session.id &&
+                    user &&
+                    user.role === "employee"
+                  ) {
+                    return;
+                  }
+
+                  //trainer session mapping
+                  if (
+                    user &&
+                    user.role === "trainer" &&
+                    session.trainer._id !== user.id
+                  ) {
+                    return;
+                  }
+
+                  return (
+                    <TrainingSessionCard
+                      key={index}
+                      enrolled={enrolledSession === session.id}
+                      session={session}
+                      program={program._id}
+                      updateBtns={getEmployeeEnrollment}
+                    ></TrainingSessionCard>
+                  );
+                })}
+            </div>
+          </>
+
           {/*Role Specific Components*/}
           {user && user.role === "admin" && (
             <div className={styles.cancel_btn}>

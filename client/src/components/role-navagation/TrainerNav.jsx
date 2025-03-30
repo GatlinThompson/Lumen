@@ -11,7 +11,7 @@ export default function TrainerNav(props) {
         <i className="bi bi-book"></i>Assigned Trainings
       </NavLink>
       <NavLink
-        to=""
+        to="/notifications"
         className={`${styles.last_user_high}`}
         onClick={props.handleLinkClick}
       >

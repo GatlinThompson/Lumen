@@ -20,7 +20,7 @@ export default function TrainingSessionCard({
   useEffect(() => {
     if (enrolled) {
       setColor("black");
-      setBtnText("Join Meeting");
+      setBtnText("Enrolled");
     } else {
       setColor("yellow");
       setBtnText("Enroll in session");
