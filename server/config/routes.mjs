@@ -13,6 +13,7 @@ import {
   getEmployees,
   getAllUsers,
   logoutUser,
+  getSpecificUser,
 } from "../controllers/users.mjs";
 import { createRole, deleteRole, editRole } from "../controllers/roles.mjs";
 import {
@@ -83,6 +84,9 @@ export const configureRoutes = (app) => {
   app.get("/api/users/managers", getManagers);
   app.get("/api/users/trainers", getTrainers);
   app.get("/api/users/employees", getEmployees);
+
+  //Get Specific User
+  app.get("/api/user/:id", getSpecificUser);
 
   //Super Admin API Calls*************************************************************
 

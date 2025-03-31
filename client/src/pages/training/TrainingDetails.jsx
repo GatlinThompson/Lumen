@@ -7,6 +7,7 @@ import { AppContext } from "../../App";
 import Button from "../../components/basic-components/Button";
 import TrainingSessionCard from "../../components/trainings/TrainingSessionCard";
 import ManagerTrainingDetails from "../../components/training-details/ManagerTrainingDetails";
+import TrainerTrainingDetails from "../../components/training-details/TrainerTrainingDetails";
 
 export default function TrainingDetails() {
   const { p_id } = useParams();
@@ -14,6 +15,7 @@ export default function TrainingDetails() {
   const [program, setProgram] = useState();
   const { user } = useContext(AppContext);
   const [loaded, setLoaded] = useState(false);
+  const [trainerSessions, setTrainerSessions] = useState([]);
   const [enrolledSession, setEnrolledSession] = useState([]);
 
   //dynamic employee enrollment button colors
@@ -210,6 +212,12 @@ export default function TrainingDetails() {
           )}
           {user && user.role === "manager" && (
             <ManagerTrainingDetails programID={program._id} />
+          )}
+          {user && user.role === "trainer" && (
+            <TrainerTrainingDetails
+              programID={program._id}
+              sessions={program.training_sessions}
+            />
           )}
         </div>
       )}

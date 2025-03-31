@@ -5,10 +5,20 @@ export const getRoleAndDepartments = async (req, res) => {
   try {
     // get all departments but transitioning
     let departments = await Department.find({
-      name: { $nin: ["Transitioning", "New Hire"] },
+      name: {
+        $nin: ["Transitioning", "New Hire", "Human Resources", "Training"],
+      },
     });
 
-    let roles = await Role.find({ name: { $ne: "super_admin" } });
+    let employeeRole = await Role.find({ name: "employee" });
+
+    let otherRoles = await Role.find({
+      name: { $nin: ["super_admin", "employee"] },
+    }).sort({
+      name: 1,
+    });
+
+    let roles = [...employeeRole, ...otherRoles];
 
     const niceRole = roles.map((role) => {
       const firstLetter = role.name.charAt(0).toUpperCase();

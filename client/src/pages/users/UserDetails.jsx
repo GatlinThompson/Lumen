@@ -1,27 +1,53 @@
-import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import BackButton from "../../components/basic-components/BackButton";
-import PageHeader from "../../components/basic-components/PageHeader.jsx";
-import ProfileIcon from "../../components/basic-components/ProfileIcon.jsx";
-import Button from "../../components/basic-components/Button.jsx";
-import styles from "../../styles/profile.module.scss";
-import { AppContext } from "../../App.jsx";
+import { use, useEffect, useState } from "react";
+import { apiFetch } from "../../hooks/APIFetch";
 
 export default function UserDetails() {
-  const { user } = useContext(AppContext);
+  const { id } = useParams();
+  const [pageUser, setPageUser] = useState([]);
+  const [loaded, setLoaded] = useState(false);
+
+  const getPageUser = async () => {
+    const { result, error } = await apiFetch(`/api/user/${id}`, "GET");
+
+    if (!error) {
+      console.log(result.user);
+      setPageUser(result.user);
+      setTimeout(() => {
+        setLoaded(true);
+      }, 100);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      getPageUser();
+    }
+  }, [id]);
+
   return (
-    <div>
-      <BackButton />
-      <PageHeader title={"Manager Details"} />
-      <div className="row align-items-center mt-4 mb-5">
-        <ProfileIcon user={user} size="large" />
-        <div className="col-6">
-          <h2 className="fs-2 text-nowrap">
-            {user.first_name} {user.last_name}
-          </h2>
-          <p className="m-0">{user.email}</p>
-          <p>{user.department}</p>
+    <>
+      {pageUser && (
+        <div className={`${loaded ? "loaded loading" : "loading"}`}>
+          <BackButton />
+          <h1>User Details Page Under Construction</h1>
+          <p>
+            {pageUser.first_name} {pageUser.last_name}
+          </p>
+          <PageHeader title={"Manager Details"} />
+          <div className="row align-items-center mt-4 mb-5">
+            <ProfileIcon user={user} size="large" />
+            <div className="col-6">
+              <h2 className="fs-2 text-nowrap">
+                {user.first_name} {user.last_name}
+              </h2>
+              <p className="m-0">{user.email}</p>
+              <p>{user.department}</p>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
