@@ -4,6 +4,7 @@ h1.header {
   font-family: $header_font;
   font-size: 2rem;
   font-weight: normal;
+  text-transform: capitalize;
   margin-top: calc(2rem - 3px);
   margin-bottom: 0;
 

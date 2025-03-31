@@ -1,7 +1,9 @@
 import { useParams } from "react-router-dom";
 import BackButton from "../../components/basic-components/BackButton";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { apiFetch } from "../../hooks/APIFetch";
+import ProfileIcon from "../../components/basic-components/ProfileIcon.jsx";
+import PageHeader from "../../components/basic-components/PageHeader.jsx";
 
 export default function UserDetails() {
   const { id } = useParams();
@@ -31,19 +33,15 @@ export default function UserDetails() {
       {pageUser && (
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
           <BackButton />
-          <h1>User Details Page Under Construction</h1>
-          <p>
-            {pageUser.first_name} {pageUser.last_name}
-          </p>
-          <PageHeader title={"Manager Details"} />
+          <PageHeader title={`${pageUser.role.name} Details`} />
           <div className="row align-items-center mt-4 mb-5">
-            <ProfileIcon user={user} size="large" />
+            <ProfileIcon user={pageUser} size="large" />
             <div className="col-6">
               <h2 className="fs-2 text-nowrap">
-                {user.first_name} {user.last_name}
+                {pageUser.first_name} {pageUser.last_name}
               </h2>
-              <p className="m-0">{user.email}</p>
-              <p>{user.department}</p>
+              <p className="m-0">{pageUser.email}</p>
+              <p>Department: {pageUser.department.name}</p>
             </div>
           </div>
         </div>
