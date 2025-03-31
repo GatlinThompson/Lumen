@@ -346,3 +346,25 @@ export const getAllUsers = async (req, res) => {
     });
   }
 };
+
+//Get Specific User
+export const getSpecificUser = async (req, res) => {
+  try {
+    let user = await User.findById(req.params.id)
+      .populate({
+        path: "department",
+      })
+      .populate({ path: "role" })
+      .select("-hash -salt");
+
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: "Successfully obtained user",
+        user: user,
+      });
+  } catch (err) {
+    res.status(500).json({ success: false, message: "Failed to get user" });
+  }
+};

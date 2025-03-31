@@ -197,5 +197,10 @@ export const getDashboardTrainerTrainings = async (req, res) => {
       message: "Trainings Sessions successfully obtained",
       training_sessions: assignedSessions,
     });
-  } catch (err) {}
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Trainings Sessions unsuccessfully obtained",
+    });
+  }
 };
