@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function BackButton() {
   return (
     <div className={styles.icon_btn_container}>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex gap-4">
         <Link to="/users/create" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
             <div>
@@ -27,7 +27,7 @@ export default function BackButton() {
           </CardContainer>
         </Link>
       </div>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex gap-4">
         <Link to="/users/trainers" className={styles.icon_btn}>
           <CardContainer extraClasses={styles.icon_card}>
             <div className="text-center">

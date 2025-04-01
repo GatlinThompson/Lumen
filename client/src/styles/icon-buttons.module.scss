@@ -2,8 +2,8 @@
 @use "sass:color";
 
 .icon_btn_container{
-    width: 344px;
-    margin-top: 5rem;
+    width: 100%;
+    margin-top: 1.5rem;
 
     .icon_btn{
         text-decoration: none;
@@ -11,8 +11,8 @@
         padding-bottom: 21px;
 
         .icon_card{
-            width: 161px;
-            height: 161px;
+            width: 160px;
+            height: 160px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -28,13 +28,12 @@
 
 @include screen-breakpoint("lg") {
         .icon_btn_container{
-            width: 420px;
-            margin-top: 5rem;
+            width: 40%;
             
             .icon_btn{
                 .icon_card{
-                    width: 200px;
-                    height: 200px;
+                    width: 195px;
+                    height: 195px;
 
                     i{
                         font-size: 60px;
