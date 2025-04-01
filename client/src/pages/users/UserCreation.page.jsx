@@ -26,7 +26,7 @@ export default function UserCreationPage() {
     last_name: "",
     email: "",
     temp_password: "",
-    role: "",
+    role: "67c21b54015d0f2b4cd7ba1d",
     department: "",
   };
 

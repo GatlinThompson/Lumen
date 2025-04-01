@@ -1,0 +1,16 @@
+@use "./custom.scss" as *;
+
+div.status {
+  width: 16px;
+  height: 16px;
+
+  & > i {
+    &.progress {
+      color: #a2c6ff;
+    }
+
+    &.complete {
+      color: $success;
+    }
+  }
+}

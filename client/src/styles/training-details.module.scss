@@ -195,6 +195,15 @@ h2.insights_header {
     margin-top: 4rem;
     font-size: 2rem;
   }
+
+  &.trainer {
+    margin-top: 2rem;
+    margin-top: 1.75rem;
+
+    @include screen-breakpoint("lg") {
+      margin-top: 3rem;
+    }
+  }
 }
 
 //Cancel Program Btn
@@ -223,9 +232,10 @@ div.cancel_btn {
 div.trainer_btn {
   display: flex;
   justify-content: center;
+  max-width: 300px;
 
   @include screen-breakpoint("lg") {
-    display: block;
+    display: none;
   }
 
   & > button {
@@ -285,5 +295,13 @@ div.manager_training_circles {
     @include screen-breakpoint("lg") {
       flex: 0 0 calc(50% - (2.5rem / 2));
     }
+  }
+}
+
+div.enrolled_container {
+  order: 1;
+
+  @include screen-breakpoint("lg") {
+    order: 0;
   }
 }

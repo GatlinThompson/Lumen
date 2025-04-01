@@ -105,3 +105,98 @@ export const completeEmployees = async (req, res) => {
     console.log(err.message);
   }
 };
+
+//Trainer Training Widgets
+export const getTrainingEnrollmentCount = async (req, res) => {
+  try {
+    //get program
+    let program = await TrainingProgram.findById(req.params.pid);
+
+    //check program
+    if (!program) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Program not found" });
+    }
+
+    let assigned = await EmployeeTraining.countDocuments({
+      training_program: program._id,
+    });
+
+    //get session ids
+    let sessionIDs = req.body.sessions.map((session) => {
+      return session.id;
+    });
+
+    let enrolled = await EmployeeTraining.countDocuments({
+      training_program: program._id,
+      enrolled_training_session: { $in: sessionIDs },
+      training_completed: false,
+    });
+
+    let completed = await EmployeeTraining.countDocuments({
+      training_program: program._id,
+      enrolled_training_session: { $in: sessionIDs },
+      training_completed: true,
+    });
+
+    console.log("Assigned", assigned);
+    console.log("Enrolled", enrolled);
+    console.log("Completed", completed);
+
+    const data = {
+      enrolled: enrolled,
+      assigned: assigned,
+      completed: completed,
+    };
+
+    res
+      .status(200)
+      .json({ success: true, message: "Obtain count info", count: data });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to obtain count info" });
+    console.log(err.message);
+  }
+};
+
+//Get assigned employees
+export const trainerGetAssignedEmployees = async (req, res) => {
+  try {
+    let program = await TrainingProgram.findById(req.params.pid);
+
+    if (!program) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Program not found" });
+    }
+
+    let sessionIDs = req.body.sessions.map((session) => {
+      return session.id;
+    });
+
+    let emp_trainings = await EmployeeTraining.find({
+      training_program: program._id,
+      enrolled_training_session: { $in: sessionIDs },
+    })
+      .populate({
+        path: "enrolled_employee",
+        populate: { path: "department", select: "name" },
+      })
+      .select("-hash -salt");
+
+    console.log(emp_trainings);
+
+    res.status(200).json({
+      success: true,
+      message: "Obtained assigned employees",
+      users: emp_trainings,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to obtain employee info" });
+    console.log(err.message);
+  }
+};

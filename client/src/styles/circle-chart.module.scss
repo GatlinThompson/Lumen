@@ -8,8 +8,8 @@ div.circle_chart {
   box-sizing: border-box;
 
   @include screen-breakpoint("lg") {
-    height: 75px;
-    width: 75px;
+    height: 90px;
+    width: 90px;
   }
 
   // Default color is green
@@ -49,6 +49,10 @@ div.circle_container {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+
+  @include screen-breakpoint("lg") {
+    padding: 2rem 0;
+  }
 
   & > p.title {
     font-size: 0.825rem;

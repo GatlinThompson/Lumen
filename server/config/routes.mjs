@@ -59,7 +59,9 @@ import {
 } from "../controllers/manager.mjs";
 import {
   completeEmployees,
+  getTrainingEnrollmentCount,
   getUncompletedEmployees,
+  trainerGetAssignedEmployees,
 } from "../controllers/trainer.mjs";
 
 // Define Router
@@ -209,6 +211,18 @@ export const configureRoutes = (app) => {
     "/api/training-program/:pid/assign-count",
     isManager,
     getAssignedEmployeesCount
+  );
+
+  //Trainer
+  app.post(
+    "/api/training-programs/:pid/enrollment-count",
+    isTrainer,
+    getTrainingEnrollmentCount
+  );
+
+  app.post(
+    "/api/traing-programs/:pid/trainer/assigned",
+    trainerGetAssignedEmployees
   );
 
   //Dashboard API Calls***************************************************************

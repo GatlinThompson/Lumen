@@ -66,6 +66,34 @@ div.employees_container {
     font-weight: 400;
     line-height: normal;
   }
+
+  &.trainer {
+    height: 100%;
+    padding: 0;
+    border-width: 0px;
+    box-shadow: none;
+    display: flex;
+    flex-flow: column nowrap;
+    background-color: transparent;
+
+    @include screen-breakpoint("lg") {
+      height: 100%;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-flow: column nowrap;
+      background-color: $bright_white;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+      border-width: 0.5px;
+    }
+
+    & button {
+      display: none;
+
+      @include screen-breakpoint("lg") {
+        display: block;
+      }
+    }
+  }
 }
 
 //Search Bar
@@ -84,7 +112,11 @@ div.employee_list_container {
   gap: 1rem;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  max-height: 275px;
+  max-height: 375px;
+
+  &.trainer {
+    min-height: 375px;
+  }
 
   & > p {
     font-size: 1.5rem;
