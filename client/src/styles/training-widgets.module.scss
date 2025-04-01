@@ -1,0 +1,21 @@
+@use "./custom.scss" as *;
+
+.training_widgets {
+  width: 344px;
+}
+
+.hr {
+  overflow: hidden;
+  color: $neutral_black;
+  text-align: left;
+  line-height: 1.6em;
+}
+
+.hr:before {
+  display: block;
+  float: right;
+  margin-top: 0.8em;
+  border-top: 2px solid $neutral_black;
+  width: 65%;
+  content: "";
+}

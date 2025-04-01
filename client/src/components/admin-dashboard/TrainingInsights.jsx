@@ -1,12 +1,12 @@
 import CardContainer from "../basic-components/CardContainer";
 import CircleChart from "../basic-components/CircleChart";
-import styles from "../../styles/training-programs.module.scss";
+import styles from "../../styles/training-widgets.module.scss";
 
 export default function TrainingInsights() {
   return (
-    <div className={styles.training_programs}>
+    <div className={styles.training_widgets}>
       <CardContainer extraClasses="d-flex flex-column gap-3">
-        <p className="fw-bold fs-5 mx-3 mt-3 mb-0">Training Insights</p>
+        <h2 className="fs-5 mx-3 mt-3 mb-0">Training Insights</h2>
 
         <div className="d-flex flex-row mx-3 gap-3">
           <CardContainer extraClasses="col">

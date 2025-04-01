@@ -1,7 +1,7 @@
 import CardContainer from "../basic-components/CardContainer";
 import Button from "../basic-components/Button";
 import { useNavigate } from "react-router-dom";
-import styles from "../../styles/training-programs.module.scss";
+import styles from "../../styles/training-widgets.module.scss";
 import { useEffect, useState } from "react";
 import { apiFetch } from "../../hooks/APIFetch";
 
@@ -26,9 +26,9 @@ export default function TrainingPrograms() {
     getPrograms();
   }, []);
   return (
-    <div className={styles.training_programs}>
+    <div className={styles.training_widgets}>
       <CardContainer extraClasses="mb-4">
-        <p className="fw-bold fs-5 p-3 m-0">Training Programs</p>
+        <h2 className="fs-5 p-3 m-0">Training Programs</h2>
         <div className="row text-center justify-content-center">
           <div className="col-3">
             <p className="fw-bold mb-0 fs-4">
