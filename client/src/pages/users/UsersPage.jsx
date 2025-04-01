@@ -134,9 +134,9 @@ export default function UsersPage() {
       <div className={styles.search_nav}>
         {user && user.role === "admin" && (
           <InnerNavigation>
-            <NavLink to="employees">Employees</NavLink>
-            <NavLink to="trainers">Trainers</NavLink>
             <NavLink to="managers">Managers</NavLink>
+            <NavLink to="trainers">Trainers</NavLink>
+            <NavLink to="employees">Employees</NavLink>
           </InnerNavigation>
         )}
         <Input
