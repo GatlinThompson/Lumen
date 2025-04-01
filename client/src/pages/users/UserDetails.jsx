@@ -7,7 +7,7 @@ import PageHeader from "../../components/basic-components/PageHeader.jsx";
 
 export default function UserDetails() {
   const { id } = useParams();
-  const [pageUser, setPageUser] = useState([]);
+  const [pageUser, setPageUser] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
   const getPageUser = async () => {
