@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 
 export default function BackButton() {
   return (
-    <div className={styles.icon_btn_container}>
-      <div className="d-flex gap-4">
-        <Link to="/users/create" className={styles.icon_btn}>
-          <CardContainer extraClasses={styles.icon_card}>
+    <div className={`mt-4 ${styles.icon_btn_container}`}>
+      <div className="row">
+        <Link
+          to="/users/create"
+          className={`col-6 col-md-6 ${styles.icon_btn}`}
+        >
+          <CardContainer extraClasses={`py-5 ${styles.icon_card}`}>
             <div>
               <div className="align-content-center">
                 <i className="bi bi-person-plus"></i>
@@ -16,8 +19,11 @@ export default function BackButton() {
             </div>
           </CardContainer>
         </Link>
-        <Link to="/users/managers" className={styles.icon_btn}>
-          <CardContainer extraClasses={styles.icon_card}>
+        <Link
+          to="/users/managers"
+          className={`col-6 col-md-6 ${styles.icon_btn}`}
+        >
+          <CardContainer extraClasses={`py-5 ${styles.icon_card}`}>
             <div className="text-center">
               <div>
                 <i className="bi bi-briefcase"></i>
@@ -27,9 +33,12 @@ export default function BackButton() {
           </CardContainer>
         </Link>
       </div>
-      <div className="d-flex gap-4">
-        <Link to="/users/trainers" className={styles.icon_btn}>
-          <CardContainer extraClasses={styles.icon_card}>
+      <div className="row">
+        <Link
+          to="/users/trainers"
+          className={`col-6 col-md-6 ${styles.icon_btn}`}
+        >
+          <CardContainer extraClasses={`py-5 ${styles.icon_card}`}>
             <div className="text-center">
               <div>
                 <i className="bi bi-person-video3"></i>
@@ -38,8 +47,11 @@ export default function BackButton() {
             </div>
           </CardContainer>
         </Link>
-        <Link to="/users/employees" className={styles.icon_btn}>
-          <CardContainer extraClasses={styles.icon_card}>
+        <Link
+          to="/users/employees"
+          className={`col-6 col-md-6 ${styles.icon_btn}`}
+        >
+          <CardContainer extraClasses={`py-5 ${styles.icon_card}`}>
             <div className="text-center">
               <div>
                 <i className="bi bi-person"></i>

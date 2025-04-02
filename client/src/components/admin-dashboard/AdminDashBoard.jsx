@@ -7,11 +7,27 @@ import TrainingDeadlines from "./TrainingDeadlines";
 export default function AdminDashboard() {
   return (
     <>
-      <UsersOverview />
-      <IconButtons />
-      <TrainingPrograms />
-      <TrainingInsights />
-      <TrainingDeadlines />
+      <div className="row">
+        <div className="col-12 col-md-6 mt-4">
+          <div>
+            <UsersOverview />
+          </div>
+          <div>
+            <IconButtons />
+          </div>
+          <div>
+            <TrainingInsights />
+          </div>
+        </div>
+        <div className="col-12 col-md-6 mt-4">
+          <div>
+            <TrainingPrograms />
+          </div>
+          <div>
+            <TrainingDeadlines />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

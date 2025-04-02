@@ -3,15 +3,12 @@
 
 
 .users_overview_container{
-
-    width: 344px;
     padding: 1rem 1rem;
-    margin-top: 5rem;
 
     .users_data{
         font-family: $body_font;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
         text-align: center;
 
@@ -20,8 +17,6 @@
 
 @include screen-breakpoint("lg") {
     .users_overview_container{
-
-        width: 420px;
         padding: 1rem 1.5rem;
     }
     }
