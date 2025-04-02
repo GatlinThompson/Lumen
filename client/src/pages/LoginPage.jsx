@@ -53,7 +53,7 @@ export default function LoginPage() {
       setLoggedIn(true); //set login to true
       setUser(result.user); // set user
       localStorage.setItem("user", JSON.stringify(result.user));
-      localStorage.setItem("token", JSON.stringify(result.token));
+      localStorage.setItem("token", result.token);
       setFormError(false); // no form errors
       navigate("/dashboard"); // navigate to dashboard
     } else {

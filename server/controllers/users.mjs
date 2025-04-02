@@ -84,8 +84,7 @@ export const signInUser = async (req, res) => {
       res.cookie("token", token, {
         httpOnly: true,
         secure: true,
-        partitioned: true,
-        sameSite: "None",
+        sameSite: "Lax",
         maxAge: 1000 * 60 * 60 * 24 * 3,
         path: "/",
         domain:
@@ -97,6 +96,7 @@ export const signInUser = async (req, res) => {
         success: true,
         message: "User sign in was successful",
         user: userData,
+        token: token,
       });
     } else {
       return res.status(403).json({
