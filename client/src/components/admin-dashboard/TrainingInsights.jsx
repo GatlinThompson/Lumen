@@ -13,27 +13,31 @@ export default function TrainingInsights() {
             <div className="text-end text-success fs-5 mx-2 mt-1">
               <i className="bi bi-check-circle-fill"></i>
             </div>
-            <div className="d-flex flex-row">
-              <p className="fs-1 fw-bold mx-3">12</p>
-              <p>On time Trainings</p>
+            <div className="d-flex justify-content-center  align-items-center">
+              <p className="fs-1 fw-bold pe-3">12</p>
+              <p>
+                On time <br /> Trainings
+              </p>
             </div>
           </CardContainer>
           <CardContainer extraClasses="col">
-            <div className="text-end text-error-red fs-5 mx-2 mt-1">
+            <div className="text-end text-danger fs-5 mx-2 mt-1">
               <i className="bi bi-x-circle-fill"></i>
             </div>
-            <div className="d-flex flex-row">
-              <p className="fs-1 fw-bold mx-3">5</p>
-              <p>Overdue Trainings</p>
+            <div className="d-flex justify-content-center align-items-center">
+              <p className="fs-1 pe-3 fw-bold">5</p>
+              <p>
+                Overdue <br /> Trainings
+              </p>
             </div>
           </CardContainer>
         </div>
 
-        <CardContainer extraClasses="row mx-3 mb-4 p-3">
+        <CardContainer extraClasses="d-flex align-items-center mx-3 mb-4 p-3">
           <CircleChart percent="75" color="blue" size="large"></CircleChart>
-          <div className="col">
+          <div className="col ms-3">
             <p className="fs-1 fw-bold m-0">75%</p>
-            <p className="text-nowrap">Completion rate</p>
+            <p className="text-nowrap">Training Completion Rate</p>
           </div>
         </CardContainer>
       </CardContainer>
