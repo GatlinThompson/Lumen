@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { apiFetch } from "../../hooks/APIFetch";
 import ProfileIcon from "../../components/basic-components/ProfileIcon.jsx";
 import PageHeader from "../../components/basic-components/PageHeader.jsx";
-import UserDetailsTrainingCard from "../../components/trainings/UserDetailsTrainingCard.jsx";
-import UserDetailTrainingsCarousel from "../../components/trainings/UserDetailTrainingsCarousel.jsx";
+import UserDetailsAssignedTrainings from "../../components/trainings/UserDetailsAssignedTrainings.jsx";
 
 export default function UserDetails() {
   const { id } = useParams();
@@ -46,10 +45,7 @@ export default function UserDetails() {
               <p>Department: {pageUser.department.name}</p>
             </div>
           </div>
-
-          <div>
-            <UserDetailTrainingsCarousel />
-          </div>
+          <UserDetailsAssignedTrainings/>
         </div>
       )}
     </>
