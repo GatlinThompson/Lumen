@@ -15,7 +15,8 @@ import NotificationAlert from "../components/basic-components/NotificationAlert.
 export default function LoginPage() {
   const navigate = useNavigate();
 
-  let { loggedIn, user, setLoggedIn, setUser } = useContext(AppContext);
+  let { loggedIn, user, setLoggedIn, setUser, setCookie } =
+    useContext(AppContext);
 
   //go to dashboard if user is already logged in
   useEffect(() => {
@@ -52,6 +53,7 @@ export default function LoginPage() {
       setLoggedIn(true); //set login to true
       setUser(result.user); // set user
       localStorage.setItem("user", JSON.stringify(result.user));
+      localStorage.setItem("token", JSON.stringify(result.token));
       setFormError(false); // no form errors
       navigate("/dashboard"); // navigate to dashboard
     } else {
