@@ -86,6 +86,7 @@ export const signInUser = async (req, res) => {
         secure: true,
         sameSite: "None",
         maxAge: 1000 * 60 * 60 * 24 * 3,
+        path: "/",
       });
       res.status(200).json({
         success: true,
@@ -357,13 +358,11 @@ export const getSpecificUser = async (req, res) => {
       .populate({ path: "role" })
       .select("-hash -salt");
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        message: "Successfully obtained user",
-        user: user,
-      });
+    res.status(200).json({
+      success: true,
+      message: "Successfully obtained user",
+      user: user,
+    });
   } catch (err) {
     res.status(500).json({ success: false, message: "Failed to get user" });
   }
