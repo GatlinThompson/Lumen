@@ -1,0 +1,10 @@
+.scrollable_container {
+  width: 100%; /* Or any desired width */
+  overflow-x: scroll; /* Or overflow-x: auto; */
+  /* Optional: Hide vertical scrollbar */
+  overflow-y: hidden; 
+
+    .scrollable-content {
+        margin: 1.5rem 0
+    }
+}

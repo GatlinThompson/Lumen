@@ -1,0 +1,68 @@
+@use "./custom.scss" as *;
+
+a.user_details_training_card {
+  text-decoration: none;
+  color: $neutral_black;
+
+    div.training_card_content {
+      padding: 1rem 0;
+
+      //background color
+      & > div.background_color {
+        width: 20px;
+        max-height: 80%;
+        margin-left: .75rem;
+        background-color: lightpink;
+      }
+
+      & > div > p.title {
+        font-family: $header_font;
+        font-size: 1.25rem;
+        margin-left: 1rem;
+        margin-bottom: 0;
+        color: $neutral_black;
+        text-decoration: none;
+      }
+
+      & > div > p.text {
+        font-family: $body_font;
+        font-size: 1rem;
+        margin-left: 1rem;
+        margin-top: 0;
+        margin-bottom: 0;
+        color: $neutral_black;
+        text-decoration: none;
+      }
+  }
+
+}
+
+@include screen-breakpoint("lg") {
+  a.user_details_training_card {
+    text-decoration: none;
+    color: $neutral_black;
+
+    div.training_card_content {
+
+        & > div > p.title {
+          font-family: $header_font;
+          font-size: 1.25rem;
+          margin-left: 1rem;
+          margin-bottom: 0;
+          color: $neutral_black;
+          text-decoration: none;
+        }
+
+        & > div > p.text {
+          font-family: $body_font;
+          font-size: 1rem;
+          margin-left: 1rem;
+          margin-top: 0;
+          margin-bottom: 0;
+          color: $neutral_black;
+          text-decoration: none;
+        }
+    }
+
+  }
+}
