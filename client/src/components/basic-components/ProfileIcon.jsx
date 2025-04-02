@@ -16,7 +16,8 @@ export default function ProfileIcon({
   return (
     <div
       className={`${styles.profile} ${
-        size === "large" ? styles.large : ""
+        (size === "large" ? styles.large : "",
+        size === "medium" ? styles.medium : "")
       } ${extraClasses}`}
       style={{ backgroundColor: backgroundColor }}
       onClick={() => handleLinkClick}

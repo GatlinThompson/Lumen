@@ -34,8 +34,8 @@ export default function UserDetails() {
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
           <BackButton />
           <PageHeader title={`${pageUser.role.name} Details`} />
-          <div className="row align-items-center mt-4 mb-5">
-            <ProfileIcon user={pageUser} size="large" />
+          <div className="row align-items-center mt-4">
+            <ProfileIcon user={pageUser} size="medium" />
             <div className="col-6">
               <h2 className="fs-2 text-nowrap">
                 {pageUser.first_name} {pageUser.last_name}

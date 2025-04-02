@@ -26,6 +26,23 @@ div.profile {
     }
   }
 
+  &.medium {
+    justify-self: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: 1rem;
+
+    @include screen-breakpoint("md") {
+      justify-self: start;
+    }
+
+    & > span {
+      font-size: 48px;
+      line-height: 48px;
+    }
+  }
+
   &.large {
     justify-self: center;
     align-items: center;
