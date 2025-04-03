@@ -16,7 +16,7 @@ export default function Dashboard() {
   }, [user]);
 
   return (
-    <div className={`${loaded ? "loaded loading" : "loading"}`}>
+    <div className={`${loaded ? "loaded loading" : "loading"} max-1024`}>
       {user ? (
         <div className="pt-4">
           <PageHeader

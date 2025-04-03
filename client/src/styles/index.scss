@@ -34,8 +34,8 @@ body {
   //layout for side nav & desktop layout might have to do grid
   @include screen-breakpoint("lg") {
     display: grid;
-    min-width: 100wh;
-    grid-template-columns: auto, 1fr;
+
+    grid-template-columns: 296px, auto;
     grid-template-rows: auto, auto, auto;
   }
 }
@@ -49,6 +49,7 @@ header {
     grid-row: 1 / 4;
     background-color: $neutral_black;
     box-shadow: -3px 0px 24px 0px rgba(0, 0, 0, 0.21);
+    width: 296px;
   }
 }
 nav {
@@ -67,7 +68,6 @@ nav {
       flex: 1;
       align-items: stretch;
       padding-bottom: 77px;
-      min-width: 296px;
     }
   }
 }
@@ -83,6 +83,7 @@ main {
   &.no-nav {
     min-height: calc(100vh - 77px - 3rem);
     margin: auto;
+    justify-content: center;
 
     @include screen-breakpoint("lg") {
       padding-left: 0;
@@ -92,7 +93,6 @@ main {
       margin: 0 2rem;
 
       @include screen-breakpoint("lg") {
-        //padding-left: 296px;
       }
     }
 
@@ -105,11 +105,12 @@ main {
 
   @include screen-breakpoint("lg") {
     min-height: calc(100vh - 77px - 4rem - 104px);
-    grid-column: 2/3;
+    grid-column: 1/3;
     grid-row: 2 /3;
     padding-left: 2rem;
-    //margin-right: 2rem;
-    min-width: calc(100vw - 296px - 4rem);
+    padding-right: 2rem;
+
+    //min-width: calc(100vw - 296px - 4rem);
     margin-left: 296px;
   }
 
@@ -151,7 +152,7 @@ footer {
 
   @include screen-breakpoint("lg") {
     margin-top: 4rem;
-    grid-column: 2 / 3;
+    grid-column: 1 / 3;
     grid-row: 3 / 4;
     padding-left: 296px;
 
