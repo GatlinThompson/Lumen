@@ -7,17 +7,15 @@ export default function ManagerDashboard() {
     <>
       <div className="row">
         <div className="mt-4">
-          <div>
-            <UserDetailsAssignedTrainings />
-          </div>
+          <UserDetailsAssignedTrainings />
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5">
-          <div className="mt-2">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5 mt-4">
+          <div>
             <TrainingInsights />
           </div>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5">
-          <div className="mt-2">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5 mt-4">
+          <div>
             <TrainingDeadlines />
           </div>
         </div>
