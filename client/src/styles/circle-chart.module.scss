@@ -5,6 +5,7 @@ div.circle_chart {
   height: 65px;
   width: 65px;
   border-radius: 50%;
+  flex-shrink: 0;
   box-sizing: border-box;
 
   @include screen-breakpoint("lg") {

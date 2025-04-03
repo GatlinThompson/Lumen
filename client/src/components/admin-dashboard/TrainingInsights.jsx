@@ -13,7 +13,7 @@ export default function TrainingInsights() {
             <div className="text-end text-success fs-5 mx-2 mt-1">
               <i className="bi bi-check-circle-fill"></i>
             </div>
-            <div className="d-flex justify-content-center  align-items-center">
+            <div className="d-flex justify-content-center align-items-center">
               <p className="fs-1 fw-bold pe-3">12</p>
               <p>
                 On time <br /> Trainings
