@@ -37,7 +37,7 @@ export default function TrainingInsights() {
           <CircleChart percent="75" color="blue" size="large"></CircleChart>
           <div className="col ms-3">
             <p className="fs-1 fw-bold m-0">75%</p>
-            <p className="text-nowrap">Training Completion Rate</p>
+            <p className="text-nowrap">Completion Rate</p>
           </div>
         </CardContainer>
       </CardContainer>
