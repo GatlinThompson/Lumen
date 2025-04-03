@@ -4,7 +4,7 @@ import Button from "../../components/basic-components/Button";
 
 export default function UserDetailsAssignedTrainings() {
     return (
-      <div className={`${styles.assigned_trainings_container}`}>
+      <div className={`col-12 col-xxl-10 ${styles.assigned_trainings_container}`}>
         <div className={`${styles.title_container}`}>
           <h3>Assigned Trainings</h3>
         </div>

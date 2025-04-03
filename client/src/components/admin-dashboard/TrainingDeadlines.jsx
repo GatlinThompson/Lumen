@@ -4,7 +4,7 @@ import styles from "../../styles/training-widgets.module.scss";
 export default function TrainingDeadlines() {
   return (
     <div className={styles.training_widgets}>
-      <CardContainer extraClasses="d-flex flex-column gap-3 mt-4">
+      <CardContainer extraClasses="d-flex flex-column gap-3">
         <h2 className="fs-5 mx-3 mt-3 mb-0">Upcoming Training Deadlines</h2>
 
         <div className="mx-3 gap-3 mb-1">

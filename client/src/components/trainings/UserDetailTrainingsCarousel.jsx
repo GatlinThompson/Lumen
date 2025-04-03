@@ -7,16 +7,16 @@ export default function UserDetailTrainingsCarousel(){
       <div
         className={`d-flex flex-row gap-3 mt-3 mb-5 ${styles.scrollable_content}`}
       >
-        <div className="col-8 col-md-5 col-lg-5">
+        <div className="col-8 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
           <UserDetailsTrainingCard />
         </div>
-        <div className="col-8 col-md-5 col-lg-5">
+        <div className="col-8 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
           <UserDetailsTrainingCard />
         </div>
-        <div className="col-8 col-md-5 col-lg-5">
+        <div className="col-8 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
           <UserDetailsTrainingCard />
         </div>
-        <div className="col-8 col-md-5 col-lg-5">
+        <div className="col-8 col-md-5 col-lg-5 col-xl-5 col-xxl-4">
           <UserDetailsTrainingCard />
         </div>
       </div>
