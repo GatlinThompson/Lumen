@@ -87,10 +87,6 @@ export const signInUser = async (req, res) => {
         sameSite: "None",
         maxAge: 1000 * 60 * 60 * 24 * 3,
         path: "/",
-        domain:
-          process.env.NODE_ENV === "production"
-            ? ".lumen-ctt.netlify.app"
-            : "localhost",
       });
       res.status(200).json({
         success: true,
