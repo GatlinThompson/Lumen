@@ -8,7 +8,7 @@ export default function AdminDashboard() {
   return (
     <>
       <div className="row">
-        <div className="col-12 col-md-6 col-lg-6 col-xl-5 col-xxl-4 mt-4">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-5 col-xxl-5 mt-4">
           <div>
             <UsersOverview />
           </div>
@@ -19,7 +19,7 @@ export default function AdminDashboard() {
             <TrainingInsights />
           </div>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-5 col-xxl-4 mt-4">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-5 col-xxl-5 mt-4">
           <div>
             <TrainingPrograms />
           </div>
