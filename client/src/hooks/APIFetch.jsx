@@ -19,9 +19,10 @@ export const apiFetch = async (url, method, data = null) => {
 
   // Retrieve token from local storage
   const token = localStorage.getItem("token");
+  console.log("Token Test", token);
 
   if (token) {
-    apiConfig.headers["Authorization"] = `Bearer ${JSON.parse(token)}`;
+    apiConfig.headers["Authorization"] = `Bearer ${token}`;
   }
 
   if (method.toUpperCase() !== "GET" && data) {
