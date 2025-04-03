@@ -16,12 +16,10 @@ export default function Dashboard() {
   }, [user]);
 
   return (
-    <div className={`${loaded ? "loaded loading" : "loading"}`}>
+    <div className={`${loaded ? "loaded loading" : "loading"} `}>
       {user ? (
         <div className="pt-4">
-          <PageHeader
-            title={`Welcome back, ${user.first_name} ${user.last_name}`}
-          />
+          <PageHeader title={`Welcome back, ${user.first_name}`} />
           {user && user.role == "admin" && <AdminDashboard />}
         </div>
       ) : null}
