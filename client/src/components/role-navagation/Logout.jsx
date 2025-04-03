@@ -14,6 +14,7 @@ export default function Logout() {
     logout();
   }, []);
   removeCookie("token");
+  localStorage.removeItem("token");
   window.location.href = "/login";
   return <></>;
 }

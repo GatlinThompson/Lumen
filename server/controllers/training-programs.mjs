@@ -326,7 +326,8 @@ export const getManagerTrainingProgram = async (req, res) => {
 export const getTrainerTrainingProgram = async (req, res) => {
   try {
     //get trainer
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
+    console.log("Hey", userDecoded);
 
     let sessions = await TrainingSession.find({
       trainer: userDecoded._id,

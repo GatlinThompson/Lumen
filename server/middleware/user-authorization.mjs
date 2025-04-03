@@ -5,11 +5,13 @@ import jwt from "jsonwebtoken";
 //User Role Validation Method for Each Role
 const checkUserRole = (userRole) => async (req, res, next) => {
   try {
+    const token = req.headers["authorization"].split(" ")[1];
+
     //check if jwt is valid
-    if (jwt.verify(req.cookies.token, "TEST")) {
+    if (jwt.verify(token, "TEST")) {
       //get user info from jwt
 
-      let userDecoded = jwt.verify(req.cookies.token, "TEST");
+      let userDecoded = jwt.verify(token, "TEST");
 
       //get role of user
       let role = await Role.findOne({ name: userRole });
@@ -21,6 +23,7 @@ const checkUserRole = (userRole) => async (req, res, next) => {
 
       //check is role and user combo exist
       if (user && role._id == userDecoded.role) {
+        req.auth_user = token;
         next(); //middleware is good to go forward
       } else {
         //not valid role for api call
@@ -54,7 +57,12 @@ export const isSuperAdmin = checkUserRole("super_admin"); //super admin is for d
 //simple extra step of security validating user
 export const verifyUser = (req, res, next) => {
   try {
-    if (jwt.verify(req.cookies.token, "TEST")) {
+    console.log("GSDAS");
+
+    const token = req.headers["authorization"].split(" ")[1];
+
+    if (jwt.verify(token, "TEST")) {
+      req.auth_user = token;
       next(); //continue getting user
     }
   } catch (err) {

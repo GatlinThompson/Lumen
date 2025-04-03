@@ -14,15 +14,28 @@ export const apiFetch = async (url, method, data = null) => {
   let apiConfig = {
     method: method.toUpperCase(),
     credentials: "include",
+    headers: {},
   };
 
-  //add body when method isnt get method
-  if (method.toUpperCase() != "GET" && data) {
-    apiConfig.headers = {
-      "Content-Type": "application/json",
-    };
+  // Retrieve token from local storage
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    apiConfig.headers["Authorization"] = `Bearer ${JSON.parse(token)}`;
+  }
+
+  if (method.toUpperCase() !== "GET" && data) {
+    apiConfig.headers["Content-Type"] = "application/json";
     apiConfig.body = JSON.stringify(data);
   }
+
+  // //add body when method isnt get method
+  // if (method.toUpperCase() != "GET" && data) {
+  //   apiConfig.headers = {
+  //     "Content-Type": "application/json",
+  //   };
+  //   apiConfig.body = JSON.stringify(data);
+  // }
 
   //fetch reqeust
   try {
