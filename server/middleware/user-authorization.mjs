@@ -57,7 +57,7 @@ export const isSuperAdmin = checkUserRole("super_admin"); //super admin is for d
 //simple extra step of security validating user
 export const verifyUser = (req, res, next) => {
   try {
-    console.log("GSDAS");
+ 
 
     const token = req.headers["authorization"].split(" ")[1];
 

@@ -301,7 +301,7 @@ export const getAdminTrainingProgram = async (req, res) => {
 export const getManagerTrainingProgram = async (req, res) => {
   try {
     //get manager
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //get programs assigned to manager
     let programs = await TrainingProgram.find({
