@@ -44,6 +44,7 @@ import {
 import { getRoleAndDepartments } from "../controllers/admin.mjs";
 import { changeName, changePassword } from "../controllers/profile.mjs";
 import {
+  getDashboardEmployeeTrainings,
   getDashboardManagerTrainings,
   getDashboardPrograms,
   getDashboardTrainerTrainings,
@@ -254,6 +255,9 @@ export const configureRoutes = (app) => {
     isTrainer,
     getDashboardTrainerTrainings
   );
+
+  // Employee Dashboard
+    app.get("/api/dashboard/employee-trainings", isEmployee, getDashboardEmployeeTrainings)
 
   app.use("/", router);
 };

@@ -19,7 +19,6 @@ export const apiFetch = async (url, method, data = null) => {
 
   // Retrieve token from local storage
   const token = localStorage.getItem("token");
-  console.log("Token Test", token);
 
   if (token) {
     apiConfig.headers["Authorization"] = `Bearer ${token}`;
@@ -29,14 +28,6 @@ export const apiFetch = async (url, method, data = null) => {
     apiConfig.headers["Content-Type"] = "application/json";
     apiConfig.body = JSON.stringify(data);
   }
-
-  // //add body when method isnt get method
-  // if (method.toUpperCase() != "GET" && data) {
-  //   apiConfig.headers = {
-  //     "Content-Type": "application/json",
-  //   };
-  //   apiConfig.body = JSON.stringify(data);
-  // }
 
   //fetch reqeust
   try {

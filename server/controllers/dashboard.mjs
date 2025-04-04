@@ -96,21 +96,24 @@ export const getDashboardManagerTrainings = async (req, res) => {
 
     let programs = await TrainingProgram.find({
       assigned_manager: manager,
-      archived: false,
-    });
+      archived: false, deadline: {$gt: new Date()}
+    }).sort({deadline: 1}).limit(5);
 
     let assignedPrograms = [];
 
     //find enrollement/completion of each program
     for (const program of programs) {
       //get training details
+      const assigned = await EmployeeTraining.countDocuments({training_program: program._id})
+      const completed = await EmployeeTraining.countDocuments({training_program: program._id, training_completed:true, enrolled_training_session: {$ne: null}})
+      const enrolled = await EmployeeTraining.countDocuments({training_program: program._id, training_completed:false, enrolled_training_session: {$ne: null}})
 
       //program object
       const programSchema = {
         program: program,
-        enrolled: 10,
-        assigned: 30,
-        completed: 14,
+        enrolled: enrolled,
+        assigned: assigned,
+        completed: completed,
       };
 
       assignedPrograms = [...assignedPrograms, programSchema]; //add to array
@@ -168,34 +171,38 @@ export const getDashboardTrainerTrainings = async (req, res) => {
     let userDecoded = jwt.verify(req.auth_user, "TEST");
     let trainer = await User.findById(userDecoded._id);
 
-    let sessions = await TrainingSession.find({ trainer: trainer._id });
+    let sessions = await TrainingSession.find({ trainer: trainer._id, start_time: {$gt: new Date()} }).populate({path: "training_program"}).sort({start_time: 1}).limit(5);
+
+   
 
     let assignedSessions = [];
 
     //loop through each session to get program infomation
     for (const session of sessions) {
-      //seperate date and time for session
-      const date = session.start_time.toLocaleDateString();
-      const time = session.start_time.toLocaleTimeString();
+     
 
       //get program tied to the session
-      let program = await TrainingProgram.find({
+      const program = await TrainingProgram.findOne({
         _id: session.training_program,
         archived: false,
-      }).select("_id background_color title duration description");
+      });
+      //console.log("Program", program)
 
+      program.deadline = session.start_time
       //session object
       const sessionSchema = {
-        session: { date: date, time: time },
         program: program,
       };
 
       assignedSessions = [...assignedSessions, sessionSchema]; //add to array
     }
+   
+
+    console.log(assignedSessions)
     res.status(200).json({
       success: true,
       message: "Trainings Sessions successfully obtained",
-      training_sessions: assignedSessions,
+      programs: assignedSessions,
     });
   } catch (err) {
     res.status(500).json({
@@ -204,3 +211,38 @@ export const getDashboardTrainerTrainings = async (req, res) => {
     });
   }
 };
+
+export const getDashboardEmployeeTrainings = async (req, res) => {
+ try {
+  let userDecoded = jwt.verify(req.auth_user, "TEST");
+    let employee = await User.findById(userDecoded._id);
+
+    let trainings = await EmployeeTraining.find({enrolled_employee: employee._id}).populate({path: "training_program", match: {archived: false}}).sort({"training_program.deadline": 1}).limit(5);
+
+   trainings = trainings.filter(training => training && training.training_program)
+//console.log(trainings)
+const programs = trainings.map(training => {  
+   return training.training_program
+  })
+  console.log(programs)
+
+  let programsArray = []
+  for (const program of programs) {
+
+    const programSchema = {
+      program: program
+    }
+
+    programsArray = [...programsArray, programSchema]
+  }
+
+//let programs = await TrainingProgram.find({_id: {$in: programsID}})
+res.status(200).json({success: true, message: "Trainings successfuly obtained",
+programs: programsArray})
+ } catch (err) {
+  res.status(500).json({
+    success: false,
+    message: "Trainings Enrollments unsuccessfully obtained",
+  });
+ }
+}
