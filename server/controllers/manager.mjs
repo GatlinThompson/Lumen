@@ -8,7 +8,7 @@ import { TrainingProgram } from "../models/training-program.mjs";
 export const getUnassignedEmployees = async (req, res) => {
   try {
     //get user from jwt
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //get program
     let program = await TrainingProgram.findById(req.params.id);

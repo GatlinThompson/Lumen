@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 //Update User's Name
 export const changeName = async (req, res) => {
   try {
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //find user from jwt
     let user = await User.findOne({ _id: userDecoded._id });
@@ -53,7 +53,7 @@ export const changeName = async (req, res) => {
 //Update User Password
 export const changePassword = async (req, res) => {
   try {
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //find user from jwt
     let user = await User.findOne({ _id: userDecoded._id });

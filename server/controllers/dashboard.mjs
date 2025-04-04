@@ -91,7 +91,7 @@ export const getDashboardPrograms = async (req, res) => {
 export const getDashboardManagerTrainings = async (req, res) => {
   try {
     //get manager
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
     let manager = await User.findById(userDecoded._id);
 
     let programs = await TrainingProgram.find({
@@ -134,7 +134,7 @@ export const getDashboardManagerTrainings = async (req, res) => {
 export const getDepartmentEmployees = async (req, res) => {
   try {
     //get manager infomation
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //get employee role
     let employeeRole = await Role.findOne({ name: "employee" });
@@ -165,7 +165,7 @@ export const getDepartmentEmployees = async (req, res) => {
 
 export const getDashboardTrainerTrainings = async (req, res) => {
   try {
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
     let trainer = await User.findById(userDecoded._id);
 
     let sessions = await TrainingSession.find({ trainer: trainer._id });

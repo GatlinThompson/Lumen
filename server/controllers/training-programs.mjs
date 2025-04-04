@@ -367,7 +367,7 @@ export const getTrainerTrainingProgram = async (req, res) => {
 export const getEmployeeTrainingProgram = async (req, res) => {
   try {
     //get trainer
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     let trainings = await EmployeeTraining.find({
       enrolled_employee: userDecoded._id,
@@ -414,7 +414,7 @@ export const EnrollEmployee = async (req, res) => {
     }
 
     //get user
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
     let employee = await User.findById(req.body.user);
 
     //check if employee exists

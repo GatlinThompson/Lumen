@@ -6,7 +6,7 @@ import { User } from "../models/user.mjs";
 export const getUncompletedEmployees = async (req, res) => {
   try {
     //get user from jwt
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //check program
     let program = await TrainingProgram.findById(req.params.pid);
@@ -53,7 +53,7 @@ export const getUncompletedEmployees = async (req, res) => {
 export const completeEmployees = async (req, res) => {
   try {
     //get user from jwt
-    let userDecoded = jwt.verify(req.cookies.token, "TEST");
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //check program
     let program = await TrainingProgram.findById(req.params.pid);
