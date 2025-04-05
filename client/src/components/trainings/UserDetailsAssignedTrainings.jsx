@@ -4,13 +4,14 @@ import Button from "../../components/basic-components/Button";
 import { apiFetch } from "../../hooks/APIFetch.jsx";
 import {  useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App.jsx";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
-export default function UserDetailsAssignedTrainings() {
+export default function UserDetailsAssignedTrainings({userID = null}) {
   const {user} = useContext(AppContext)
   const [programs, setPrograms] = useState([])
   const navigate = useNavigate();
+  const location = useLocation();
 
 
   const getManagerTrainings = async () => {
@@ -47,7 +48,20 @@ export default function UserDetailsAssignedTrainings() {
     }
   }
 
+  const getUserTrainings = async () => {
+
+    const {result, error} = await apiFetch(`/api/user/${userID}/trainings`, "GET")
+
+    if(!error) {
+   console.log(result.programs)
+      setPrograms(result.programs)
+    }else {
+     navigate("/errorapi")
+    }
+  }
+
   useEffect(()=> { 
+    if(location.pathname === "/dashboard") {
     if(user && user.role === "manager") {
       getManagerTrainings();
     }
@@ -59,7 +73,14 @@ export default function UserDetailsAssignedTrainings() {
     if(user && user.role === "employee") {
       getEmployeeTrainings();
     }
-    }, [user])
+
+    
+  } 
+
+  if(location.pathname == `/user/${userID}` && userID) {
+    getUserTrainings();
+  }
+    }, [user, location])
     return (
       <div className={`col-12 col-xxl-10 ${styles.assigned_trainings_container}`}>
         <div className={`${styles.title_container}`}>
@@ -67,8 +88,8 @@ export default function UserDetailsAssignedTrainings() {
         </div>
         <div className={`${styles.carousel_button_container}`}>
           <div className={`${styles.carousel_container}`}>
-            {programs.length > 0 &&
-            <UserDetailTrainingsCarousel programs={programs}/> }
+            {programs.length > 0 ?
+            <UserDetailTrainingsCarousel programs={programs}/> : <p className={styles.no_trainings}>No Assigned Trainings</p>}
           </div>
           <div className={`${styles.button_container}`}>
             <Button

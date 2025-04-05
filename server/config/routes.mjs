@@ -67,6 +67,7 @@ import {
   getUncompletedEmployees,
   trainerGetAssignedEmployees,
 } from "../controllers/trainer.mjs";
+import { getUserTrainings } from "../controllers/user-details.mjs";
 
 // Define Router
 let router = express.Router();
@@ -92,7 +93,10 @@ export const configureRoutes = (app) => {
   app.get("/api/users/employees", getEmployees);
 
   //Get Specific User
-  app.get("/api/user/:id", getSpecificUser);
+  app.get("/api/user/:id", getSpecificUser, getUserTrainings);
+
+  //Get User Trainings Widget
+  app.get("/api/user/:id/trainings", verifyUser, getUserTrainings)
 
   //Super Admin API Calls*************************************************************
 

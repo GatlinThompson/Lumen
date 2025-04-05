@@ -93,7 +93,7 @@ export const getDashboardManagerTrainings = async (req, res) => {
     let manager = await User.findById(userDecoded._id);
 
     let programs = await TrainingProgram.find({
-      assigned_manager: manager,
+      assigned_manager: manager._id,
       archived: false, deadline: {$gt: new Date()}
     }).sort({deadline: 1}).limit(5);
 

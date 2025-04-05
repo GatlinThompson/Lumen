@@ -23,18 +23,22 @@ export default function UserDetails() {
     }
   };
 
+
+
   useEffect(() => {
     if (id) {
       getPageUser();
     }
   }, [id]);
 
+  const role = pageUser ? pageUser.role.name[0].toUpperCase() + pageUser.role.name.slice(1) : null
+
   return (
     <>
       {pageUser && (
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
           <BackButton />
-          <PageHeader title={`${pageUser.role.name} Details`} />
+          <PageHeader title={`${role} Details`} />
           <div className="row align-items-center mt-4">
             <ProfileIcon user={pageUser} size="medium" />
             <div className="col-6">
@@ -45,7 +49,7 @@ export default function UserDetails() {
               <p>Department: {pageUser.department.name}</p>
             </div>
           </div>
-          <UserDetailsAssignedTrainings/>
+          <UserDetailsAssignedTrainings userID={id}/>
         </div>
       )}
     </>
