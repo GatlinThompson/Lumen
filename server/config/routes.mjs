@@ -44,12 +44,15 @@ import {
 import { getRoleAndDepartments } from "../controllers/admin.mjs";
 import { changeName, changePassword } from "../controllers/profile.mjs";
 import {
+  employeeDashboardInights,
   getDashboardEmployeeTrainings,
   getDashboardManagerTrainings,
   getDashboardPrograms,
   getDashboardTrainerTrainings,
   getDashBoardUsers,
   getDepartmentEmployees,
+  managerDashboardInsights,
+  trainerDashboardInsight,
 } from "../controllers/dashboard.mjs";
 import {
   assignEmployeeTraining,
@@ -245,6 +248,8 @@ export const configureRoutes = (app) => {
     getDashboardManagerTrainings
   );
 
+  app.get("/api/dashboard/manager-insight", isManager, managerDashboardInsights)
+
   //Get department employees
   app.get("/api/dashboard/employees", isManager, getDepartmentEmployees);
 
@@ -256,8 +261,11 @@ export const configureRoutes = (app) => {
     getDashboardTrainerTrainings
   );
 
+  app.get("/api/dashboard/trainer-insight", isTrainer, trainerDashboardInsight)
+
   // Employee Dashboard
     app.get("/api/dashboard/employee-trainings", isEmployee, getDashboardEmployeeTrainings)
+    app.get("/api/dashboard/employee-insight", isEmployee, employeeDashboardInights)
 
   app.use("/", router);
 };
