@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/basic-components/BackButton";
-import SuccessHeader from "../../components/basic-components/SucessHeader";
+import SuccessHeader from "../../components/basic-components/SuccessHeader";
 import { useContext, useEffect, useState } from "react";
 import styles from "../../styles/success-page.module.scss";
 import { apiFetch } from "../../hooks/APIFetch";

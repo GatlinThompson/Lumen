@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import BackButton from "../../components/basic-components/BackButton";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiFetch } from "../../hooks/APIFetch";
-import SuccessHeader from "../../components/basic-components/SucessHeader";
+import SuccessHeader from "../../components/basic-components/SuccessHeader";
 import styles from "../../styles/success-page.module.scss";
 import { useContext } from "react";
 import { AppContext } from "../../App";

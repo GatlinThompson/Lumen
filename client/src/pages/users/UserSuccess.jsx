@@ -1,6 +1,6 @@
 import BackButton from "../../components/basic-components/BackButton";
 import { useNavigate } from "react-router-dom";
-import SuccessHeader from "../../components/basic-components/SucessHeader";
+import SuccessHeader from "../../components/basic-components/SuccessHeader";
 import styles from "../../styles/success-page.module.scss";
 import Button from "../../components/basic-components/Button";
 import { useEffect, useState } from "react";

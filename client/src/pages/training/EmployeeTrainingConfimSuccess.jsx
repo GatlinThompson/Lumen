@@ -7,7 +7,7 @@ import Button from "../../components/basic-components/Button";
 import SessionTrainingCard from "../../components/trainings/SessionTrainingCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiFetch } from "../../hooks/APIFetch";
-import SuccessHeader from "../../components/basic-components/SucessHeader";
+import SuccessHeader from "../../components/basic-components/SuccessHeader";
 
 export default function EmployeeTrainingConfirmSuccess() {
   const [loaded, setLoaded] = useState(false);
