@@ -30,6 +30,7 @@ import TrainerEmployeeCompleteSuccess from "./pages/training/TrainerEmployeeComp
 import EmployeeTrainingConfirm from "./pages/training/EmployeeTrainingConfim";
 import EmployeeTrainingConfirmSuccess from "./pages/training/EmployeeTrainingConfimSuccess";
 import EditUser from "./pages/users/EditUser";
+import UserDetailsTraining from "./pages/users/UserDetailTrainings";
 
 export const AppContext = createContext();
 
@@ -156,6 +157,10 @@ function App() {
 
               {/*User Routes*/}
               <Route path="user/:id" element={<UserDetails />} />
+              <Route
+                path="user/:id/trainings"
+                element={<UserDetailsTraining />}
+              />
               <Route path="/users/create" element={<UserCreationPage />} />
               <Route path="/users/create/success" element={<UserSuccess />} />
               {/*Profile Route */}
