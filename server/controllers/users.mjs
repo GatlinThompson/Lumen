@@ -130,7 +130,6 @@ export const logoutUser = (req, res) => {
 export const verifiedLoggedInUser = async (req, res) => {
   try {
     const token = req.headers["authorization"].split(" ")[1];
-    console.log(token);
     let userDecoded = jwt.verify(req.auth_user, "TEST");
 
     //get all base user infomation

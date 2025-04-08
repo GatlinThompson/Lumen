@@ -84,3 +84,14 @@ div.admin_top_controls {
     }
   }
 }
+
+div.status_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  @include screen-breakpoint("lg") {
+    gap: 3rem;
+  }
+}

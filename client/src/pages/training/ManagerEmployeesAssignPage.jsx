@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Input from "../../components/form-components/Input";
 import EmployeeCard from "../../components/basic-components/EmployeeCard";
 import Button from "../../components/basic-components/Button";
+import StatusCircle from "../../components/basic-components/StatusCircle";
 
 export default function ManagerEmployeesAssignPage() {
   const [loaded, setLoaded] = useState(false);
@@ -88,14 +89,17 @@ export default function ManagerEmployeesAssignPage() {
           employees.map((employee, index) => {
             return (
               <EmployeeCard key={index} employee={employee}>
-                <Button
-                  variant="remove"
-                  onClick={() => {
-                    unassignEmployee(employee._id);
-                  }}
-                >
-                  Unassign
-                </Button>
+                <div className={styles.status_container}>
+                  <StatusCircle training_status={employee.status} />
+                  <Button
+                    variant="remove"
+                    onClick={() => {
+                      unassignEmployee(employee._id);
+                    }}
+                  >
+                    X
+                  </Button>
+                </div>
               </EmployeeCard>
             );
           })

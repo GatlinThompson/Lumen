@@ -96,7 +96,7 @@ export const configureRoutes = (app) => {
   app.get("/api/user/:id", getSpecificUser, getUserTrainings);
 
   //Get User Trainings Widget
-  app.get("/api/user/:id/trainings", verifyUser, getUserTrainings)
+  app.get("/api/user/:id/trainings", verifyUser, getUserTrainings);
 
   //Super Admin API Calls*************************************************************
 
@@ -200,7 +200,11 @@ export const configureRoutes = (app) => {
     getUncompletedEmployees
   );
 
-  app.post("/api/training-program/:pid/employees/complete", completeEmployees);
+  app.post(
+    "/api/training-program/:pid/employees/complete",
+    isTrainer,
+    completeEmployees
+  );
 
   //Training Details Widgets API Calls************************************************
 
@@ -252,7 +256,11 @@ export const configureRoutes = (app) => {
     getDashboardManagerTrainings
   );
 
-  app.get("/api/dashboard/manager-insight", isManager, managerDashboardInsights)
+  app.get(
+    "/api/dashboard/manager-insight",
+    isManager,
+    managerDashboardInsights
+  );
 
   //Get department employees
   app.get("/api/dashboard/employees", isManager, getDepartmentEmployees);
@@ -265,11 +273,19 @@ export const configureRoutes = (app) => {
     getDashboardTrainerTrainings
   );
 
-  app.get("/api/dashboard/trainer-insight", isTrainer, trainerDashboardInsight)
+  app.get("/api/dashboard/trainer-insight", isTrainer, trainerDashboardInsight);
 
   // Employee Dashboard
-    app.get("/api/dashboard/employee-trainings", isEmployee, getDashboardEmployeeTrainings)
-    app.get("/api/dashboard/employee-insight", isEmployee, employeeDashboardInights)
+  app.get(
+    "/api/dashboard/employee-trainings",
+    isEmployee,
+    getDashboardEmployeeTrainings
+  );
+  app.get(
+    "/api/dashboard/employee-insight",
+    isEmployee,
+    employeeDashboardInights
+  );
 
   app.use("/", router);
 };

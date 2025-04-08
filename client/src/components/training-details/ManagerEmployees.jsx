@@ -4,6 +4,7 @@ import Input from "../form-components/Input";
 import { useEffect, useState } from "react";
 import EmployeeCard from "../basic-components/EmployeeCard";
 import { apiFetch } from "../../hooks/APIFetch";
+import StatusCircle from "../basic-components/StatusCircle";
 
 export default function ManagerEmployees({ programID, children }) {
   const [employees, setEmployees] = useState([]);
@@ -15,6 +16,7 @@ export default function ManagerEmployees({ programID, children }) {
         `/api/training-program/${programID}/employees/assigned`,
         "GET"
       );
+      console.log(result);
 
       if (!error) {
         setOrginalEmployees(result.employees);
@@ -63,7 +65,9 @@ export default function ManagerEmployees({ programID, children }) {
         {employees.length > 0 ? (
           employees.map((employee, index) => {
             return (
-              <EmployeeCard key={index} employee={employee}></EmployeeCard>
+              <EmployeeCard key={index} employee={employee}>
+                <StatusCircle training_status={employee.status} />
+              </EmployeeCard>
             );
           })
         ) : (

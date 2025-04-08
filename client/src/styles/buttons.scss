@@ -72,18 +72,17 @@
 
   //Remove Button
   &-remove {
-    background-color: $error-red;
-    color: $white;
+    //background-color: $error-red;
+    color: $error-red;
     min-width: none;
     width: auto;
     margin-bottom: 0;
-    padding: 4px 12px;
+    padding: 0;
     box-shadow: none;
-    font-size: 1rem;
+    font-size: 1.25rem;
 
     &:hover {
-      background-color: color.adjust($color: $error-red, $lightness: -10%);
-      color: $white;
+      color: color.adjust($color: $error-red, $lightness: -20%);
     }
   }
 }

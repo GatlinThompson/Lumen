@@ -132,10 +132,41 @@ export const getAssignedEmployees = async (req, res) => {
       })
       .select("-hash -salt");
 
+    let assignedemployeesPromises = employees.map(async (emp) => {
+      let status = "enrolled";
+
+      let not_enrolled = await EmployeeTraining.findOne({
+        enrolled_employee: emp._id,
+        training_program: program._id,
+        training_completed: false,
+        enrolled_training_session: null,
+      });
+
+      if (not_enrolled) {
+        status = "not-enrolled";
+      }
+
+      let complete = await EmployeeTraining.findOne({
+        enrolled_employee: emp._id,
+        training_program: program._id,
+        training_completed: true,
+      });
+
+      if (complete) {
+        status = "complete";
+      }
+
+      return { ...emp._doc, status: status };
+    });
+
+    const assignedemployees = await Promise.all(assignedemployeesPromises);
+
+    console.log("Assigned", assignedemployees);
+
     res.status(200).json({
       success: true,
       message: "Assigned employees obtained",
-      employees: employees,
+      employees: assignedemployees,
     });
   } catch (err) {
     res

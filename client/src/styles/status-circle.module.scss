@@ -12,5 +12,9 @@ div.status {
     &.complete {
       color: $success;
     }
+
+    &.assigned {
+      color: $darker_yellow;
+    }
   }
 }
