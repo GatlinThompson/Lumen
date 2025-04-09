@@ -15,9 +15,8 @@ export default function ProfileIcon({
   const backgroundColor = user ? user.background_color : "#fff";
   return (
     <div
-      className={`${styles.profile} ${
-        (size === "large" ? styles.large : "",
-        size === "medium" ? styles.medium : "")
+      className={`${styles.profile} ${size === "large" ? styles.large : ""} ${
+        size === "medium" ? styles.medium : ""
       } ${extraClasses}`}
       style={{ backgroundColor: backgroundColor }}
       onClick={() => handleLinkClick}
