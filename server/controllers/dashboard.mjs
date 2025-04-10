@@ -109,6 +109,73 @@ export const getDashboardPrograms = async (req, res) => {
   }
 };
 
+//get deadlines
+export const dashboardDeadlines = async (req, res) => {
+  try {
+    const programs = await TrainingProgram.find({
+      deadline: { $gt: new Date() },
+    })
+      .sort({ deadline: 1 })
+      .limit(5)
+      .select("title duration deadline");
+
+    let programData = await Promise.all(
+      programs.map(async (program) => {
+        const enrolled = await EmployeeTraining.countDocuments({
+          training_program: program._id,
+          enrolled_training_session: { $ne: null },
+          training_completed: false,
+        });
+
+        const completed = await EmployeeTraining.countDocuments({
+          training_program: program._id,
+          enrolled_training_session: { $ne: null },
+          training_completed: true,
+        });
+
+        return {
+          ...program.toObject(),
+          enrolled: enrolled,
+          completed: completed,
+        };
+      })
+    );
+
+    let deadlines = [
+      ...new Set(
+        programData.map((program) => new Date(program.deadline).toISOString())
+      ),
+    ];
+
+    deadlines = deadlines.map((deadline) => {
+      return { deadline: new Date(deadline), programs: [] };
+    });
+
+    deadlines = deadlines.map((deadline) => {
+      let sameDatePrograms = programData.filter((program) => {
+        return (
+          new Date(program.deadline).toISOString() ===
+          new Date(deadline.deadline).toISOString()
+        );
+      });
+      return { ...deadline, programs: sameDatePrograms };
+    });
+
+    //console.log(deadlines);
+    res.status(200).json({
+      success: true,
+      message: "Deadlines obtained",
+      deadlines: deadlines,
+      //test: programData,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Getting training programs deadlines was unsuccessful",
+    });
+  }
+};
+
 //Manager Dashboard****************************************************
 
 //get manager assigned trainings

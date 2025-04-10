@@ -44,6 +44,7 @@ import {
 import { getRoleAndDepartments } from "../controllers/admin.mjs";
 import { changeName, changePassword } from "../controllers/profile.mjs";
 import {
+  dashboardDeadlines,
   employeeDashboardInights,
   getDashboardAdminInsights,
   getDashboardEmployeeTrainings,
@@ -260,11 +261,15 @@ export const configureRoutes = (app) => {
     getDashboardManagerTrainings
   );
 
+  // Admin Insights
   app.get(
     "/api/dashboard/manager-insight",
     isManager,
     managerDashboardInsights
   );
+
+  // Admin Deadlines
+  app.get("/api/dashboard/deadlines", dashboardDeadlines);
 
   //Get department employees
   app.get("/api/dashboard/employees", isManager, getDepartmentEmployees);
