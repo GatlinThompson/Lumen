@@ -45,6 +45,7 @@ import { getRoleAndDepartments } from "../controllers/admin.mjs";
 import { changeName, changePassword } from "../controllers/profile.mjs";
 import {
   employeeDashboardInights,
+  getDashboardAdminInsights,
   getDashboardEmployeeTrainings,
   getDashboardManagerTrainings,
   getDashboardPrograms,
@@ -240,6 +241,9 @@ export const configureRoutes = (app) => {
   //Dashboard API Calls***************************************************************
 
   //Admin Dashboard
+
+  //training insights
+  app.get("/api/dashboard/admin-insight", isAdmin, getDashboardAdminInsights);
 
   //User Count
   app.get("/api/dashboard/users", isAdmin, getDashBoardUsers);

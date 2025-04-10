@@ -6,56 +6,80 @@ import { apiFetch } from "../../hooks/APIFetch";
 import { AppContext } from "../../App";
 
 export default function TrainingInsights() {
-const {user} = useContext(AppContext)
+  const { user } = useContext(AppContext);
 
-const [completed, setCompleted] = useState(0);
-const [overdue, setOverdue] = useState(0)
+  const [completed, setCompleted] = useState(0);
+  const [overdue, setOverdue] = useState(0);
 
-const percent=Math.floor((completed / (completed + overdue)) * 100)
+  const percent = Math.floor((completed / (completed + overdue)) * 100);
 
+  const getEmployeeRate = async () => {
+    const { result, error } = await apiFetch(
+      "/api/dashboard/employee-insight",
+      "GET"
+    );
 
-const getEmployeeRate = async () => {
-  const {result, error} = await apiFetch("/api/dashboard/employee-insight", "GET");
+    if (!error) {
+      console.log(result);
+      setCompleted(result.complete);
+      setOverdue(result.overdue);
+    }
+  };
 
-  if (!error) {
-    console.log(result)
-    setCompleted(result.complete)
-    setOverdue(result.overdue)
-  }
-}
+  const getTrainerRate = async () => {
+    const { result, error } = await apiFetch(
+      "/api/dashboard/trainer-insight",
+      "GET"
+    );
 
-const getTrainerRate = async () => {
-  const {result, error} = await apiFetch("/api/dashboard/trainer-insight", "GET");
+    if (!error) {
+      console.log(result);
+      setCompleted(result.complete);
+      setOverdue(result.overdue);
+    }
+  };
 
-  if (!error) {
-    console.log(result)
-    setCompleted(result.complete)
-    setOverdue(result.overdue)
-  }
-}
+  const getManagerRate = async () => {
+    const { result, error } = await apiFetch(
+      "/api/dashboard/manager-insight",
+      "GET"
+    );
 
-const getManagerRate = async () => {
-  const {result, error} = await apiFetch("/api/dashboard/manager-insight", "GET");
+    if (!error) {
+      console.log(result);
+      setCompleted(result.complete);
+      setOverdue(result.overdue);
+    }
+  };
 
-  if (!error) {
-    console.log(result)
-    setCompleted(result.complete)
-    setOverdue(result.overdue)
-  }
-}
+  const getAdminRate = async () => {
+    const { result, error } = await apiFetch(
+      "/api/dashboard/admin-insight",
+      "GET"
+    );
 
-useEffect(()=> {
-  if(user && user.role === "employee") {
-    getEmployeeRate();
-  }
-  if(user && user.role === "trainer") {
-    getTrainerRate();
-  }
-  if(user && user.role === "manager") {
-    getManagerRate();
-  }
+    if (!error) {
+      console.log(result);
+      setCompleted(result.complete);
+      setOverdue(result.overdue);
+    }
+  };
 
-}, [user])
+  useEffect(() => {
+    if (user && user.role === "employee") {
+      getEmployeeRate();
+    }
+    if (user && user.role === "trainer") {
+      getTrainerRate();
+    }
+    if (user && user.role === "manager") {
+      getManagerRate();
+    }
+
+    if (user && user.role === "admin") {
+      getAdminRate();
+    }
+  }, [user]);
 
   return (
     <div className={styles.training_widgets}>
@@ -88,7 +112,11 @@ useEffect(()=> {
         </div>
 
         <CardContainer extraClasses="d-flex align-items-center mx-3 mb-4 p-3">
-          <CircleChart percent={percent} color="blue" size="large"></CircleChart>
+          <CircleChart
+            percent={percent}
+            color="blue"
+            size="large"
+          ></CircleChart>
           <div className="col ms-3">
             <p className="fs-1 fw-bold m-0">{percent ? percent : 0}%</p>
             <p className="text-nowrap">Completion Rate</p>

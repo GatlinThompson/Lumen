@@ -51,6 +51,34 @@ export const getDashBoardUsers = async (req, res) => {
   }
 };
 
+//get insight count
+export const getDashboardAdminInsights = async (req, res) => {
+  try {
+    let completed = await EmployeeTraining.countDocuments({
+      training_completed: true,
+    });
+    let overdue = await EmployeeTraining.countDocuments({
+      training_completed: false,
+    }).populate({
+      path: "training_program",
+      match: {
+        deadline: { $lt: new Date() },
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Insights successfully obtained",
+      complete: completed,
+      overdue: overdue,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Getting insights was unsuccessful",
+    });
+  }
+};
 //get count of training programs
 export const getDashboardPrograms = async (req, res) => {
   try {
@@ -67,8 +95,6 @@ export const getDashboardPrograms = async (req, res) => {
       active: activePrograms,
       archived: archivedPrograms,
     };
-
-
 
     res.status(200).json({
       success: true,
@@ -94,17 +120,30 @@ export const getDashboardManagerTrainings = async (req, res) => {
 
     let programs = await TrainingProgram.find({
       assigned_manager: manager._id,
-      archived: false, deadline: {$gt: new Date()}
-    }).sort({deadline: 1}).limit(5);
+      archived: false,
+      deadline: { $gt: new Date() },
+    })
+      .sort({ deadline: 1 })
+      .limit(5);
 
     let assignedPrograms = [];
 
     //find enrollement/completion of each program
     for (const program of programs) {
       //get training details
-      const assigned = await EmployeeTraining.countDocuments({training_program: program._id})
-      const completed = await EmployeeTraining.countDocuments({training_program: program._id, training_completed:true, enrolled_training_session: {$ne: null}})
-      const enrolled = await EmployeeTraining.countDocuments({training_program: program._id, training_completed:false, enrolled_training_session: {$ne: null}})
+      const assigned = await EmployeeTraining.countDocuments({
+        training_program: program._id,
+      });
+      const completed = await EmployeeTraining.countDocuments({
+        training_program: program._id,
+        training_completed: true,
+        enrolled_training_session: { $ne: null },
+      });
+      const enrolled = await EmployeeTraining.countDocuments({
+        training_program: program._id,
+        training_completed: false,
+        enrolled_training_session: { $ne: null },
+      });
 
       //program object
       const programSchema = {
@@ -127,7 +166,6 @@ export const getDashboardManagerTrainings = async (req, res) => {
       success: false,
       message: "Getting trainings was unsuccessful",
     });
-  
   }
 };
 
@@ -169,24 +207,25 @@ export const getDashboardTrainerTrainings = async (req, res) => {
     let userDecoded = jwt.verify(req.auth_user, "TEST");
     let trainer = await User.findById(userDecoded._id);
 
-    let sessions = await TrainingSession.find({ trainer: trainer._id, start_time: {$gt: new Date()} }).populate({path: "training_program"}).sort({start_time: 1}).limit(5);
-
-   
+    let sessions = await TrainingSession.find({
+      trainer: trainer._id,
+      start_time: { $gt: new Date() },
+    })
+      .populate({ path: "training_program" })
+      .sort({ start_time: 1 })
+      .limit(5);
 
     let assignedSessions = [];
 
     //loop through each session to get program infomation
     for (const session of sessions) {
-     
-
       //get program tied to the session
       const program = await TrainingProgram.findOne({
         _id: session.training_program,
         archived: false,
       });
-  
 
-      program.deadline = session.start_time
+      program.deadline = session.start_time;
       //session object
       const sessionSchema = {
         program: program,
@@ -194,9 +233,7 @@ export const getDashboardTrainerTrainings = async (req, res) => {
 
       assignedSessions = [...assignedSessions, sessionSchema]; //add to array
     }
-   
 
-  
     res.status(200).json({
       success: true,
       message: "Trainings Sessions successfully obtained",
@@ -211,125 +248,168 @@ export const getDashboardTrainerTrainings = async (req, res) => {
 };
 
 export const getDashboardEmployeeTrainings = async (req, res) => {
- try {
-  let userDecoded = jwt.verify(req.auth_user, "TEST");
-    let employee = await User.findById(userDecoded._id);
-
-    let assigned_trainings = await EmployeeTraining.find({enrolled_employee: employee._id})
-
-    assigned_trainings =  assigned_trainings.map(training => {return training.training_program})
-
- 
-    const new_programs = await TrainingProgram.find({_id: {$in: assigned_trainings}, archived: false, deadline: {$gt: new Date()}}).sort({deadline: 1}).limit(5);
-
-
-
-  let programsArray = []
-  for (const program of new_programs) {
-
-    const programSchema = {
-      program: program
-    }
-
-    programsArray = [...programsArray, programSchema]
-  }
-
-res.status(200).json({success: true, message: "Trainings successfuly obtained",
-programs: programsArray})
- } catch (err) {
-  res.status(500).json({
-    success: false,
-    message: "Trainings Enrollments unsuccessfully obtained",
-  });
- }
-}
-
-
-// Training Insight 
-export const employeeDashboardInights = async (req, res) => {
   try {
-
     let userDecoded = jwt.verify(req.auth_user, "TEST");
     let employee = await User.findById(userDecoded._id);
 
-    let complete = await EmployeeTraining.countDocuments({enrolled_employee: employee._id, training_completed: true});
+    let assigned_trainings = await EmployeeTraining.find({
+      enrolled_employee: employee._id,
+    });
 
-let overdue  = await EmployeeTraining.countDocuments({enrolled_employee: employee._id, training_completed: false}).populate({path:"training_program", match: {deadline: {$lt: new Date() }}});
+    assigned_trainings = assigned_trainings.map((training) => {
+      return training.training_program;
+    });
 
+    const new_programs = await TrainingProgram.find({
+      _id: { $in: assigned_trainings },
+      archived: false,
+      deadline: { $gt: new Date() },
+    })
+      .sort({ deadline: 1 })
+      .limit(5);
 
-    console.log("Completed", complete)
-    console.log("Overdue", overdue)
+    let programsArray = [];
+    for (const program of new_programs) {
+      const programSchema = {
+        program: program,
+      };
 
-    res.status(200).json({success: true, message: "Training insights successfully obtained", complete: complete, overdue: overdue})
-    
+      programsArray = [...programsArray, programSchema];
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Trainings successfuly obtained",
+      programs: programsArray,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Trainings Enrollments unsuccessfully obtained",
+    });
+  }
+};
+
+// Training Insight
+export const employeeDashboardInights = async (req, res) => {
+  try {
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
+    let employee = await User.findById(userDecoded._id);
+
+    let complete = await EmployeeTraining.countDocuments({
+      enrolled_employee: employee._id,
+      training_completed: true,
+    });
+
+    let overdue = await EmployeeTraining.countDocuments({
+      enrolled_employee: employee._id,
+      training_completed: false,
+    }).populate({
+      path: "training_program",
+      match: { deadline: { $lt: new Date() } },
+    });
+
+    console.log("Completed", complete);
+    console.log("Overdue", overdue);
+
+    res.status(200).json({
+      success: true,
+      message: "Training insights successfully obtained",
+      complete: complete,
+      overdue: overdue,
+    });
   } catch (err) {
     res.status(500).json({
       success: false,
       message: "Trainings Insights unsuccessfully obtained",
     });
   }
-}
+};
 
 export const trainerDashboardInsight = async (req, res) => {
   try {
     let userDecoded = jwt.verify(req.auth_user, "TEST");
     let trainer = await User.findById(userDecoded._id);
 
-    let sessions = await TrainingSession.find({trainer: trainer._id})
+    let sessions = await TrainingSession.find({ trainer: trainer._id });
 
-   
+    sessions = sessions.map((session) => {
+      return session._id;
+    });
 
-    sessions = sessions.map(session => {return session._id})
+    let complete = await EmployeeTraining.countDocuments({
+      enrolled_training_session: { $in: sessions },
+      training_completed: true,
+    });
 
-  
-    let complete = await EmployeeTraining.countDocuments({enrolled_training_session: {$in: sessions}, training_completed: true})
-    
+    let overdue = await EmployeeTraining.countDocuments({
+      enrolled_training_session: { $in: sessions },
+      training_completed: false,
+    }).populate({
+      path: "training_program",
+      match: { deadline: { $lt: new Date() } },
+    });
 
-    let overdue = await EmployeeTraining.countDocuments({enrolled_training_session: {$in: sessions}, training_completed: false}).populate({path: "training_program", match: { deadline: {$lt: new Date()}}})
-
-    res.status(200).json({success: true, message:"Training insights successfully obtained", complete: complete, overdue: overdue})
-    
+    res.status(200).json({
+      success: true,
+      message: "Training insights successfully obtained",
+      complete: complete,
+      overdue: overdue,
+    });
   } catch (err) {
     res.status(500).json({
       success: false,
       message: "Trainings Insights unsuccessfully obtained",
-      err: err.message
+      err: err.message,
     });
-    
   }
-}
+};
 
 export const managerDashboardInsights = async (req, res) => {
   try {
     let userDecoded = jwt.verify(req.auth_user, "TEST");
     let manager = await User.findById(userDecoded._id);
 
-     let complete = await EmployeeTraining.countDocuments({training_completed: true}).populate({path: "training_program", match: {assigned_manager: manager._id}})
+    let complete = await EmployeeTraining.countDocuments({
+      training_completed: true,
+    }).populate({
+      path: "training_program",
+      match: { assigned_manager: manager._id },
+    });
 
+    let overdue_trainings = await EmployeeTraining.find({
+      training_completed: false,
+    }).populate({
+      path: "training_program",
+      match: { assigned_manager: manager._id, deadline: { $lt: new Date() } },
+    });
 
-    
-     let overdue_trainings = await EmployeeTraining.find({training_completed: false}).populate({path: "training_program", match: {assigned_manager: manager._id, deadline: {$lt: new Date()}}})
+    let overdue = overdue_trainings.map((training) => {
+      if (
+        training.training_program &&
+        training.training_program.assigned_manager &&
+        training.training_program.deadline
+      ) {
+        return training;
+      }
+    });
+    overdue = overdue.filter((training) => training != null);
 
-   let overdue = overdue_trainings.map(training => {
-    if (training.training_program && training.training_program.assigned_manager && training.training_program.deadline) {
-    return training
-   }
+    console.log("HELLO");
+    console.log("Complete:", complete);
+    console.log("Overdue:", overdue.length);
 
-   
-  })
-  overdue = overdue.filter(training => training != null)
-
-    console.log("HELLO")
-    console.log("Complete:", complete)
-    console.log("Overdue:", overdue.length)
-
-    res.status(200).json({success: true, message: "Trainings Insights unsuccessfully obtained",complete: complete, overdue: overdue.length})
-    
+    res.status(200).json({
+      success: true,
+      message: "Trainings Insights unsuccessfully obtained",
+      complete: complete,
+      overdue: overdue.length,
+    });
   } catch (err) {
     res.status(500).json({
       success: false,
       message: "Trainings Insights unsuccessfully obtained",
-      err: err.message
+      err: err.message,
     });
   }
-}
+};
