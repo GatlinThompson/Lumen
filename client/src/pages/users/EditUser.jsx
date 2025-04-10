@@ -152,7 +152,7 @@ export default function EditUser() {
               variant="gray"
               type="button"
               extraClasses={styles.cancel}
-              onClick={() => navigate(`/users/${id}`)}
+              onClick={() => navigate(`/user/${id}`)}
             >
               Cancel
             </Button>
