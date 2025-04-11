@@ -13,13 +13,13 @@ export default function ManagerNav(props) {
       <NavLink to="/users/employees" onClick={props.handleLinkClick}>
         <i className="bi bi-person"></i>Employees
       </NavLink>
-      <NavLink
+      {/*<NavLink
         to="/notifications"
         className={`${styles.last_user_med}`}
         onClick={props.handleLinkClick}
       >
         <i className="bi bi-bell"></i>Notifications
-      </NavLink>
+      </NavLink> */}
     </>
   );
 }

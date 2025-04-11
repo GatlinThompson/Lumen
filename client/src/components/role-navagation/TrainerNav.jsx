@@ -10,13 +10,13 @@ export default function TrainerNav(props) {
       <NavLink to="/trainings" onClick={props.handleLinkClick}>
         <i className="bi bi-book"></i>Assigned Trainings
       </NavLink>
-      <NavLink
+      {/*<NavLink
         to="/notifications"
         className={`${styles.last_user_high}`}
         onClick={props.handleLinkClick}
       >
         <i className="bi bi-bell"></i>Notifications
-      </NavLink>
+      </NavLink>*/}
     </>
   );
 }
