@@ -129,7 +129,6 @@ export default function UsersPage() {
   };
   return (
     <div className={`${loaded ? "loaded loading" : "loading"} max-1080`}>
-      <BackButton />
       <PageHeader title={`All ${usersRole}`} />
       <div className={styles.search_nav}>
         {user && user.role === "admin" && (

@@ -84,7 +84,7 @@ export default function TrainingInsights() {
   return (
     <div className={styles.training_widgets}>
       <CardContainer extraClasses="d-flex flex-column gap-3">
-        <h2 className="fs-5 mx-3 mt-3 mb-0">Training Insights</h2>
+        <h2 className="fs-4 mx-3 mt-3 mb-0">Training Insights</h2>
 
         <div className="d-flex flex-row mx-3 gap-3">
           <CardContainer extraClasses="col">

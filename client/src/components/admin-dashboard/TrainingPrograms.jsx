@@ -28,7 +28,7 @@ export default function TrainingPrograms() {
   return (
     <div className={styles.training_widgets}>
       <CardContainer extraClasses="mb-4">
-        <h2 className="fs-5 p-3 m-0">Training Programs</h2>
+        <h2 className="fs-4 p-3 m-0">Training Programs</h2>
         <div className="row text-center justify-content-center">
           <div className="col-3">
             <p className="fw-bold mb-0 fs-4">

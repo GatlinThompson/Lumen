@@ -42,7 +42,7 @@ export default function DeadlineDate({ deadline }) {
 
           return (
             <div key={index}>
-              <p className="fw-bold fs-5 mb-2">{program.title}</p>
+              <p className="fs-5 mb-2">{program.title}</p>
               <div className="d-flex flex-row gap-2 justify-content-start">
                 <div className="d-flex flex-fill">
                   <i className="bi bi-clock me-1"></i>

@@ -1,37 +1,34 @@
 @use "./custom.scss" as *;
 @use "sass:color";
 
-.icon_btn_container{
+.icon_btn_container {
+  .icon_btn {
+    text-decoration: none;
+    color: $neutral_black;
+    padding-bottom: 21px;
 
-    .icon_btn{
-        text-decoration: none;
-        color: $neutral_black;
-        padding-bottom: 21px;
+    .icon_card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-        .icon_card{
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-            i{
-                font-size: 48px;
-            }
-        }
+    i {
+      font-size: 48px;
+    }
+  }
 }
 
 @include screen-breakpoint("lg") {
-        .icon_btn_container{
-            
-            .icon_btn{
-                .icon_card{
-
-                    i{
-                        font-size: 60px;
-                    }
-                }
-            }
+  .icon_btn_container {
+    .icon_btn {
+      .icon_card {
+        i {
+          font-size: 60px;
         }
+      }
     }
+  }
+}

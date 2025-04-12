@@ -23,7 +23,7 @@ export default function UsersOverview() {
   }, []);
   return (
     <CardContainer extraClasses={styles.users_overview_container}>
-      <div className="fs-4 pb-3">Users</div>
+      <h2 className="fs-4 pb-3 m-0">Users</h2>
 
       <div className={styles.users_data}>
         <div>

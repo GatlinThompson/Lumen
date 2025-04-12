@@ -97,7 +97,7 @@ export default function UserCreationPage() {
 
   return (
     <div className={`${loaded ? "loaded loading" : "loading"}`}>
-      <BackButton to="/dashboard" />
+      <BackButton />
       <PageHeader title={"Create new user"} />
       <div className={styles.error_msg}>
         {formError ? (
