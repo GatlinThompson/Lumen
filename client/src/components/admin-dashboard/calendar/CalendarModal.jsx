@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "../../../styles/calendar-modal.module.scss";
 import CardContainer from "../../basic-components/CardContainer";
+import { useContext } from "react";
+import { AppContext } from "../../../App";
 export default function CalendarModal(props) {
-  console.log(props.dateEvents[0]);
+  const { setIsModalOpen } = useContext(AppContext);
+
   const date = new Date(props.dateEvents[0].event).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -10,7 +13,7 @@ export default function CalendarModal(props) {
   });
 
   const todayEvents = props.dateEvents[0].programs;
-  console.log(date);
+
   return (
     <>
       <h3 className={styles.header}>{date && date}</h3>
@@ -26,7 +29,11 @@ export default function CalendarModal(props) {
               }
             );
             return (
-              <Link key={index}>
+              <Link
+                key={index}
+                to={`/trainings/${todayEvent._id}`}
+                onClick={() => setIsModalOpen(false)}
+              >
                 <CardContainer extraClasses={styles.event}>
                   <div
                     className={styles.background}
