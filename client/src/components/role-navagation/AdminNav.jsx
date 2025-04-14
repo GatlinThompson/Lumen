@@ -27,9 +27,6 @@ export default function AdminNav(props) {
       <NavLink to="/users/create" onClick={props.handleLinkClick}>
         <i className="bi bi-person-plus"></i>User Creation
       </NavLink>
-      {/*<NavLink to="/notifications" onClick={props.handleLinkClick}>
-        <i className="bi bi-bell"></i>Notifications
-      </NavLink>*/}
     </>
   );
 }

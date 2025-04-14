@@ -1,6 +1,6 @@
 import UserDetailTrainingsCarousel from "../../components/trainings/UserDetailTrainingsCarousel.jsx";
 import styles from "../../styles/user-details-assigned-trainings.module.scss";
-import Button from "../../components/basic-components/Button";
+import Button from "../basic-components/Button.jsx";
 import { apiFetch } from "../../hooks/APIFetch.jsx";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App.jsx";
@@ -19,7 +19,6 @@ export default function UserDetailsAssignedTrainings({ userID = null }) {
     );
 
     if (!error) {
-      console.log(result.programs);
       setPrograms(result.programs);
     } else {
       navigate("/errorapi");
@@ -46,7 +45,6 @@ export default function UserDetailsAssignedTrainings({ userID = null }) {
     );
 
     if (!error) {
-      console.log(result.programs);
       setPrograms(result.programs);
     } else {
       navigate("/errorapi");
@@ -60,7 +58,6 @@ export default function UserDetailsAssignedTrainings({ userID = null }) {
     );
 
     if (!error) {
-      console.log(result.programs);
       setPrograms(result.programs);
     } else {
       navigate("/errorapi");

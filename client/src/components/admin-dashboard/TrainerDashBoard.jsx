@@ -1,6 +1,7 @@
 import TrainingInsights from "./TrainingInsights";
 import TrainingDeadlines from "./TrainingDeadlines";
 import UserDetailsAssignedTrainings from "../trainings/UserDetailsAssignedTrainings";
+import Calendar from "./calendar/Calendar";
 
 export default function TrainerDashboard() {
   return (
@@ -14,9 +15,9 @@ export default function TrainerDashboard() {
             <TrainingInsights />
           </div>
         </div>
-        <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5 mt-4">
+        <div className="col-12">
           <div>
-            <TrainingDeadlines />
+            <Calendar />
           </div>
         </div>
       </div>

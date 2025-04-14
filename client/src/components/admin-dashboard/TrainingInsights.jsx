@@ -20,7 +20,6 @@ export default function TrainingInsights() {
     );
 
     if (!error) {
-      console.log(result);
       setCompleted(result.complete);
       setOverdue(result.overdue);
     }
@@ -33,7 +32,6 @@ export default function TrainingInsights() {
     );
 
     if (!error) {
-      console.log(result);
       setCompleted(result.complete);
       setOverdue(result.overdue);
     }
@@ -46,7 +44,6 @@ export default function TrainingInsights() {
     );
 
     if (!error) {
-      console.log(result);
       setCompleted(result.complete);
       setOverdue(result.overdue);
     }
@@ -59,7 +56,6 @@ export default function TrainingInsights() {
     );
 
     if (!error) {
-      console.log(result);
       setCompleted(result.complete);
       setOverdue(result.overdue);
     }

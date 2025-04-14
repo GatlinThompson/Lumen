@@ -46,6 +46,8 @@ function App() {
   const [errorMessage, setErrorMessage] = useState("");
   const [newAssignedEmployees, setNewAssignedEmployees] = useState([]);
   const [newSession, setNewSession] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   //verify user
   const verifyUser = async () => {
@@ -94,6 +96,10 @@ function App() {
         setNewAssignedEmployees,
         newSession,
         setNewSession,
+        isModalOpen,
+        setIsModalOpen,
+        modalData,
+        setModalData,
       }}
     >
       <Router>

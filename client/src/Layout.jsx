@@ -7,6 +7,7 @@ import DesktopHeader from "./components/layout/DesktopHeader";
 import { useEffect, useContext } from "react";
 import { AppContext } from "./App";
 import NotificationAlert from "./components/basic-components/NotificationAlert";
+import SimpleModal from "./components/admin-dashboard/calendar/SimpleModal";
 
 export default function Layout() {
   const location = useLocation();
@@ -36,6 +37,7 @@ export default function Layout() {
         {location.pathname === "/" ? <LandingPage /> : <Outlet />}
       </main>
       <Footer noNavbar={noNavbar} />
+      <SimpleModal />
     </>
   );
 }

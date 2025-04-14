@@ -9,6 +9,10 @@
   font-family: $body_font;
 }
 
+body.dont-scroll {
+  overflow: hidden;
+}
+
 *,
 ::after,
 ::before {
@@ -250,6 +254,19 @@ div.error-container {
   transition: opacity 500ms ease-in-out, top 500ms ease-in-out;
 
   &.loaded {
+    opacity: 1;
+    top: 0px;
+  }
+}
+
+//page loading transition
+.swift-loading {
+  opacity: 0;
+  //top: -10px;
+  position: relative;
+  transition: opacity 200ms ease-in-out, top 200ms ease-in-out;
+
+  &.swift-loaded {
     opacity: 1;
     top: 0px;
   }

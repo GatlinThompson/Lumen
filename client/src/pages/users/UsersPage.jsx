@@ -23,7 +23,6 @@ export default function UsersPage() {
     const { result, error } = await apiFetch("/api/users", "GET");
 
     if (!error) {
-      console.log(result);
       setUsers(result.users);
       setTimeout(() => {
         setLoaded(true);

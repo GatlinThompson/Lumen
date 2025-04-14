@@ -1,0 +1,119 @@
+@use "./custom.scss" as *;
+
+//Calender Container
+div.calendar {
+  margin-top: 2rem;
+  padding: 1.5rem 1rem 2rem;
+  max-width: 850px;
+
+  //Header
+  div.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    //Month Name
+    & > div.name {
+      flex: 1;
+      text-align: center;
+      & > h2 {
+        margin: 0;
+        font-family: "Albert Sans";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        text-transform: uppercase;
+      }
+    }
+
+    //Month Button
+    & > div.button > button {
+      border: none;
+      font-size: 2rem;
+      background-color: transparent;
+      color: $neutral-black;
+      line-height: 32px;
+      font-weight: 200;
+    }
+  }
+}
+
+//Calendar Body
+table.body {
+  border-collapse: collapse;
+  width: 100%;
+
+  table-layout: fixed;
+
+  //Table Head
+  & > thead > tr {
+    & > th {
+      width: calc(100% / 7);
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 32px;
+    }
+  }
+
+  //Table Calender Body
+  & > tbody {
+    height: 260px;
+    @include screen-breakpoint("md") {
+      height: 340px;
+    }
+    @include screen-breakpoint("lg") {
+      height: 420px;
+    }
+    @include screen-breakpoint("xl") {
+      height: 500px;
+    }
+    & tr > td.day {
+      border: 0.5px solid $gray;
+      border-collapse: collapse;
+      aspect-ratio: 1 / 1;
+      width: calc(100% / 7);
+      height: auto;
+      position: relative;
+
+      & > span {
+        margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0.25rem;
+      }
+
+      &.today {
+        background-color: rgb(242, 240, 240);
+      }
+
+      &.other_month {
+        border: 0.5px solid $light_gray;
+        color: $gray;
+      }
+    }
+  }
+}
+
+//Event Icon
+div.event_icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 0.25rem;
+
+  & > div {
+    aspect-ratio: 1/1;
+    width: 45%;
+    border-radius: 100%;
+
+    @include screen-breakpoint("md") {
+      width: 25%;
+    }
+  }
+}

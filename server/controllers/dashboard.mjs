@@ -176,6 +176,77 @@ export const dashboardDeadlines = async (req, res) => {
   }
 };
 
+//get deadlines
+export const dashboardManagerDeadlines = async (req, res) => {
+  try {
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
+    let manager = await User.findById(userDecoded._id);
+
+    const programs = await TrainingProgram.find({
+      assigned_manager: manager._id,
+      deadline: { $gt: new Date() },
+    })
+      .sort({ deadline: 1 })
+      .limit(5)
+      .select("title duration deadline");
+
+    let programData = await Promise.all(
+      programs.map(async (program) => {
+        const enrolled = await EmployeeTraining.countDocuments({
+          training_program: program._id,
+          enrolled_training_session: { $ne: null },
+          training_completed: false,
+        });
+
+        const completed = await EmployeeTraining.countDocuments({
+          training_program: program._id,
+          enrolled_training_session: { $ne: null },
+          training_completed: true,
+        });
+
+        return {
+          ...program.toObject(),
+          enrolled: enrolled,
+          completed: completed,
+        };
+      })
+    );
+
+    let deadlines = [
+      ...new Set(
+        programData.map((program) => new Date(program.deadline).toISOString())
+      ),
+    ];
+
+    deadlines = deadlines.map((deadline) => {
+      return { deadline: new Date(deadline), programs: [] };
+    });
+
+    deadlines = deadlines.map((deadline) => {
+      let sameDatePrograms = programData.filter((program) => {
+        return (
+          new Date(program.deadline).toISOString() ===
+          new Date(deadline.deadline).toISOString()
+        );
+      });
+      return { ...deadline, programs: sameDatePrograms };
+    });
+
+    //console.log(deadlines);
+    res.status(200).json({
+      success: true,
+      message: "Deadlines obtained",
+      deadlines: deadlines,
+      //test: programData,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Getting training programs deadlines was unsuccessful",
+    });
+  }
+};
+
 //Manager Dashboard****************************************************
 
 //get manager assigned trainings
@@ -476,6 +547,167 @@ export const managerDashboardInsights = async (req, res) => {
     res.status(500).json({
       success: false,
       message: "Trainings Insights unsuccessfully obtained",
+      err: err.message,
+    });
+  }
+};
+
+//Calendar Wiget
+
+export const getManagerCalendar = async (req, res) => {
+  try {
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
+    let manager = await User.findById(userDecoded._id);
+
+    let programs = await TrainingProgram.find({
+      assigned_manager: manager._id,
+    });
+
+    let events = [
+      ...new Set(
+        programs.map((program) => new Date(program.deadline).toISOString())
+      ),
+    ];
+
+    events = events.map((event) => {
+      return { event: new Date(event), programs: [] };
+    });
+
+    events = events.map((event) => {
+      let sameDatePrograms = programs
+        .filter((program) => {
+          return (
+            new Date(program.deadline).toISOString() ===
+            new Date(event.event).toISOString()
+          );
+        })
+        .map((program) => ({
+          _id: program._id,
+          title: program.title,
+          deadline: program.deadline,
+          background_color: program.background_color,
+        }));
+      return { ...event, programs: sameDatePrograms };
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Obtained calendar events",
+      role: "manager",
+      events: events,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Calendar failed to get any events",
+      err: err.message,
+    });
+  }
+};
+
+export const getTrainerCalendar = async (req, res) => {
+  try {
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
+    let trainer = await User.findById(userDecoded._id);
+
+    let sessions = await TrainingSession.find({
+      trainer: trainer._id,
+    }).populate({ path: "training_program" });
+
+    let events = [
+      ...new Set(
+        sessions.map((session) => {
+          const time = new Date(session.start_time);
+          time.setHours(0, 0, 0, 0);
+          return time.toISOString();
+        })
+      ),
+    ];
+
+    events = events.map((event) => {
+      return { event: new Date(event), programs: [] };
+    });
+
+    events = events.map((event) => {
+      let sameDatePrograms = sessions
+        .filter((session) => {
+          const time = new Date(session.start_time);
+          time.setHours(0, 0, 0, 0);
+          return time.toISOString() === new Date(event.event).toISOString();
+        })
+        .map((session) => ({
+          _id: session.training_program._id,
+          title: session.training_program.title,
+          deadline: session.start_time,
+          background_color: session.training_program.background_color,
+        }));
+      return { ...event, programs: sameDatePrograms };
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Obtained calendar events",
+      role: "trainer",
+      events: events,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Calendar failed to get any events",
+      err: err.message,
+    });
+  }
+};
+
+export const getEmployeeCalendar = async (req, res) => {
+  try {
+    let userDecoded = jwt.verify(req.auth_user, "TEST");
+    let employee = await User.findById(userDecoded._id);
+
+    let programs = await EmployeeTraining.find({
+      enrolled_employee: employee._id,
+    }).populate({ path: "training_program" });
+
+    let events = [
+      ...new Set(
+        programs.map((program) => {
+          const time = new Date(program.training_program.deadline);
+          time.setHours(0, 0, 0, 0);
+          return time.toISOString();
+        })
+      ),
+    ];
+
+    events = events.map((event) => {
+      return { event: new Date(event), programs: [] };
+    });
+
+    events = events.map((event) => {
+      let sameDatePrograms = programs
+        .filter((program) => {
+          const time = new Date(program.training_program.deadline);
+          time.setHours(0, 0, 0, 0);
+          return time.toISOString() === new Date(event.event).toISOString();
+        })
+        .map((program) => ({
+          _id: program.training_program._id,
+          title: program.training_program.title,
+          deadline: program.deadline,
+          background_color: program.training_program.background_color,
+        }));
+      return { ...event, programs: sameDatePrograms };
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Obtained calendar events",
+      role: "employee",
+      events: events,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Calendar failed to get any events",
       err: err.message,
     });
   }

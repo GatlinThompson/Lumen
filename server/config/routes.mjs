@@ -45,6 +45,7 @@ import { getRoleAndDepartments } from "../controllers/admin.mjs";
 import { changeName, changePassword } from "../controllers/profile.mjs";
 import {
   dashboardDeadlines,
+  dashboardManagerDeadlines,
   employeeDashboardInights,
   getDashboardAdminInsights,
   getDashboardEmployeeTrainings,
@@ -53,6 +54,9 @@ import {
   getDashboardTrainerTrainings,
   getDashBoardUsers,
   getDepartmentEmployees,
+  getEmployeeCalendar,
+  getManagerCalendar,
+  getTrainerCalendar,
   managerDashboardInsights,
   trainerDashboardInsight,
 } from "../controllers/dashboard.mjs";
@@ -269,7 +273,12 @@ export const configureRoutes = (app) => {
   );
 
   // Admin Deadlines
-  app.get("/api/dashboard/deadlines", dashboardDeadlines);
+  app.get("/api/dashboard/deadlines", isAdmin, dashboardDeadlines);
+  app.get(
+    "/api/dashboard/manager-deadlines",
+    isManager,
+    dashboardManagerDeadlines
+  );
 
   //Get department employees
   app.get("/api/dashboard/employees", isManager, getDepartmentEmployees);
@@ -295,6 +304,11 @@ export const configureRoutes = (app) => {
     isEmployee,
     employeeDashboardInights
   );
+
+  //Calendar Widget
+  app.get("/api/dashboard/manager-calendar", isManager, getManagerCalendar);
+  app.get("/api/dashboard/trainer-calendar", isTrainer, getTrainerCalendar);
+  app.get("/api/dashboard/employee-calendar", isEmployee, getEmployeeCalendar);
 
   app.use("/", router);
 };

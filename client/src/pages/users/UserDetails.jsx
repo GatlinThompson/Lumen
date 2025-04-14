@@ -5,7 +5,7 @@ import { apiFetch } from "../../hooks/APIFetch";
 import ProfileIcon from "../../components/basic-components/ProfileIcon.jsx";
 import PageHeader from "../../components/basic-components/PageHeader.jsx";
 import UserDetailsAssignedTrainings from "../../components/trainings/UserDetailsAssignedTrainings.jsx";
-import Button from "../../components/basic-components/Button.jsx";
+import Button from "../../components/basic-components/Button";
 import { AppContext } from "../../App.jsx";
 
 export default function UserDetails() {
@@ -19,7 +19,6 @@ export default function UserDetails() {
     const { result, error } = await apiFetch(`/api/user/${id}`, "GET");
 
     if (!error) {
-      console.log(result.user);
       setPageUser(result.user);
       setTimeout(() => {
         setLoaded(true);
@@ -40,7 +39,7 @@ export default function UserDetails() {
   return (
     <>
       {pageUser && (
-        <div className={`${loaded ? "loaded loading" : "loading"}`}>
+        <div className={`${loaded ? "loaded loading" : "loading"} max-1080`}>
           <BackButton />
           <PageHeader title={`${role} Details`} />
           {user && user.role === "admin" && (

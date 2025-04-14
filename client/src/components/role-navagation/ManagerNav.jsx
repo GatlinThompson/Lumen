@@ -10,7 +10,11 @@ export default function ManagerNav(props) {
       <NavLink to="/trainings" onClick={props.handleLinkClick}>
         <i className="bi bi-book"></i>Assigned Trainings
       </NavLink>
-      <NavLink to="/users/employees" onClick={props.handleLinkClick}>
+      <NavLink
+        to="/users/employees"
+        className={`${styles.last_user_med}`}
+        onClick={props.handleLinkClick}
+      >
         <i className="bi bi-person"></i>Employees
       </NavLink>
       {/*<NavLink
