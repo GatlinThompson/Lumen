@@ -45,6 +45,9 @@ export default function TrainingSessionCard({
   const trainer = `${session.trainer.first_name} ${session.trainer.last_name}`;
 
   const confirmSession = () => {
+    if (enrolled) {
+      return;
+    }
     setNewSession(session);
     navigate(`/trainings/${program}/confirmation`);
   };
