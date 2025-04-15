@@ -561,6 +561,7 @@ export const getManagerCalendar = async (req, res) => {
 
     let programs = await TrainingProgram.find({
       assigned_manager: manager._id,
+      archived: false,
     });
 
     let events = [
@@ -612,7 +613,7 @@ export const getTrainerCalendar = async (req, res) => {
 
     let sessions = await TrainingSession.find({
       trainer: trainer._id,
-    }).populate({ path: "training_program" });
+    }).populate({ path: "training_program", match: { archived: false } });
 
     let events = [
       ...new Set(
@@ -666,7 +667,7 @@ export const getEmployeeCalendar = async (req, res) => {
 
     let programs = await EmployeeTraining.find({
       enrolled_employee: employee._id,
-    }).populate({ path: "training_program" });
+    }).populate({ path: "training_program", match: { archived: false } });
 
     let events = [
       ...new Set(

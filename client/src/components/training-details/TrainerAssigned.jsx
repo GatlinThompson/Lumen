@@ -19,7 +19,7 @@ export default function TrainerAssigned({ program, sessions, children }) {
     );
 
     if (!error) {
-      console.log(result.users);
+   
       setEmployees(result.users);
       setOrginalEmployees(result.users);
     }

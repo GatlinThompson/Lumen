@@ -4,7 +4,7 @@ import CardContainer from "../../basic-components/CardContainer";
 import { useContext } from "react";
 import { AppContext } from "../../../App";
 export default function CalendarModal(props) {
-  const { setIsModalOpen } = useContext(AppContext);
+  const { setIsModalOpen, user } = useContext(AppContext);
 
   const date = new Date(props.dateEvents[0].event).toLocaleDateString("en-US", {
     year: "numeric",
@@ -21,7 +21,7 @@ export default function CalendarModal(props) {
       <div className={styles.events_container}>
         {todayEvents &&
           todayEvents.map((todayEvent, index) => {
-            const time = new Date(props.dateEvents[0].event).toLocaleTimeString(
+            let time = new Date(todayEvent.deadline).toLocaleTimeString(
               "en-US",
               {
                 hour: "numeric",

@@ -9,7 +9,7 @@ export default function TrainerTrainingEnrolled({ program, sessions }) {
 
   const getWidgetInfo = async () => {
     const sessionData = { sessions: sessions };
-    console.log(sessionData);
+
     const { result, error } = await apiFetch(
       `/api/training-programs/${program}/enrollment-count`,
       "POST",
@@ -17,7 +17,7 @@ export default function TrainerTrainingEnrolled({ program, sessions }) {
     );
 
     if (!error) {
-      console.log(result);
+
       setCount(result.count);
     }
   };

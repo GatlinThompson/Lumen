@@ -16,7 +16,7 @@ export default function ManagerEmployees({ programID, children }) {
         `/api/training-program/${programID}/employees/assigned`,
         "GET"
       );
-      console.log(result);
+   
 
       if (!error) {
         setOrginalEmployees(result.employees);

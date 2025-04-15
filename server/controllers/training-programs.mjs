@@ -27,7 +27,9 @@ export const createTrainingProgram = async (req, res) => {
 
     program.title = req.body.title;
     program.duration = parseInt(req.body.duration);
-    program.deadline = req.body.deadline;
+    let new_deadline = new Date(req.body.deadline);
+    new_deadline.setHours(11, 59, 59, 0);
+    program.deadline = new_deadline;
     program.description = req.body.description;
     program.assigned_manager = req.body.assigned_manager;
 
@@ -82,7 +84,7 @@ export const createTrainingProgram = async (req, res) => {
       success: false,
       message: "Program creation was unsuccessful",
     });
-
+    console.log(err.message);
     console.log("Program creation encounter an error");
   }
 };
