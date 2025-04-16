@@ -3,6 +3,7 @@ import styles from "../../../styles/calendar-modal.module.scss";
 import CardContainer from "../../basic-components/CardContainer";
 import { useContext } from "react";
 import { AppContext } from "../../../App";
+
 export default function CalendarModal(props) {
   const { setIsModalOpen, user } = useContext(AppContext);
 
