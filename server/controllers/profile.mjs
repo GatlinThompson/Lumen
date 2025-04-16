@@ -67,7 +67,8 @@ export const changePassword = async (req, res) => {
 
     //initalize and declare passwords
     let oldPassword = req.body.current_password;
-    let confrimPassword = req.body.confirm_password;
+    let newPassword = req.body.new_password;
+    let confrimNewPassword = req.body.confirm_new_password;
 
     //check if password is valid
     if (!user.isPasswordValid(oldPassword)) {
@@ -77,12 +78,12 @@ export const changePassword = async (req, res) => {
       });
     }
 
-    // if (oldPassword != confrimPassword) {
-    //   //check old and confirm password
-    //   return res
-    //     .status(409)
-    //     .json({ success: false, message: "Passwords do not match" });
-    // }
+    if (newPassword != confrimNewPassword) {
+      //check old and confirm password
+      return res
+        .status(409)
+        .json({ success: false, message: "Passwords do not match" });
+    }
 
     //create new hash and salt
     user.createPassword(req.body.new_password);
@@ -93,11 +94,12 @@ export const changePassword = async (req, res) => {
     res.status(200).json({
       success: false,
       message: "Successfully updated password infomation.",
-      user: userData,
     });
   } catch (err) {
-    res
-      .status(500)
-      .json({ success: false, message: "Password failed to update." });
+    res.status(500).json({
+      success: false,
+      message: "Password failed to update.",
+      err: err.message,
+    });
   }
 };
