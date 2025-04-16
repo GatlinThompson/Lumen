@@ -1,0 +1,21 @@
+@use "./custom.scss" as *;
+
+ul.nav {
+  overflow-x: scroll;
+  padding-bottom: 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include screen-breakpoint("md") {
+    overflow-x: auto;
+  }
+}
+
+//Navigation
+div.emp_nav {
+  margin-top: 2rem;
+}

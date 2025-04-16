@@ -669,6 +669,8 @@ export const getEmployeeCalendar = async (req, res) => {
       enrolled_employee: employee._id,
     }).populate({ path: "training_program", match: { archived: false } });
 
+    programs = programs.filter((program) => program.training_program !== null);
+
     let events = [
       ...new Set(
         programs.map((program) => {
@@ -693,7 +695,8 @@ export const getEmployeeCalendar = async (req, res) => {
         .map((program) => ({
           _id: program.training_program._id,
           title: program.training_program.title,
-          deadline: program.deadline,
+
+          deadline: program.training_program.deadline,
           background_color: program.training_program.background_color,
         }));
       return { ...event, programs: sameDatePrograms };

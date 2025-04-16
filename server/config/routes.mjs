@@ -73,7 +73,10 @@ import {
   getUncompletedEmployees,
   trainerGetAssignedEmployees,
 } from "../controllers/trainer.mjs";
-import { getUserTrainings } from "../controllers/user-details.mjs";
+import {
+  getAllUserTrainings,
+  getUserTrainings,
+} from "../controllers/user-details.mjs";
 
 // Define Router
 let router = express.Router();
@@ -309,6 +312,9 @@ export const configureRoutes = (app) => {
   app.get("/api/dashboard/manager-calendar", isManager, getManagerCalendar);
   app.get("/api/dashboard/trainer-calendar", isTrainer, getTrainerCalendar);
   app.get("/api/dashboard/employee-calendar", isEmployee, getEmployeeCalendar);
+
+  //User Details Training
+  app.get("/api/user-details/:id/trainings", getAllUserTrainings);
 
   app.use("/", router);
 };
