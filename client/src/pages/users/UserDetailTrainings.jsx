@@ -98,7 +98,7 @@ export default function UserDetailsTraining() {
         />
       </div>
       {userRole === "employee" ? (
-        <Outlet context={{ trainings: specificTrainings }} />
+        <Outlet context={{ trainings: trainings }} />
       ) : (
         <>
           {/*Mobile Desktop*/}
