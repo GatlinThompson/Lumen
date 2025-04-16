@@ -6,7 +6,6 @@ import ProfileIcon from "../../components/basic-components/ProfileIcon.jsx";
 import Button from "../../components/basic-components/Button.jsx";
 import styles from "../../styles/profile.module.scss";
 import EditProfileForm from "./EditProfileForm.jsx";
-import ChangePasswordForm from "./ChangePasswordForm.jsx";
 
 export default function UserProfile({ roles, departments }) {
   const { user } = useContext(AppContext);
@@ -27,7 +26,6 @@ export default function UserProfile({ roles, departments }) {
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
           <BackButton />
           <PageHeader title={"Profile"} />
-
           <div className={styles.profile_bg}>
             <ProfileIcon user={user} size="large" />
             <div className={styles.profile_content}>
@@ -63,8 +61,6 @@ export default function UserProfile({ roles, departments }) {
               onClose={() => setShowEditForm(false)}
             />
           )}
-
-          <ChangePasswordForm />
         </div>
       )}
     </>
