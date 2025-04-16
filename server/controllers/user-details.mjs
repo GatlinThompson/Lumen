@@ -187,9 +187,51 @@ export const getAllUserTrainings = async (req, res) => {
     //check role
     let role = await Role.findById(user.role);
 
+    let programs = [];
+
+    if (role.name == "trainer") {
+      let sessions = await TrainingSession.find({ trainer: user._id }).populate(
+        { path: "training_program", match: { archived: false } }
+      );
+
+      sessions = sessions.filter(
+        (session) => session.training_program !== null
+      );
+
+      const programAlreadyIn = new Set();
+
+      const programsID = sessions.map((session) => {
+        if (!programAlreadyIn.has(session.training_program._id))
+          programAlreadyIn.add(session.training_program._id);
+        return session.training_program._id;
+      });
+
+      let trainerPrograms = await TrainingProgram.find({
+        _id: { $in: programsID },
+        archived: false,
+      })
+        .select("background_color title")
+        .sort({ deadline: 1 });
+
+      programs = trainerPrograms;
+    }
+
+    if (role.name == "manager") {
+      console.log("Hello");
+      let managerPrograms = await TrainingProgram.find({
+        assigned_manager: user._id,
+        archived: false,
+      })
+        .select("background_color title")
+        .sort({ deadline: 1 });
+
+      programs = managerPrograms;
+    }
+
     res.status(200).json({
       success: true,
       role: role.name,
+      programs: programs,
       name: { first_name: user.first_name, last_name: user.last_name },
     });
   } catch (err) {
