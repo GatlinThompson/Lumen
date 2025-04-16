@@ -36,11 +36,6 @@ export default function UserDetailsTraining() {
     }
   };
 
-  getTrainings();
-  setTimeout(() => {
-    setLoaded(true);
-  }, 100);
-
   useEffect(() => {
     if (id) {
       getTrainings();
@@ -76,15 +71,17 @@ export default function UserDetailsTraining() {
     <div className={`${loaded ? "loaded loading" : "loading"} max-1080`}>
       <BackButton />
       <PageHeader
-        title={`${userName.first_name} ${userName.last_name}'s Trainings`}
+        title={`${userName.first_name || ""} ${
+          userName.last_name || ""
+        }'s Trainings`}
       />
       <div className={tablestyles.search_nav}>
         {userRole === "employee" && (
           <InnerNavigation extraClasses={styles.nav}>
-            <NavLink to="/">Enrolled</NavLink>
-            <NavLink to="">Not&nbsp;Enrolled</NavLink>
-            <NavLink to="">Complete</NavLink>
-            <NavLink to="">Overdue</NavLink>
+            <NavLink to="enrolled">Enrolled</NavLink>
+            <NavLink to="not-enrolled">Not&nbsp;Enrolled</NavLink>
+            <NavLink to="complete">Complete</NavLink>
+            <NavLink to="overdue">Overdue</NavLink>
           </InnerNavigation>
         )}
         <Input
