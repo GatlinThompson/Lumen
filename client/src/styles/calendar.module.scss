@@ -64,12 +64,7 @@ table.body {
     @include screen-breakpoint("md") {
       height: 340px;
     }
-    @include screen-breakpoint("lg") {
-      height: 420px;
-    }
-    @include screen-breakpoint("xl") {
-      height: 500px;
-    }
+
     & tr > td.day {
       border: 0.5px solid $gray;
       border-collapse: collapse;
