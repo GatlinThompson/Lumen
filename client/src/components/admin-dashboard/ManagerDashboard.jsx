@@ -7,10 +7,10 @@ import EmployeesWidget from "./EmployeesWidget";
 export default function ManagerDashboard() {
   return (
     <>
+      <div className="mt-4">
+        <UserDetailsAssignedTrainings />
+      </div>
       <div className="row">
-        <div className="mt-4">
-          <UserDetailsAssignedTrainings />
-        </div>
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5 mt-4">
           <div>
             <TrainingInsights />
@@ -21,10 +21,10 @@ export default function ManagerDashboard() {
         </div>
         <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5 mt-4">
           <div>
-            <TrainingDeadlines />
+            <Calendar />
           </div>
           <div className="mt-4">
-            <Calendar />
+            <TrainingDeadlines />
           </div>
         </div>
       </div>
