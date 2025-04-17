@@ -8,12 +8,14 @@ const Input = ({
   value,
   onChange,
   onBlur,
+  onClick,
   placeholder,
   required,
   error,
   touched,
   extraClasses = null,
   pattern,
+  disabled,
 }) => {
   return (
     <div className={`${styles.input_container} ${extraClasses}`}>
@@ -29,6 +31,8 @@ const Input = ({
         placeholder={placeholder}
         required={required}
         className={``}
+        onClick={onClick}
+        disabled={disabled}
       />
       {touched && error ? <p>{error}</p> : null}
     </div>

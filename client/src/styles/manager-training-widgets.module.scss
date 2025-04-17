@@ -128,3 +128,31 @@ div.employee_list_container {
     display: none;
   }
 }
+
+//Employee Modal
+div.employee_modal {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  overflow-y: scroll;
+  height: calc(455px - 1.5rem);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & a {
+    text-decoration: none;
+    color: $neutral_black;
+  }
+
+  & > p {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    color: $gray;
+  }
+}
