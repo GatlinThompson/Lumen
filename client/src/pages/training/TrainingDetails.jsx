@@ -114,7 +114,7 @@ export default function TrainingDetails() {
     <>
       {program && (
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
-          <BackButton />
+          <BackButton to={`/trainings/`} />
           <div
             className={`${styles.program_container} ${
               program ? "loaded loading" : "loading"

@@ -23,9 +23,7 @@ export default function ManagerDashboard() {
           <div>
             <TrainingDeadlines />
           </div>
-        </div>
-        <div className="col-12 col-md-8">
-          <div>
+          <div className="mt-4">
             <Calendar />
           </div>
         </div>

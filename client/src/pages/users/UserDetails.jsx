@@ -40,7 +40,7 @@ export default function UserDetails() {
     <>
       {pageUser && (
         <div className={`${loaded ? "loaded loading" : "loading"} max-1080`}>
-          <BackButton />
+          <BackButton to={`/users/managers`} />
           <PageHeader title={`${role} Details`} />
           {user && user.role === "admin" && (
             <Button

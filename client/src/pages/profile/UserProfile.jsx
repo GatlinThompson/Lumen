@@ -24,7 +24,7 @@ export default function UserProfile({ roles, departments }) {
     <>
       {user && (
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
-          <BackButton />
+          <BackButton to={`/dashboard/`} />
           <PageHeader title={"Profile"} />
           <div className={styles.profile_bg}>
             <ProfileIcon user={user} size="large" />
