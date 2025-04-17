@@ -39,10 +39,15 @@ export default function TrainingDeadlines() {
     <div className={styles.training_widgets}>
       <CardContainer extraClasses="d-flex flex-column gap-3">
         <h2 className="fs-4 mx-3 mt-3 mb-0">Upcoming Training Deadlines</h2>
-        {deadlines &&
-          deadlines.map((deadline, index) => {
-            return <DeadlineDate key={index} deadline={deadline} />;
-          })}
+        {deadlines.length > 0 ? (
+          deadlines.map((deadline, index) => (
+            <DeadlineDate key={index} deadline={deadline} />
+          ))
+        ) : (
+          <p className="fs-5 mx-3 mb-3 text-muted">
+            No upcoming training deadlines
+          </p>
+        )}
       </CardContainer>
     </div>
   );
