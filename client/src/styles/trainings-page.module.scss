@@ -95,3 +95,14 @@ div.status_container {
     gap: 3rem;
   }
 }
+
+div.status {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 1rem;
+
+  @include screen-breakpoint("lg") {
+    margin-right: 2rem;
+  }
+}

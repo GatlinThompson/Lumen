@@ -16,16 +16,19 @@ import Input from "../../components/form-components/Input";
 import trainingStyles from "../../styles/trainings-page.module.scss";
 import MiniTrainingCard from "../../components/trainings/MiniTrainingCard";
 import Button from "../../components/basic-components/Button";
+import { useLocation } from "react-router-dom";
 
 export default function UserDetailsTraining() {
   const [userRole, setUserRole] = useState("");
   const [userName, setUserName] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [orginalTrainings, setOrginalTrainings] = useState([]);
+  const [specificTraining, setSpecificTraining] = useState([]);
   const [trainings, setTrainings] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const getTrainings = async () => {
     const { result, error } = await apiFetch(
@@ -34,7 +37,6 @@ export default function UserDetailsTraining() {
     );
 
     if (!error) {
-      console.log(result);
       setOrginalTrainings(result.programs);
       setTrainings(result.programs);
       setUserName(result.name);
@@ -57,25 +59,65 @@ export default function UserDetailsTraining() {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (userRole === "employee") {
+      if (location.pathname === `/user/${id}/trainings/enrolled`) {
+        setSpecificTraining(orginalTrainings["enrolled"]);
+        setTrainings(orginalTrainings["enrolled"]);
+      }
+
+      if (location.pathname === `/user/${id}/trainings/not-enrolled`) {
+        setSpecificTraining(orginalTrainings["not_enrolled"]);
+        setTrainings(orginalTrainings["not_enrolled"]);
+      }
+
+      if (location.pathname === `/user/${id}/trainings/complete`) {
+        setSpecificTraining(orginalTrainings["completed"]);
+        setTrainings(orginalTrainings["completed"]);
+      }
+
+      if (location.pathname === `/user/${id}/trainings/overdue`) {
+        setSpecificTraining(orginalTrainings["overdue"]);
+        setTrainings(orginalTrainings["overdue"]);
+      }
+
+      setSearchValue("");
+    }
+  }, [location.pathname, navigate, orginalTrainings]);
+
   //search trainings
   const handleSearch = (e) => {
     // if search bar has nothing in it.
+    setSearchValue(e.target.value);
     if (e.target.value.trim() === "") {
-      setTrainings(orginalTrainings);
-      return;
+      if (userRole !== "employee") {
+        setTrainings(orginalTrainings);
+        return;
+      } else {
+        setTrainings(specificTraining);
+      }
     }
-    const filterSearch = orginalTrainings.filter((training, index) => {
-      //check if training title has value
-      if (training.title.toLowerCase().includes(e.target.value.toLowerCase()))
-        return training;
-    });
+    let filterSearch;
+    if (userRole !== "employee") {
+      filterSearch = orginalTrainings.filter((training, index) => {
+        //check if training title has value
+        if (training.title.toLowerCase().includes(e.target.value.toLowerCase()))
+          return training;
+      });
+    } else {
+      filterSearch = specificTraining.filter((training, index) => {
+        //check if training title has value
+        if (training.title.toLowerCase().includes(e.target.value.toLowerCase()))
+          return training;
+      });
+    }
 
     setTrainings(filterSearch);
   };
 
   return (
     <div className={`${loaded ? "loaded loading" : "loading"} max-1080`}>
-      <BackButton />
+      <BackButton to={`/user/${id}`} />
       <PageHeader
         title={`${userName.first_name || ""} ${
           userName.last_name || ""
@@ -95,6 +137,7 @@ export default function UserDetailsTraining() {
           placeholder={`Search all trainings`}
           name={"search_input"}
           onChange={handleSearch}
+          value={searchValue}
         />
       </div>
       {userRole === "employee" ? (

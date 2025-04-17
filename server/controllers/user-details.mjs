@@ -217,7 +217,6 @@ export const getAllUserTrainings = async (req, res) => {
     }
 
     if (role.name == "manager") {
-      console.log("Hello");
       let managerPrograms = await TrainingProgram.find({
         assigned_manager: user._id,
         archived: false,
@@ -226,6 +225,114 @@ export const getAllUserTrainings = async (req, res) => {
         .sort({ deadline: 1 });
 
       programs = managerPrograms;
+    }
+
+    if (role.name == "employee") {
+      let not_enrolled = await EmployeeTraining.find({
+        enrolled_employee: user._id,
+        enrolled_training_session: null,
+        training_completed: false,
+      }).populate({
+        path: "training_program",
+        match: { archived: false, deadline: { $gt: new Date() } },
+      });
+
+      not_enrolled = not_enrolled.filter(
+        (program) => program.training_program !== null
+      );
+
+      let not_enrolled_programs = not_enrolled.map((program) => {
+        const programSchema = {
+          _id: program.training_program._id,
+          title: program.training_program.title,
+          background_color: program.training_program.background_color,
+          status: "not-enrolled",
+        };
+
+        return programSchema;
+      });
+
+      //Enrolled
+      let enrolled = await EmployeeTraining.find({
+        enrolled_employee: user._id,
+        enrolled_training_session: { $ne: null },
+        training_completed: false,
+      }).populate({
+        path: "training_program",
+        match: { archived: false, deadline: { $gt: new Date() } },
+      });
+
+      enrolled = enrolled.filter(
+        (program) => program.training_program !== null
+      );
+
+      let enrolled_programs = enrolled.map((program) => {
+        const programSchema = {
+          _id: program.training_program._id,
+          title: program.training_program.title,
+          background_color: program.training_program.background_color,
+          status: "enrolled",
+        };
+
+        return programSchema;
+      });
+
+      //Completed
+      let completed = await EmployeeTraining.find({
+        enrolled_employee: user._id,
+        enrolled_training_session: { $ne: null },
+        training_completed: true,
+      }).populate({
+        path: "training_program",
+        match: { archived: false },
+      });
+
+      completed = completed.filter(
+        (program) => program.training_program !== null
+      );
+
+      let completed_programs = completed.map((program) => {
+        const programSchema = {
+          _id: program.training_program._id,
+          title: program.training_program.title,
+          background_color: program.training_program.background_color,
+          status: "complete",
+        };
+
+        return programSchema;
+      });
+
+      //Overdue
+      let overdue = await EmployeeTraining.find({
+        enrolled_employee: user._id,
+        training_completed: false,
+      }).populate({
+        path: "training_program",
+        match: { archived: false, deadline: { $lt: new Date() } },
+      });
+
+      overdue = overdue.filter((program) => program.training_program !== null);
+
+      let overdue_programs = overdue.map((program) => {
+        const programSchema = {
+          _id: program.training_program._id,
+          title: program.training_program.title,
+          background_color: program.training_program.background_color,
+          status: "overdue",
+        };
+
+        return programSchema;
+      });
+
+      //Final Programs
+      const programCollection = {
+        enrolled: enrolled_programs,
+        not_enrolled: not_enrolled_programs,
+        completed: completed_programs,
+        overdue: overdue_programs,
+      };
+
+      programs = programCollection;
     }
 
     res.status(200).json({

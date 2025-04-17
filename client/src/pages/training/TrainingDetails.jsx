@@ -211,7 +211,10 @@ export default function TrainingDetails() {
             </div>
           )}
           {user && user.role === "manager" && (
-            <ManagerTrainingDetails programID={program._id} />
+            <ManagerTrainingDetails
+              programID={program._id}
+              deadline={program.deadline}
+            />
           )}
           {user && user.role === "trainer" && (
             <TrainerTrainingDetails

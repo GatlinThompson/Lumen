@@ -18,6 +18,9 @@ export default function StatusCircle({ status = false, training_status = "" }) {
       {status == false && training_status == "not-enrolled" && (
         <i className={`${styles.assigned} bi bi-circle`}></i>
       )}
+      {status == false && training_status == "overdue" && (
+        <i className={`${styles.overdue} bi bi-exclamation-circle-fill`}></i>
+      )}
     </div>
   );
 }

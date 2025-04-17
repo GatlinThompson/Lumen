@@ -16,5 +16,9 @@ div.status {
     &.assigned {
       color: $darker_yellow;
     }
+
+    &.overdue {
+      color: $error-red;
+    }
   }
 }
