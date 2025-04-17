@@ -59,18 +59,17 @@ table.body {
 
   //Table Calender Body
   & > tbody {
-    height: 260px;
-    @include screen-breakpoint("md") {
-      height: 340px;
-    }
-
     & tr > td.day {
       border: 0.5px solid $gray;
       border-collapse: collapse;
       aspect-ratio: 1 / 1;
       width: calc(100% / 7);
-      height: auto;
+      height: 45px;
       position: relative;
+
+      @include screen-breakpoint("md") {
+        height: 55px;
+      }
 
       & > span {
         margin: 0;
