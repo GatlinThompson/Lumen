@@ -15,7 +15,7 @@ export default function TrainerDashboard() {
             <TrainingInsights />
           </div>
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6 col-xxl-5 mt-4">
           <div>
             <Calendar />
           </div>
