@@ -8,7 +8,7 @@ import Button from "../../components/basic-components/Button.jsx";
 import styles from "../../styles/edit-profile.module.scss";
 import NotificationAlert from "../../components/basic-components/NotificationAlert";
 
-export default function EditProfileForm({ onClose }) {
+export default function EditProfileForm({ onClose, onSuccess }) {
   const { user, setUser } = useContext(AppContext);
   const [formError, setFormError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,7 +33,7 @@ export default function EditProfileForm({ onClose }) {
 
       if (!error) {
         setFormError(false);
-        setSuccessMessage("User updated successfully!");
+        onSuccess("User updated successfully!");
         setUser(result.user);
         onClose();
       } else {
@@ -69,6 +69,7 @@ export default function EditProfileForm({ onClose }) {
       if (!error) {
         setFormError(false);
         setSuccessMessage("Password updated successfully!");
+        onSuccess("Password updated successfully!");
         onClose();
       } else {
         setFormError(true);

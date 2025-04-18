@@ -6,11 +6,13 @@ import ProfileIcon from "../../components/basic-components/ProfileIcon.jsx";
 import Button from "../../components/basic-components/Button.jsx";
 import styles from "../../styles/profile.module.scss";
 import EditProfileForm from "./EditProfileForm.jsx";
+import NotificationAlert from "../../components/basic-components/NotificationAlert.jsx";
 
 export default function UserProfile({ roles, departments }) {
   const { user } = useContext(AppContext);
   const [showEditForm, setShowEditForm] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -26,6 +28,13 @@ export default function UserProfile({ roles, departments }) {
         <div className={`${loaded ? "loaded loading" : "loading"}`}>
           <BackButton to={`/dashboard/`} />
           <PageHeader title={"Profile"} />
+
+          {successMessage && (
+            <div className={styles.success_msg}>
+              <NotificationAlert error={false} message={successMessage} />
+            </div>
+          )}
+
           <div className={styles.profile_bg}>
             <ProfileIcon user={user} size="large" />
             <div className={styles.profile_content}>
@@ -59,6 +68,11 @@ export default function UserProfile({ roles, departments }) {
               roles={roles}
               departments={departments}
               onClose={() => setShowEditForm(false)}
+              onSuccess={(msg) => {
+                setSuccessMessage(msg);
+                setShowEditForm(false);
+                setTimeout(() => setSuccessMessage(""), 3000);
+              }}
             />
           )}
         </div>
