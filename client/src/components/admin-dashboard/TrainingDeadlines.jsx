@@ -38,7 +38,7 @@ export default function TrainingDeadlines() {
   return (
     <div className={styles.training_widgets}>
       <CardContainer extraClasses="d-flex flex-column gap-3">
-        <h2 className="fs-4 mx-3 mt-3 mb-0">Upcoming Training Deadlines</h2>
+        <h2 className="fs-4 mx-3 mt-3 mb-2">Upcoming Training Deadlines</h2>
         {deadlines.length > 0 ? (
           deadlines.map((deadline, index) => (
             <DeadlineDate key={index} deadline={deadline} />
