@@ -48,7 +48,7 @@ export default function TrainingSuccess() {
   return (
     <>
       <div className={`${loaded ? "loaded loading" : "loading"}`}>
-        <BackButton />
+        <BackButton to="/trainings" />
 
         <SuccessHeader />
         <div className={styles.info_container}></div>

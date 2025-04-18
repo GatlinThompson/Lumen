@@ -17,7 +17,7 @@ export default function UserSuccess() {
 
   return (
     <div className={`${loaded ? "loaded loading" : "loading"}`}>
-      <BackButton to="/users/create" />
+      <BackButton to="/users" />
       <SuccessHeader />
       <div className={styles.info_container}></div>
       <p className={styles.info}>User successfully created.</p>
