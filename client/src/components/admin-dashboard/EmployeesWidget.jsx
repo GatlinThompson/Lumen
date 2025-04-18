@@ -59,7 +59,7 @@ export default function EmployeesWidget({
   return (
     <div className={styles.training_widgets}>
       <CardContainer extraClasses="d-flex flex-column gap-3 mb-2">
-        <h2 className="fs-4 mx-3 mt-3 mb-0">My Employees</h2>
+        <h2 className="fs-4 mx-3 mt-3 mb-2 mb-0">My Employees</h2>
         <Input
           type="search"
           placeholder="Employee Quick Search"
@@ -71,7 +71,7 @@ export default function EmployeesWidget({
         />
         <Button
           variant="black"
-          extraClasses="mx-auto"
+          extraClasses="mx-auto mt-2 mb-4"
           onClick={() => {
             navigate(`/users/employees`);
           }}
