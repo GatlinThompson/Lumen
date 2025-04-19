@@ -35,6 +35,7 @@ export const getUncompletedEmployees = async (req, res) => {
 
     let employees = await User.find({
       _id: { $in: uncompleteEmployeesArr },
+      is_active: true,
     }).populate({ path: "department" });
 
     res.status(200).json({

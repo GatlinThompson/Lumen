@@ -23,6 +23,19 @@ export default function UserDetails() {
       setTimeout(() => {
         setLoaded(true);
       }, 100);
+    } else {
+      navigate("/errorapi");
+    }
+  };
+
+  const deleteUser = async () => {
+    const { result, error } = await apiFetch(
+      `/api/user/${id}/delete`,
+      "DELETE"
+    );
+
+    if (!error) {
+      navigate("/users");
     }
   };
 
@@ -43,15 +56,20 @@ export default function UserDetails() {
           <BackButton to={`/users/managers`} />
           <PageHeader title={`${role} Details`} />
           {user && user.role === "admin" && (
-            <Button
-              variant="black"
-              extraClasses="mt-4"
-              onClick={() => {
-                navigate(`/users/${pageUser._id}/edit`);
-              }}
-            >
-              Edit User
-            </Button>
+            <>
+              <Button
+                variant="black"
+                extraClasses="mt-4"
+                onClick={() => {
+                  navigate(`/users/${pageUser._id}/edit`);
+                }}
+              >
+                Edit User
+              </Button>
+              <Button variant="delete" extraClasses="mt-4" onClick={deleteUser}>
+                Delete User
+              </Button>
+            </>
           )}
           <div className="row align-items-center mt-4">
             <ProfileIcon user={pageUser} size="medium" />

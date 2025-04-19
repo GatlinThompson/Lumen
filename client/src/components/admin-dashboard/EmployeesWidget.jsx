@@ -60,15 +60,15 @@ export default function EmployeesWidget({
     <div className={styles.training_widgets}>
       <CardContainer extraClasses="d-flex flex-column gap-3 mb-2">
         <h2 className="fs-4 mx-3 mt-3 mb-2 mb-0">My Employees</h2>
-        <Input
-          type="search"
-          placeholder="Employee Quick Search"
-          name="search_input"
-          //onChange={handleSearch}
-          //value={searchValue}
-          extraClasses="px-3 mb-0"
+
+        <Button
+          variant="search_input"
           onClick={openModal}
-        />
+          extraClasses="px-3 mb-0"
+        >
+          <i className="bi bi-search" />
+          <span>Employee Quick Search</span>
+        </Button>
         <Button
           variant="black"
           extraClasses="mx-auto mt-2 mb-4"

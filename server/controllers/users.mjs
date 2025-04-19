@@ -244,9 +244,11 @@ export const deleteUser = async (req, res) => {
     //archive user
     user.is_active = false;
 
+    await user.save();
+
     res.status(200).json({
       success: true,
-      message: "User edit was successful",
+      message: "User delete was successful",
     });
   } catch (err) {
     res
@@ -353,12 +355,18 @@ export const getAllUsers = async (req, res) => {
 //Get Specific User
 export const getSpecificUser = async (req, res) => {
   try {
-    let user = await User.findById(req.params.id)
+    let user = await User.findOne({ _id: req.params.id, is_active: true })
       .populate({
         path: "department",
       })
       .populate({ path: "role" })
       .select("-hash -salt");
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
 
     res.status(200).json({
       success: true,
