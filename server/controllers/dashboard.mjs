@@ -508,12 +508,15 @@ export const managerDashboardInsights = async (req, res) => {
     let userDecoded = jwt.verify(req.auth_user, "TEST");
     let manager = await User.findById(userDecoded._id);
 
-    let complete = await EmployeeTraining.countDocuments({
+    let complete = await EmployeeTraining.find({
       training_completed: true,
     }).populate({
       path: "training_program",
-      match: { assigned_manager: manager._id },
+      match: { assigned_manager: manager._id, archived: false },
     });
+    console.log(complete);
+
+    complete = complete.filter((program) => program.training_program !== null);
 
     let overdue_trainings = await EmployeeTraining.find({
       training_completed: false,
@@ -534,13 +537,13 @@ export const managerDashboardInsights = async (req, res) => {
     overdue = overdue.filter((training) => training != null);
 
     console.log("HELLO");
-    console.log("Complete:", complete);
+    console.log("Complete:", complete.length);
     console.log("Overdue:", overdue.length);
 
     res.status(200).json({
       success: true,
       message: "Trainings Insights unsuccessfully obtained",
-      complete: complete,
+      complete: complete.length,
       overdue: overdue.length,
     });
   } catch (err) {
