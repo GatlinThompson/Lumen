@@ -3,6 +3,7 @@ import { TrainingProgram } from "../models/training-program.mjs";
 import { TrainingSession } from "../models/training-session.mjs";
 import { User } from "../models/user.mjs";
 import jwt from "jsonwebtoken";
+import { DateTime } from "luxon";
 
 export const createTrainingProgram = async (req, res) => {
   try {
@@ -28,7 +29,9 @@ export const createTrainingProgram = async (req, res) => {
     program.title = req.body.title;
     program.duration = parseInt(req.body.duration);
     let new_deadline = new Date(req.body.deadline);
-    new_deadline.setHours(11, 59, 59, 0);
+    new_deadline.setDate(new_deadline.getDate() + 1);
+    new_deadline.setHours(17, 59, 59, 0);
+
     program.deadline = new_deadline;
     program.description = req.body.description;
     program.assigned_manager = req.body.assigned_manager;
@@ -48,7 +51,9 @@ export const createTrainingProgram = async (req, res) => {
       newSession.trainer = session.trainer;
 
       // Collect time + date
-      const start_time = new Date(`${session.date}T${session.time}`);
+      let start_time = DateTime.fromISO(`${session.date}T${session.time}`, {
+        zone: "America/Denver",
+      }).toJSDate();
       newSession.start_time = start_time;
       //just incase we want to add availability on trainers
       const end_time =
@@ -160,7 +165,8 @@ export const getSingleTrainingProgram = async (req, res) => {
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "Internal Error: Please try again.",
+      message: "Internal Error: Please try again!",
+      err: err.message,
     });
   }
 };
@@ -181,7 +187,10 @@ export const editTrainingProgram = async (req, res) => {
 
     program.title = req.body.title;
     program.duration = parseInt(req.body.duration);
-    program.deadline = req.body.deadline;
+    let new_deadline = new Date(req.body.deadline);
+    new_deadline.setDate(new_deadline.getDate() + 1);
+    new_deadline.setHours(17, 59, 59, 0);
+    program.deadline = new_deadline;
     program.description = req.body.description;
 
     //deal with deleted/unused sessions

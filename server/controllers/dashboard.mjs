@@ -620,6 +620,8 @@ export const getTrainerCalendar = async (req, res) => {
       trainer: trainer._id,
     }).populate({ path: "training_program", match: { archived: false } });
 
+    sessions = sessions.filter((session) => session.training_program);
+
     let events = [
       ...new Set(
         sessions.map((session) => {
