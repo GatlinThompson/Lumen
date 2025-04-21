@@ -54,10 +54,10 @@ export const getDashBoardUsers = async (req, res) => {
 //get insight count
 export const getDashboardAdminInsights = async (req, res) => {
   try {
-    let completed = await EmployeeTraining.countDocuments({
+    let completed = await EmployeeTraining.find({
       training_completed: true,
     });
-    let overdue = await EmployeeTraining.countDocuments({
+    let overdue = await EmployeeTraining.find({
       training_completed: false,
     }).populate({
       path: "training_program",
@@ -66,11 +66,13 @@ export const getDashboardAdminInsights = async (req, res) => {
       },
     });
 
+    overdue = overdue.filter((program) => program.training_program !== null);
+
     res.status(200).json({
       success: true,
       message: "Insights successfully obtained",
-      complete: completed,
-      overdue: overdue,
+      complete: completed.length,
+      overdue: overdue.length,
     });
   } catch (err) {
     res.status(500).json({
