@@ -3,7 +3,6 @@ import { TrainingProgram } from "../models/training-program.mjs";
 import { TrainingSession } from "../models/training-session.mjs";
 import { User } from "../models/user.mjs";
 import jwt from "jsonwebtoken";
-import { DateTime } from "luxon";
 
 export const createTrainingProgram = async (req, res) => {
   try {
