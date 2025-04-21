@@ -50,9 +50,7 @@ export const createTrainingProgram = async (req, res) => {
       newSession.trainer = session.trainer;
 
       // Collect time + date
-      let start_time = DateTime.fromISO(`${session.date}T${session.time}`, {
-        zone: "America/Denver",
-      }).toJSDate();
+      let start_time = new Date(`${session.date}T${session.time}`);
       newSession.start_time = start_time;
       //just incase we want to add availability on trainers
       const end_time =
