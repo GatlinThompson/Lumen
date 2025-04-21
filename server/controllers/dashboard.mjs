@@ -116,6 +116,7 @@ export const dashboardDeadlines = async (req, res) => {
   try {
     const programs = await TrainingProgram.find({
       deadline: { $gt: new Date() },
+      archived: false,
     })
       .sort({ deadline: 1 })
       .limit(5)
@@ -187,6 +188,7 @@ export const dashboardManagerDeadlines = async (req, res) => {
     const programs = await TrainingProgram.find({
       assigned_manager: manager._id,
       deadline: { $gt: new Date() },
+      archived: false,
     })
       .sort({ deadline: 1 })
       .limit(5)
