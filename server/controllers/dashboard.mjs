@@ -346,45 +346,40 @@ export const getDepartmentEmployees = async (req, res) => {
 
 export const getDashboardTrainerTrainings = async (req, res) => {
   try {
-    let userDecoded = jwt.verify(req.auth_user, "TEST");
-    let trainer = await User.findById(userDecoded._id);
+    const userDecoded = jwt.verify(req.auth_user, "TEST");
+    const trainer = await User.findById(userDecoded._id);
 
-    let sessions = await TrainingSession.find({
+    const sessions = await TrainingSession.find({
       trainer: trainer._id,
       start_time: { $gt: new Date() },
     })
-      .populate({ path: "training_program" })
+      .populate({
+        path: "training_program",
+        match: { archived: false },
+      })
       .sort({ start_time: 1 })
-      .limit(5);
+      .limit(5)
+      .lean();
 
-    let assignedSessions = [];
-
-    //loop through each session to get program infomation
-    for (const session of sessions) {
-      //get program tied to the session
-      const program = await TrainingProgram.findOne({
-        _id: session.training_program,
-        archived: false,
-      });
-
-      program.deadline = session.start_time;
-      //session object
-      const sessionSchema = {
-        program: program,
-      };
-
-      assignedSessions = [...assignedSessions, sessionSchema]; //add to array
-    }
+    const assignedSessions = sessions
+      .filter((session) => session.training_program !== null)
+      .map((session) => ({
+        program: {
+          ...session.training_program,
+          deadline: session.start_time,
+        },
+      }));
 
     res.status(200).json({
       success: true,
-      message: "Trainings Sessions successfully obtained",
+      message: "Training Sessions successfully obtained",
       programs: assignedSessions,
     });
   } catch (err) {
     res.status(500).json({
       success: false,
-      message: "Trainings Sessions unsuccessfully obtained",
+      message: "Training Sessions unsuccessfully obtained",
+      err: err.message,
     });
   }
 };
