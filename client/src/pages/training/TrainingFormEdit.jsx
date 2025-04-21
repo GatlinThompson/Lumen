@@ -105,11 +105,12 @@ export default function TrainingFormEdit() {
           //map through sessions to fit the form's format
           let s = program.training_sessions.map((session) => {
             //get date
-            const sessionDate = new Date(session.start_time)
-              .toISOString()
-              .split("T")[0];
+            const sessionDate = new Date(session.start_time);
+            sessionDate.setHours(sessionDate.getHours() - 6);
+            let date = new Date(sessionDate).toISOString().split("T")[0];
             //get time
-            const sessionTime = session.start_time
+            let time = new Date(sessionDate)
+              .toISOString()
               .split("T")[1]
               .split(":")
               .slice(0, 2)
@@ -119,8 +120,8 @@ export default function TrainingFormEdit() {
             const sessionObj = {
               _id: session.id,
               trainer: session.trainer._id,
-              date: sessionDate,
-              time: sessionTime,
+              date: date,
+              time: time,
             };
 
             return sessionObj; //return object
