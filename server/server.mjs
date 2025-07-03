@@ -45,6 +45,7 @@ app.use("/", function (req, res, next) {
 });
 
 server.on("listening", () => {
+  console.log(process.env.FRONTEND_URI);
   console.log(
     `\n\x1b[1mLocal Backend:\x1b\[0m\t\x1b[34mhttp://localhost:${PORT}\x1b[39m`
   );
