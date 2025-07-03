@@ -18,7 +18,7 @@ await mongoose.connect(backendURI);
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://lumen-ctt.netlify.app"
+      ? process.env.FRONTEND_URI
       : "http://127.0.0.1:5173",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
